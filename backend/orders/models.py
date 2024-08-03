@@ -9,13 +9,13 @@ class Abonement(models.Model):
     """
     title = models.CharField("Название", max_length=100)
     description = models.TextField("Описание")
-    price = models.DecimalField("Цена", max_digits=10, decimal_places=2)
+    price = models.PositiveSmallIntegerField("Цена", null=True, blank=True)
     number_of_months = models.SmallIntegerField("Количество месяцев")
 
     class Meta:
         verbose_name = "Абонемент"
         verbose_name_plural = "Абонементы"
-        ordering = ["pk"]
+        ordering = ["id"]
 
     def __str__(self):
         return self.title
@@ -23,7 +23,6 @@ class Abonement(models.Model):
     class Meta:
         verbose_name = "Абонемент"
         verbose_name_plural = "Абонементы"
-        ordering = ["-price"]
 
 
 class OrderAbonement(models.Model):

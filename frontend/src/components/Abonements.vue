@@ -1,18 +1,46 @@
 <!-- eslint-disable vue/multi-word-component-names -->
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import axios from "axios";
+import { ref, onMounted } from "vue";
+import { useToast } from "vue-toastification";
+
+const toast = useToast();
+const abonements = ref([]);
+
+const getAbonements = async (): Promise<void> => {
+  try {
+    const { data } = await axios.get("/api/abonemens/");
+    console.log(data);
+    abonements.value = data;
+  } catch {
+    toast.error("Произошла ошибка");
+  }
+};
+onMounted(() => getAbonements());
+</script>
 
 <template>
   <h1 class="text-3xl text-center text-uppercase text-yellow-500">
     Наши абонементы
   </h1>
 
-  <div class="flex justify-center items-center gap-8 mt-10 mb-20 text-yellow-500">
-    <div class="box flex flex-col gap-2 items-center justify-center">
-      <h3 class="title">Тариф "Базовый"</h3>
-      <p>6 месяцев</p>
-      <span>12000 рублей</span>
+  <div
+    class="flex justify-center items-center gap-10 mt-10 mb-20 text-yellow-500"
+  >
+    <div
+      v-for="abonement in abonements"
+      :key="abonement.id"
+      class="box flex flex-col gap-2 items-center justify-around"
+    >
+      <div class="box__title">
+        <h3 class="title text-xl uppercase font-bold">{{ abonement.title }}</h3>
+      </div>
+      <div class="box__body text-center">
+        <p class="text-white mb-4">{{ abonement.description }}</p>
+        <span class="text-gray-400">{{ abonement.price }} рублей</span>
+      </div>
     </div>
-    <div class="box flex flex-col gap-2 items-center justify-center">
+    <!-- <div class="box flex flex-col gap-2 items-center justify-center">
       <h3 class="title">Тариф "Стандартный"</h3>
       <p>9 месяцев</p>
       <span>16000 рублей</span>
@@ -26,7 +54,7 @@
       <h3 class="title">Тариф "VIP"</h3>
       <p>18 месяцев</p>
       <span>30000 рублей</span>
-    </div>
+    </div> -->
   </div>
 </template>
 

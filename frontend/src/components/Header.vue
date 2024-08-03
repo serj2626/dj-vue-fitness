@@ -3,7 +3,7 @@ import { RouterLink } from "vue-router";
 </script>
 
 <template>
-  <div id="" class="header bg-transparent py-4 fixed z-10 top-0 w-full">
+  <div id="navigation" class="header bg-transparent py-4 fixed z-10 top-0 w-full">
     <div
       class="header__container container h-20 flex justify-center items-center gap-6"
     >
@@ -24,3 +24,21 @@ import { RouterLink } from "vue-router";
     </div>
   </div>
 </template>
+
+<style scoped>
+#navigation {
+  animation: show-nav 0.5s ease-in-out;
+}
+
+@keyframes show-nav {
+  0% {
+    opacity: 0;
+    scale: 0.5;
+    transform: translateY(-150px);
+  }
+  100% {
+    opacity: 1;
+  }
+  
+}
+</style>

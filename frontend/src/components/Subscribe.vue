@@ -1,4 +1,7 @@
-<script setup lang="ts"></script>
+<!-- eslint-disable vue/multi-word-component-names -->
+<script setup lang="ts">
+import Footer from  "../components/Footer.vue";
+</script>
 
 <template>
 <div class="mt-20 px-6 sm:mt-20 lg:px-8">
@@ -38,7 +41,7 @@
                 </radialGradient>
             </defs>
         </svg>
-
+    <Footer/>
     </div>
 </div>
 </template>

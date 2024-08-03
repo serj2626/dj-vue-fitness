@@ -4,13 +4,15 @@ import { RouterLink } from "vue-router";
 
 <template>
   <div class="container row-2xl">
-    <section
-      class="w-6/12 mx-auto mt-[280px] bg-transparent dark:bg-gray-900 rounded-2xl"
+    <section id="loginID"
+      class="w-6/12 mx-auto mt-[280px] bg-transparent dark:bg-gray-900 rounded-2xl
+     "
     >
       <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
         <h1
         id="login-title"
-          class="text-xl font-bold leading-tight tracking-tight text-white text-center md:text-2xl dark:text-white"
+          class="text-xl font-bold leading-tight tracking-tight
+           text-white text-center md:text-2xl dark:text-white"
         >
           Войдите в аккаунт
         </h1>
@@ -48,7 +50,7 @@ import { RouterLink } from "vue-router";
           <button
             type="submit"
             id="login-button"
-            class="w-full text-white bg-black border-2 border-yellow-500 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+            class="form-btn"
           >
             Войти
           </button>
@@ -137,5 +139,11 @@ import { RouterLink } from "vue-router";
   100%{
     opacity: 1;
   }
+}
+
+#loginID{
+  
+  box-shadow: 0 0 25px white,
+  0 20px 15px 5px rgba(255, 255, 255, 0.228);
 }
 </style>

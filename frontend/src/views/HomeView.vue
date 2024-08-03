@@ -3,6 +3,8 @@ import Subscribe from "../components/Subscribe.vue";
 import Coach from "../components/Coach.vue";
 import Abonements from "@/components/Abonements.vue";
 import About from "@/components/About.vue";
+
+
 </script>
 
 <template>
@@ -24,18 +26,20 @@ import About from "@/components/About.vue";
   <section id="about" class="about container text-purple-500">
     <About />
   </section>
-  <section id="abonements" class="container abonements  mt-16">
+  <section id="abonements" class="container abonements mt-16">
     <Abonements />
   </section>
-  <div class="women">
-
-  </div>
-  <section id="training" class="training container">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam
-    reprehenderit qui tenetur non aliquam ullam totam? Doloremque assumenda impedit modi dolorem porro natus sunt vitae,
-    soluta ab maiores aliquam officia, doloribus aspernatur accusamus ducimus? laudantium dignissimos repellendus amet
-    aliquid! Veritatis asperiores iste Excepturi obcaecati molestias quibusdam modi dolores adipisci pariatur animi
-    quae. Eligendi velit eveniet reiciendis beatae corrupti, voluptas ut aliquid fugit assumenda repellendus, non
-    tempora deserunt.</section>
+  <div class="women"></div>
+  <section id="training" class="training container">
+    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam
+    reprehenderit qui tenetur non aliquam ullam totam? Doloremque assumenda
+    impedit modi dolorem porro natus sunt vitae, soluta ab maiores aliquam
+    officia, doloribus aspernatur accusamus ducimus? laudantium dignissimos
+    repellendus amet aliquid! Veritatis asperiores iste Excepturi obcaecati
+    molestias quibusdam modi dolores adipisci pariatur animi quae. Eligendi
+    velit eveniet reiciendis beatae corrupti, voluptas ut aliquid fugit
+    assumenda repellendus, non tempora deserunt.
+  </section>
 
   <section id="coach" class="coach container text-orange-300 my-14">
     <Coach />

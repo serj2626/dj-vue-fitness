@@ -1,3 +1,7 @@
-from django.shortcuts import render
+from rest_framework.generics import ListAPIView
+from .serializers import AbonementSerializer
+from .models import Abonement
 
-# Create your views here.
+class AbonemenListtView(ListAPIView):
+    queryset = Abonement.objects.all()
+    serializer_class = AbonementSerializer
