@@ -6,6 +6,7 @@ from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
 from datetime import timedelta
 from .service import get_path_for_avatar_for_trainer
+from django_ckeditor_5.fields import CKEditor5Field
 
 User = get_user_model()
 
@@ -134,3 +135,23 @@ class Reviews(models.Model):
         return abs((timezone.now() - self.created_at).seconds // 3600)
 
 
+
+class Post(models.Model):
+    '''
+    Модель статьи
+    '''
+
+    title = models.CharField('Заголовок статьи', max_length=100)
+    category = models.CharField('Категория', max_length=100)
+    content = CKEditor5Field(
+        blank=True, verbose_name='Описание', config_name='extends')
+    created_at = models.DateTimeField('Создано', auto_now_add=True)
+    updated_at = models.DateTimeField('Обновлено', auto_now=True)
+
+    class Meta:
+        verbose_name = 'Статья'
+        verbose_name_plural = 'Статьи'
+        ordering = ('-created_at',)
+
+    def __str__(self):
+        return self.title
