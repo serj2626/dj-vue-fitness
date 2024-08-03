@@ -34,8 +34,8 @@ class OrderAbonement(models.Model):
     user = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="tickets")
     phone = models.CharField('Телефон', max_length=11, null=True, blank=True)
-    abonement = models.ForeignKey("Абонемент",
-                                  Abonement, on_delete=models.CASCADE, related_name="orders")
+    abonement = models.ForeignKey(
+        Abonement, on_delete=models.CASCADE, related_name="orders")
     start = models.DateTimeField('Начало', auto_now_add=True)
     end = models.DateTimeField('Конец', blank=True, null=True)
     status = models.BooleanField('Оплачен', default=False)

@@ -1,3 +1,3 @@
 #   Сайт "Фитнес-клуба" на Django и Vue.js
 
-![Django](./images/django.png)
+![Django](./frontend/src/assets/screen.png)

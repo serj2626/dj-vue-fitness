@@ -5,7 +5,7 @@ from .models import OrderAbonement, Abonement
 class AbonementAdmin(admin.ModelAdmin):
     '''Admin View for Abonement'''
 
-    list_display = ('',)
+    list_display = ('title', 'price', 'number_of_months', )
 
 
 @admin.register(OrderAbonement)
