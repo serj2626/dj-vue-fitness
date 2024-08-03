@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+    scroll-behavior: smooth;
+    scrollbar-color: #d8b803 #000000;
+    scrollbar-width: auto;
+  
+}
+
+body {
+    background-color: black;
+    /* background: linear-gradient(90deg, rgb(49, 47, 47) 0%, rgba(0, 0, 0, 0.917) 100%); */
+    /* color: white; */
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    
+}
+
+a {
+    text-decoration: none;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+
+
+@layer components {
+    .btn {
+        @apply bg-sky-500 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded;
+    }
+
+    .container {
+        @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+    }
+
+    .row-sm {
+        @apply mt-7
+    }
+
+    .row-md {
+        @apply mt-16
+    }
+
+    .row-lg {
+        @apply mt-24
+    }
+
+    .row-xl {
+        @apply mt-32
+    }
+
+    .row-2xl {
+        @apply mt-40
+    }
+
+    .row-3xl {
+        @apply mt-48
+    }
+
+    .header__link {
+        @apply text-white font-bold transition-colors duration-300 ease-in hover:text-yellow-500
+    }
+
+    .header__link__buy {
+        @apply py-3 px-5 rounded-md border-2 border-yellow-500 ms-6 
+        transition-colors duration-300 ease-in 
+    }
+
+    .grid__box {
+        @apply border-2  border-slate-50 border-opacity-20 
+        rounded-md p-12 text-xl text-center font-bold
+         hover:border-yellow-500 text-yellow-500
+          transition-all duration-300 ease-in cursor-pointer
+    }
+}
