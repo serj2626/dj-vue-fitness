@@ -11,7 +11,8 @@ import { RouterLink } from "vue-router";
       <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
         <h1
           id="login-title"
-          class="text-xl font-bold leading-tight tracking-tight text-white text-center md:text-2xl dark:text-white"
+          class="text-xl font-bold leading-tight tracking-tight text-yellow-500 
+          text-center md:text-2xl dark:text-white"
         >
           Создание аккаунта
         </h1>

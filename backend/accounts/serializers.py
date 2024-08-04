@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
-
+from rest_framework.validators import ValidationError
 
 User = get_user_model()
 
@@ -13,16 +13,21 @@ class RegisterSerializer(serializers.ModelSerializer):
             'password': {'write_only': True},
         }
 
-    def create(self, validated_data):
+    def validate(self, attrs):
+        email_exists = User.objects.filter(email=attrs["email"]).exists()
 
-        user_exist = User.objects.filter(email=validated_data['email']).exists()
-        if user_exist:
-            raise serializers.ValidationError('Пользователь с таким email уже существует')
+        if email_exists:
+            raise ValidationError('Пользователь с таким email уже существует')
+
+        return super().validate(attrs)
+
+    def create(self, validated_data):
 
         psw = validated_data.pop('password')
         if len(psw) < 8:
-            raise serializers.ValidationError('Пароль должен быть не менее 8 символов')
-        
+            raise serializers.ValidationError(
+                'Пароль должен быть не менее 8 символов')
+
         user = User.objects.create_user(**validated_data)
         user.set_password(psw)
         user.save()

@@ -21,7 +21,7 @@ onMounted(() => getAbonements());
 
 <template>
   <h1 class="text-3xl text-center text-uppercase text-yellow-500">
-    Наши абонементы
+    Абонементы
   </h1>
 
   <div

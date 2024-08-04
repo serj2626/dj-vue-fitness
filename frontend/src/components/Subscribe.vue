@@ -6,7 +6,7 @@ import Footer from  "../components/Footer.vue";
 <template>
 <div class="mt-20 px-6 sm:mt-20 lg:px-8">
     <div
-        class="relative isolate overflow-hidden  px-6 py-24 shadow-2xl rounded-2xl sm:rounded-3xl sm:px-24 xl:py-32">
+        class="relative isolate overflow-hidden  px-6 py-24   sm:px-24 xl:py-32">
        
         <h2 class="mx-auto max-w-2xl text-center text-3xl font-bold tracking-tight text-white sm:text-4xl">
             Будьте в курсе событий

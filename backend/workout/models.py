@@ -49,8 +49,6 @@ class Trainer(models.Model):
     last_name = models.CharField('Фамилия', max_length=100)
     email = models.EmailField('Email', unique=True)
     phone = models.CharField('Телефон', max_length=11, unique=True)
-    rate = models.ForeignKey(
-        Rate, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Тариф')
     avatar = models.ImageField('Аватар',
                                upload_to=get_path_for_avatar_for_trainer,
                                default='trainers/trainer.jpg', blank=True)

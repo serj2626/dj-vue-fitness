@@ -6,17 +6,22 @@ html {
     scroll-behavior: smooth;
     scrollbar-color: #d8b803 #000000;
     scrollbar-width: auto;
-  
+
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-    background-color: black;
-    /* background: linear-gradient(90deg, rgb(49, 47, 47) 0%, rgba(0, 0, 0, 0.917) 100%); */
-    /* color: white; */
+    background: rgb(0, 0, 0);
+    /* background: radial-gradient(circle, rgba(0,0,0,1) 60%, rgba(255,255,255,1) 100%); */
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
-    
+
 }
 
 a {
@@ -69,25 +74,22 @@ a {
     }
 
     .header__link__buy {
-        @apply py-3 px-5 rounded-md border-2 border-yellow-500 ms-6 
-        transition-colors duration-300 ease-in 
+        @apply py-3 px-5 rounded-md border-2 border-yellow-500 ms-6 transition-colors duration-300 ease-in
     }
 
     .grid__box {
-        @apply border-2  border-slate-50 border-opacity-20 
-        rounded-md p-12 text-xl text-center font-bold
-         hover:border-yellow-500 text-yellow-500
-          transition-all duration-300 ease-in cursor-pointer
+        @apply border-2 border-slate-50 border-opacity-20 rounded-md p-12 text-xl text-center font-bold hover:border-yellow-500 text-yellow-500 transition-all duration-300 ease-in cursor-pointer
     }
+
     .footer-link {
         @apply transition-all duration-300 ease-in hover:transform hover:scale-150
     }
 
-    .form-btn{
-        @apply w-full  border-2 border-white rounded-md py-3 text-yellow-500
-        hover:border-yellow-500 
+    .form-btn {
+        @apply w-full border-2 border-white rounded-md py-3 text-yellow-500 hover:border-yellow-500
     }
-/* 
+
+    /* 
     .input-login {
         @apply bg-gray-50 border border-gray-300 text-gray-900 
               rounded-lg focus:ring-primary-600 focus:border-primary-600 

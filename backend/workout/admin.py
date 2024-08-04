@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import Rate, RatingStar, RatingTrainer, Trainer, Reviews
+from django.utils.html import mark_safe
 
 
 @admin.register(Reviews)
@@ -35,9 +36,15 @@ class TrainerAdmin(admin.ModelAdmin):
     '''Admin View for Trainer'''
 
     list_display = ('id', 'position', 'first_name',
-                    'last_name', 'email', 'phone', 'rate',)
+                    'last_name', 'email', 'phone', 'get_image')
     list_editable = ('first_name',
-                    'last_name', 'email', 'phone',)
+                     'last_name', 'email', 'phone',)
+
+    def get_image(self, obj):
+        return mark_safe(f'<img src={obj.avatar.url} style="border-radius: 50%;" " width="100" height="60"')
+
+    get_image.short_description = 'Фото'
+
     # list_filter = ('',)
     # inlines = [
     #     Inline,
