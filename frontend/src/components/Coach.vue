@@ -2,6 +2,7 @@
 <script setup lang="ts">
 import axios from "axios";
 import { ref, onMounted } from "vue";
+import { useRouter } from "vue-router";
 import { useToast } from "vue-toastification";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Pagination } from "swiper/modules";
@@ -9,6 +10,8 @@ import "swiper/css";
 
 import "swiper/css/pagination";
 
+
+const router = useRouter();
 const toast = useToast();
 const modules = [Pagination];
 
@@ -55,7 +58,9 @@ onMounted(getCoaches);
     :modules="modules"
     class="mySwiper"
   >
-    <swiper-slide v-for="trainer in trainers" :key="trainer.id">
+    <swiper-slide 
+    @click="router.push({ name: 'coach', params: { id: trainer.id } })"
+    v-for="trainer in trainers" :key="trainer.id">
       <img :src="trainer.avatar" alt="" />
     </swiper-slide>
   </swiper>

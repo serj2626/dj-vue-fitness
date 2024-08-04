@@ -9,6 +9,7 @@ class RateSerializer(serializers.ModelSerializer):
 
 
 class TrainerSerializer(serializers.ModelSerializer):
+    position = serializers.CharField(source='get_position_display')
     class Meta:
         model = Trainer
         fields = '__all__'
