@@ -1,11 +1,29 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
+import axios from "axios";
+import { ref, onMounted } from "vue";
+import { useToast } from "vue-toastification";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Pagination } from "swiper/modules";
 import "swiper/css";
 
 import "swiper/css/pagination";
 
+const toast = useToast();
 const modules = [Pagination];
+
+const trainers = ref([]);
+const getCoaches = async () => {
+  try {
+    const { data } = await axios.get("/api/workout/trainers/");
+    console.log(data);
+    trainers.value = data;
+  } catch {
+    toast.error("Произошла ошибка");
+  }
+};
+
+onMounted(getCoaches);
 </script>
 
 <template>
@@ -37,29 +55,8 @@ const modules = [Pagination];
     :modules="modules"
     class="mySwiper"
   >
-    <swiper-slide>
-      <img src="../assets/img/coach/girl.png" alt="" />
-    </swiper-slide>
-    <swiper-slide>
-      <img src="../assets/img/coach/girl2.png" alt="" />
-    </swiper-slide>
-    <swiper-slide>
-      <img src="../assets/img/coach/man.png" alt="" />
-    </swiper-slide>
-    <swiper-slide>
-      <img src="../assets/img/coach/man2.png" alt="" />
-    </swiper-slide>
-    <swiper-slide>
-      <img src="../assets/img/coach/girl.png" alt="" />
-    </swiper-slide>
-    <swiper-slide>
-      <img src="../assets/img/coach/girl2.png" alt="" />
-    </swiper-slide>
-    <swiper-slide>
-      <img src="../assets/img/coach/man.png" alt="" />
-    </swiper-slide>
-    <swiper-slide>
-      <img src="../assets/img/coach/man2.png" alt="" />
+    <swiper-slide v-for="trainer in trainers" :key="trainer.id">
+      <img :src="trainer.avatar" alt="" />
     </swiper-slide>
   </swiper>
 </template>

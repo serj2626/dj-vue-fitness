@@ -1,6 +1,6 @@
 from .models import Trainer, RatingTrainer, Reviews, Rate
 from .serializers import TrainerSerializer, RateSerializer
-from rest_framework.generics import ListAPIView
+from rest_framework.generics import ListAPIView, RetrieveAPIView
 
 
 class RateListView(ListAPIView):
@@ -9,5 +9,10 @@ class RateListView(ListAPIView):
 
 
 class TrainerListView(ListAPIView):
+    serializer_class = TrainerSerializer
+    queryset = Trainer.objects.all()
+
+
+class TrainerDetailView(RetrieveAPIView):
     serializer_class = TrainerSerializer
     queryset = Trainer.objects.all()
