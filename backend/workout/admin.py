@@ -1,13 +1,25 @@
 from django.contrib import admin
-from .models import Rate, RatingStar,  Trainer, Reviews
+from .models import Rate, RatingStar,  Trainer, Reviews, Post
 from django.utils.html import mark_safe
 
+
+@admin.register(Post)
+class PostAdmin(admin.ModelAdmin):
+    '''Admin View for Post)'''
+
+    list_display = ('title', 'category', 'created_at', 'updated_at', )
+    save_on_top = True
 
 @admin.register(Reviews)
 class ReviewsAdmin(admin.ModelAdmin):
     '''Admin View for Reviews'''
 
-    list_display = ('user', 'trainer', 'created_at', )
+    list_display = ("user", 'trainer', 'get_text', 'rating', 'created_at', )
+
+    def get_text(self, obj):
+        return (obj.text)[:15] + "..."
+
+    get_text.short_description = 'Текст отзыва'
 
 
 @admin.register(RatingStar)
@@ -15,8 +27,6 @@ class RatingStarAdmin(admin.ModelAdmin):
     '''Admin View for RatingStar'''
 
     list_display = ('value',)
-
-
 
 
 @admin.register(Rate)

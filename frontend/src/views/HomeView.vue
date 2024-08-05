@@ -3,6 +3,7 @@ import Subscribe from "../components/Subscribe.vue";
 import Coach from "../components/Coach.vue";
 import Abonements from "@/components/Abonements.vue";
 import About from "@/components/About.vue";
+import Posts from "@/components/Posts.vue";
 
 
 </script>
@@ -14,13 +15,7 @@ import About from "@/components/About.vue";
       <h3 class="header__title text-3xl text-center text-white font-extrabold">
         Начни сейчас <br />и никогда не останавливайся.
       </h3>
-      <div class="grid grid-cols-5 gap-5 mt-16">
-        <div class="grid__box">Спина</div>
-        <div class="grid__box">Грудь</div>
-        <div class="grid__box">Руки</div>
-        <div class="grid__box">Ноги</div>
-        <div class="grid__box">Плечи</div>
-      </div>
+      <Posts />
     </div>
   </section>
   <section id="about" class="about container text-purple-500">

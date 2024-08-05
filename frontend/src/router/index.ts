@@ -28,7 +28,20 @@ const router = createRouter({
       name: "coach",
       component: () => import("../views/CoachView.vue"),
     },
+    {
+      path: "/posts/:category",
+      name: "post",
+      component: () => import("../views/PostView.vue"),
+    },
   ],
 });
+
+// router.beforeEach((to, from, next) => {
+//   if (to.path === "/login" || to.path === "/register") {
+//     next();
+//   } else {
+//     next("/login");
+//   }
+// });
 
 export default router;
