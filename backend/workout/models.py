@@ -1,10 +1,8 @@
 from django.utils import timezone
 import uuid
 from django.db import models
-from django.urls import reverse
 from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
-from datetime import timedelta
 from .service import get_path_for_avatar_for_trainer
 from django_ckeditor_5.fields import CKEditor5Field
 
@@ -61,15 +59,6 @@ class Trainer(models.Model):
     def __str__(self):
         return f'{self.first_name} {self.last_name} - {self.get_position_display()}'
 
-    # @property
-    # def total_rating(self):
-    #     try:
-    #         total = round(self.ratings.aggregate(models.Sum('star__value'))[
-    #                       'star__value__sum'] / self.ratings.count(), 2)
-    #     except:
-    #         total = 0
-    #     return total
-
 
 class RatingStar(models.Model):
     """
@@ -91,11 +80,13 @@ class Reviews(models.Model):
     Отзывы
     """
     user = models.ForeignKey(
-        User,  on_delete=models.SET_NULL, null=True, verbose_name="пользователь", related_name="user_reviews")
+        User,  on_delete=models.SET_NULL, null=True, verbose_name="пользователь", 
+        related_name="user_reviews")
     rating = models.ForeignKey(
         RatingStar, on_delete=models.SET_NULL, verbose_name="рейтинг", null=True)
     trainer = models.ForeignKey(
         Trainer, verbose_name="тренер", on_delete=models.CASCADE, related_name="trainer_reviews")
+    text = models.TextField("Текст отзыва", max_length=5000, null=True)
     created_at = models.DateTimeField(
         verbose_name="Создано", default=timezone.now)
 
@@ -104,7 +95,7 @@ class Reviews(models.Model):
         verbose_name_plural = "Отзывы о тренерах"
 
     def __str__(self):
-        return f"{self.name} - {self.email}"
+        return f"Отзыв от {self.user.email}"
 
     @property
     def time_age(self):
@@ -126,7 +117,7 @@ class Post(models.Model):
     class Meta:
         verbose_name = 'Статья'
         verbose_name_plural = 'Статьи'
-        ordering = ('-created_at',)
+        ordering = ('pk',)
 
     def __str__(self):
         return self.title
