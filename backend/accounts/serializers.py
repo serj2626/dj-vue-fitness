@@ -15,9 +15,10 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     def validate(self, attrs):
         email_exists = User.objects.filter(email=attrs["email"]).exists()
+        username_exists = User.objects.filter(email=attrs["username"]).exists()
 
-        if email_exists:
-            raise ValidationError('Пользователь с таким email уже существует')
+        if email_exists or username_exists:
+            raise ValidationError('Пользователь с такой почтой или именем уже существует')
 
         return super().validate(attrs)
 

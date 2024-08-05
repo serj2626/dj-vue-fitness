@@ -16,9 +16,9 @@ import Footer from  "../components/Footer.vue";
             Присоединяйтесь к нашей рассылке для получения выборочных, заслуживающих внимания обновлений.
         </p>
 
-        <form class="mx-auto flex max-w-md gap-x-4">
+        <form class="mx-auto mt-5 flex max-w-md gap-x-4">
 
-            <label for="email-address" class="sr-only">Email address</label>
+            <label for="email-address" class="sr-only">Почта</label>
             <input id="email-address" name="email" type="email" autocomplete="email"
              required class="min-w-0 flex-auto rounded-md border-0 bg-white/5 px-3.5 py-2
               text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 

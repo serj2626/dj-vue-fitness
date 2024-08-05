@@ -19,7 +19,6 @@ const trainers = ref([]);
 const getCoaches = async () => {
   try {
     const { data } = await axios.get("/api/workout/trainers/");
-    console.log(data);
     trainers.value = data;
   } catch {
     toast.error("Произошла ошибка");

@@ -12,7 +12,6 @@ const posts = ref([]);
 const getPosts = async () => {
   try {
     const res = await axios.get("/api/workout/posts/");
-    console.log(res.data);
     posts.value = res.data;
   } catch {
     toast.error("Произошла ошибка при получении постов");

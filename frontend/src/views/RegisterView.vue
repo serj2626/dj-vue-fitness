@@ -1,5 +1,55 @@
 <script setup lang="ts">
+import { reactive } from "vue";
 import { RouterLink } from "vue-router";
+import axios from "axios";
+import { useToast } from "vue-toastification";
+import { useRouter } from "vue-router";
+
+
+const router = useRouter();
+const toast = useToast();
+
+type UserSignUp = {
+  username: string;
+  email: string;
+  password: string;
+};
+
+const user = reactive<UserSignUp>({
+  username: "",
+  email: "",
+  password: "",
+});
+
+const validateData = () => {
+  if (user.username === "" || user.email === "" || user.password === "") {
+    toast.error("Заполните все поля");
+    return false;
+  }
+  if (user.password.length < 8) {
+    toast.error("Пароль должен содержать не менее 8 символов");
+    return false;
+  } else {
+    return true;
+  }
+};
+
+const register = async () => {
+  if (validateData()) {
+    try {
+      const res = await axios.post("/api/auth/register/", user);
+      console.log(res.data);
+      toast.success("Аккаунт создан");
+      router.push({ name: "login" });
+      user.username = "";
+      user.email = "";
+      user.password = "";
+    } catch (error) {
+      const [err] = error.response.data.non_field_errors;
+      toast.error(err);
+    }
+  }
+};
 </script>
 
 <template>
@@ -10,28 +60,25 @@ import { RouterLink } from "vue-router";
           text-center md:text-2xl dark:text-white">
           Создание аккаунта
         </h1>
-        <img class="mx-auto" width="60" height="auto" src="../assets/icons/fitness.png" alt="Fitness">
-        <form class="space-y-4 md:space-y-6" action="#">
+        <img class="mx-auto" width="60" height="auto" src="../assets/icons/fitness.png" alt="Fitness" />
+        <form @submit.prevent="register" class="space-y-4 md:space-y-6">
           <div id="login-email" class="flex justify-between items-center gap-4">
-            <img src="../assets/icons/user.png" width="50" height="50" alt="user">
-            <input type="text" name="username" id="username" class="bg-gray-50 w-full border border-gray-300 text-gray-900 rounded-lg 
-              focus:ring-primary-600 focus:border-primary-600 block  p-2.5 
-              dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
-               dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
-               placeholder="Как вас зовут?"
-              required />
+            <img src="../assets/icons/user.png" width="50" height="50" alt="user" />
+            <input v-model="user.username" type="text" name="username" id="username"
+              class="bg-gray-50 w-full border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              placeholder="Как вас зовут?" required />
           </div>
 
           <div id="login-email" class="flex justify-between items-center gap-4">
-            <img src="../assets/icons/email.png" width="50" height="50" alt="user">
+            <img src="../assets/icons/email.png" width="50" height="50" alt="user" />
 
-            <input type="email" name="email" id="email"
+            <input v-model="user.email" type="email" name="email" id="email"
               class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Введите вашу почту" required />
           </div>
-          <div id="login-password"  class="flex justify-between items-center gap-4">
-            <img src="../assets/icons/password.png" width="50" height="50" alt="user">
-            <input type="password" name="password" id="password" placeholder="Ваш пароль"
+          <div id="login-password" class="flex justify-between items-center gap-4">
+            <img src="../assets/icons/password.png" width="50" height="50" alt="user" />
+            <input v-model="user.password" type="password" name="password" id="password" placeholder="Ваш пароль"
               class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               required />
           </div>

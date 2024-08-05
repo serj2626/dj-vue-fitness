@@ -12,5 +12,4 @@ interface ILogin {
     password: string;
 }
 
-
 export { IAuth, ILogin };

@@ -26,7 +26,7 @@ onMounted(getCoach);
 <template>
   <div class="container mt-[220px] flex gap-4 p-9 rounded-xl shadow-2xl shadow-white">
     <div class="w-1/3 mx-auto rounded-2xl flex flex-col items-center justify-center gap-8">
-      <img class="" :src="coach.avatar" alt="" />
+      <img class="rounded-xl" :src="coach.avatar" alt="" />
       <div class="flex items-center">
         <svg class="w-8 h-8 ms-3 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
           fill="currentColor" viewBox="0 0 22 20">
@@ -231,17 +231,18 @@ onMounted(getCoach);
 
 .coach-info li {
   width: 50%;
-
-  border: 2px solid #ffd43b;
+  background-color: rgb(35, 31, 31);
+  border: none;
+  box-shadow: 0 0 15px white;
   padding: 15px;
   font-size: 18px;
-  margin: 20px auto;
+  margin: 25px auto;
   border-radius: 10px;
   list-style: none;
   transition: all 0.3s ease-in;
 
   &:hover {
-    transform: scale(1.1);
+    box-shadow: 0 0 25px white;
   }
 }
 

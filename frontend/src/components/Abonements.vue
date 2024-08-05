@@ -10,7 +10,6 @@ const abonements = ref([]);
 const getAbonements = async (): Promise<void> => {
   try {
     const { data } = await axios.get("/api/abonemens/");
-    console.log(data);
     abonements.value = data;
   } catch {
     toast.error("Произошла ошибка");
