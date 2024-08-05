@@ -33,6 +33,11 @@ const router = createRouter({
       name: "post",
       component: () => import("../views/PostView.vue"),
     },
+    {
+      path: "/abonements/",
+      name: "abonements",
+      component: () => import("../views/BuyAbonementView.vue"),
+    },
   ],
 });
 

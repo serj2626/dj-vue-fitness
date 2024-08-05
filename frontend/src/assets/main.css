@@ -87,7 +87,7 @@ a {
     }
 
     .form-btn {
-        @apply w-full border-2 border-white rounded-md py-3 text-yellow-500 hover:border-yellow-500
+        @apply w-2/4 mx-auto block border-2 border-white border-opacity-30 rounded-md py-3 text-yellow-500 hover:border-yellow-500
     }
 
     /* 

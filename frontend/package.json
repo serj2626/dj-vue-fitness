@@ -12,6 +12,7 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "@vue-stripe/vue-stripe": "^4.5.0",
     "axios": "^1.7.3",
     "pinia": "^2.1.7",
     "swiper": "^11.1.9",
