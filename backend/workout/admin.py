@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Rate, RatingStar,  Trainer, Reviews, Post
+from .models import Rate, RatingStar,  Trainer, Reviews, Post, Subscription
 from django.utils.html import mark_safe
 
 
@@ -59,3 +59,10 @@ class TrainerAdmin(admin.ModelAdmin):
     # search_fields = ('',)
     # date_hierarchy = ''
     # ordering = ('',)
+
+
+@admin.register(Subscription)
+class SubscriptionAdmin(admin.ModelAdmin):
+    '''Admin View for Subscription)'''
+
+    list_display = ('email',)
