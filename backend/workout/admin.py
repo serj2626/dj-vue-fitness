@@ -63,6 +63,6 @@ class TrainerAdmin(admin.ModelAdmin):
 
 @admin.register(Subscription)
 class SubscriptionAdmin(admin.ModelAdmin):
-    '''Admin View for Subscription)'''
+    '''Admin View for Subscription'''
 
     list_display = ('email',)
