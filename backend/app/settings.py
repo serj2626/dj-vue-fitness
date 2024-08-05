@@ -40,9 +40,23 @@ CORS_ALLOW_METHODS = [
 CORS_ORIGIN_ALLOW_ALL = True
 
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(days=30),
-    "REFRESH_TOKEN_LIFETIME": timedelta(days=180),
-    "ROTATE_REFRESH_TOKENS": False,
+    "ACCESS_TOKEN_LIFETIME": timedelta(hours=2),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    "SIGNING_KEY": SECRET_KEY,
+    "AUTH_HEADER_TYPES": ("Bearer",),
+    # "Bearer <Token>"
+}
+
+REST_FRAMEWORK = {
+    "NON_FIELD_ERRORS_KEY": "errors",
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework.authentication.SessionAuthentication",
+        "rest_framework.authentication.TokenAuthentication",
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ),
+    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated"),
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    "PAGE_SIZE": 3,
 }
 
 
@@ -175,7 +189,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # CELERY_TIMEZONE = 'Europe/Moscow'
 
 
-
 # CKEDITOR-5
 ################################################################
 customColorPalette = [
@@ -186,7 +199,6 @@ customColorPalette = [
     {"color": "hsl(231, 48%, 48%)", "label": "Indigo"},
     {"color": "hsl(207, 90%, 54%)", "label": "Blue"},
 ]
-
 
 
 CKEDITOR_5_CONFIGS = {
@@ -335,7 +347,8 @@ CKEDITOR_5_CONFIGS = {
         },
         "htmlSupport": {
             "allow": [
-                {"name": "/.*/", "attributes": True, "classes": True, "styles": True}
+                {"name": "/.*/", "attributes": True,
+                    "classes": True, "styles": True}
             ]
         },
     },

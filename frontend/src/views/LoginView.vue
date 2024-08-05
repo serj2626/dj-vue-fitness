@@ -47,7 +47,7 @@ const login = async () => {
   <div class="container row-2xl">
     <section
       id="loginID"
-      class="w-6/12 mx-auto mt-[280px] bg-transparent dark:bg-gray-900 rounded-2xl"
+      class="w-6/12 mx-auto mt-[180px] bg-transparent dark:bg-gray-900 rounded-2xl"
     >
       <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
         <h1

@@ -27,7 +27,7 @@ onMounted(() => getAbonements());
 
 
 
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <div class="relative overflow-x-auto  sm:rounded-lg">
       <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead class="text-xs
           text-white border-2 border-opacity-25 border-white uppercase bg-gray-300 bg-transparent dark:bg-gray-700 dark:text-gray-400">
@@ -92,4 +92,8 @@ onMounted(() => getAbonements());
   </div>
 </template>
 
-<style></style>
+<style scoped>
+table{
+  box-shadow: 0 0 0 1px rgb(0 0 0 / 10%), 0 4px 11px rgb(0 0 0 / 10%);
+}
+</style>
