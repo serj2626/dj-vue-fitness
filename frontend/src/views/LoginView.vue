@@ -52,10 +52,17 @@ const login = async () => {
       <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
         <h1
           id="login-title"
-          class="text-xl font-bold leading-tight tracking-tight text-white text-center md:text-2xl dark:text-white"
+          class="text-xl font-bold leading-tight tracking-tight text-yellow-500 text-center md:text-2xl dark:text-white"
         >
           Войдите в аккаунт
         </h1>
+        <img
+          class="mx-auto form-img"
+          width="60"
+          height="auto"
+          src="../assets/icons/fitness2.png"
+          alt="Fitness"
+        />
         <form @submit.prevent="login" class="space-y-4 md:space-y-6">
           <div id="login-text">
             <label

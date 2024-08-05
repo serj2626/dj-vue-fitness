@@ -128,7 +128,7 @@ class Subscription(models.Model):
     Подписка на рассылку
     '''
 
-    email = models.EmailField('Email', unique=True)
+    email = models.EmailField('Почта', unique=True)
 
     class Meta:
         verbose_name = 'Подписка на рассылку'
