@@ -86,38 +86,16 @@ class RatingStar(models.Model):
         ordering = ["value"]
 
 
-class RatingTrainer(models.Model):
-    """
-    Рейтинг тренера
-    """
-    star = models.ForeignKey(
-        RatingStar, on_delete=models.CASCADE, verbose_name="звезда")
-    trainer = models.ForeignKey(
-        Trainer, on_delete=models.CASCADE, verbose_name="тренер", related_name="ratings")
-    user = models.ForeignKey(
-        User, on_delete=models.SET_NULL, null=True, verbose_name="пользователь", related_name="ratings"
-    )
-
-    class Meta:
-        verbose_name = "Рейтинг тренера"
-        verbose_name_plural = "Рейтинг тренеров"
-
-    def __str__(self):
-        return f"{self.star} - {self.trainer}"
-
-    class Meta:
-        verbose_name = "Рейтинг тренера"
-        verbose_name_plural = "Рейтинг тренеров"
-
-
 class Reviews(models.Model):
     """
     Отзывы
     """
     user = models.ForeignKey(
-        User,  on_delete=models.SET_NULL, null=True, verbose_name="пользователь", related_name="reviews")
+        User,  on_delete=models.SET_NULL, null=True, verbose_name="пользователь", related_name="user_reviews")
+    rating = models.ForeignKey(
+        RatingStar, on_delete=models.SET_NULL, verbose_name="рейтинг", null=True)
     trainer = models.ForeignKey(
-        Trainer, verbose_name="тренер", on_delete=models.CASCADE, related_name="reviews")
+        Trainer, verbose_name="тренер", on_delete=models.CASCADE, related_name="trainer_reviews")
     created_at = models.DateTimeField(
         verbose_name="Создано", default=timezone.now)
 
@@ -131,7 +109,6 @@ class Reviews(models.Model):
     @property
     def time_age(self):
         return abs((timezone.now() - self.created_at).seconds // 3600)
-
 
 
 class Post(models.Model):

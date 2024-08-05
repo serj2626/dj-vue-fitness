@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Rate, RatingStar, RatingTrainer, Trainer, Reviews
+from .models import Rate, RatingStar,  Trainer, Reviews
 from django.utils.html import mark_safe
 
 
@@ -17,11 +17,6 @@ class RatingStarAdmin(admin.ModelAdmin):
     list_display = ('value',)
 
 
-@admin.register(RatingTrainer)
-class RatingTrainerAdmin(admin.ModelAdmin):
-    '''Admin View for RatingTrainer'''
-
-    list_display = ('star', 'trainer', 'user', )
 
 
 @admin.register(Rate)

@@ -4,7 +4,7 @@ import Footer from  "../components/Footer.vue";
 </script>
 
 <template>
-<div class="mt-20 px-6 sm:mt-20 lg:px-8">
+<div class=" px-6 sm:mt-20 lg:px-8">
     <div
         class="relative isolate overflow-hidden  px-6 py-24   sm:px-24 xl:py-32">
        
@@ -16,7 +16,7 @@ import Footer from  "../components/Footer.vue";
             Присоединяйтесь к нашей рассылке для получения выборочных, заслуживающих внимания обновлений.
         </p>
 
-        <form class="mx-auto mt-10 flex max-w-md gap-x-4">
+        <form class="mx-auto flex max-w-md gap-x-4">
 
             <label for="email-address" class="sr-only">Email address</label>
             <input id="email-address" name="email" type="email" autocomplete="email"

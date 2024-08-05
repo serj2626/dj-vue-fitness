@@ -1,4 +1,4 @@
-from .models import Trainer, RatingTrainer, Reviews, Rate
+from .models import Trainer,  Reviews, Rate
 from .serializers import TrainerSerializer, RateSerializer
 from rest_framework.generics import ListAPIView, RetrieveAPIView
 

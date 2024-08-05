@@ -1,6 +1,8 @@
 from datetime import timedelta
 from django.db import models
 from django.contrib.auth.models import User
+from datetime import timedelta
+from workout.models import Rate, Trainer
 
 
 class Abonement(models.Model):
@@ -31,11 +33,11 @@ class OrderAbonement(models.Model):
     """
 
     user = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="tickets")
+        User, on_delete=models.CASCADE, related_name="abonements", verbose_name="Клиент")
     phone = models.CharField('Телефон', max_length=11, null=True, blank=True)
     abonement = models.ForeignKey(
-        Abonement, on_delete=models.CASCADE, related_name="orders")
-    start = models.DateTimeField('Начало', auto_now_add=True)
+        Abonement, on_delete=models.CASCADE, related_name="orders", verbose_name="Абонемент")
+    start = models.DateTimeField('Начало', blank=True, null=True)
     end = models.DateTimeField('Конец', blank=True, null=True)
     status = models.BooleanField('Оплачен', default=False)
     active = models.BooleanField('Активен', default=False)
@@ -43,7 +45,7 @@ class OrderAbonement(models.Model):
     def save(self, *args, **kwargs):
         if not self.end:
             count_days = self.abonement.number_of_months * 30
-            self.end = self.start + timedelta(count_days)
+            self.end = self.start + timedelta(days=count_days)
         super().save(*args, **kwargs)
 
     class Meta:
@@ -54,28 +56,34 @@ class OrderAbonement(models.Model):
         return f'Order - {self.abonement} - {self.user.email}'
 
 
-# class OrderTraining(models.Model):
-#     """
-#     Забронировать занятие
-#     """
+class OrderTraining(models.Model):
+    """
+    Забронировать занятие
+    """
 
-#     user = models.ForeignKey(
-#         User, on_delete=models.CASCADE, related_name="trainings")
-#     trainer = models.ForeignKey(
-#         Trainer, on_delete=models.CASCADE, related_name="user_trainings")
-#     rate = models.ForeignKey(
-#         Rate, on_delete=models.CASCADE, related_name="user_trainings", blank=True, null=True)
-#     start = models.DateTimeField("Дата начала")
-#     end = models.DateTimeField('Конец', blank=True, null=True)
-#     status = models.BooleanField('Оплачен', default=False)
-#     active = models.BooleanField('Активен', default=False)
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="trainings", verbose_name="Клиент")
+    trainer = models.ForeignKey(
+        Trainer, on_delete=models.CASCADE, related_name="user_trainings", verbose_name="Тренер")
+    rate = models.ForeignKey(
+        Rate, on_delete=models.CASCADE, related_name="user_trainings", null=True,
+        verbose_name="Тариф")
+    start = models.DateTimeField("Дата начала", blank=True, null=True)
+    end = models.DateTimeField('Конец', blank=True, null=True)
+    status = models.BooleanField('Оплачен', default=False)
+    active = models.BooleanField('Активен', default=False)
 
-#     class Meta:
-#         verbose_name = "Забронированное занятие"
-#         verbose_name_plural = "Забронированные занятия"
+    def save(self, *args, **kwargs):
+        if not self.end:
+            self.end = self.start + timedelta(minutes=self.rate.count_minutes)
+        super().save(*args, **kwargs)
 
-#     def __str__(self):
-#         return f'Занятие {self.rate} - {self.trainer}'
+    class Meta:
+        verbose_name = "Забронированное занятие"
+        verbose_name_plural = "Забронированные занятия"
+
+    def __str__(self):
+        return f'Занятие {self.rate} - {self.trainer}'
 
 
 # class CalendarTrainer(models.Model):

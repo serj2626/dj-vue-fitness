@@ -9,7 +9,7 @@
       <a class="text-yellow-500" href="https://github.com/serj2626"
         >Бойцов Сергей</a
       >
-      <p>© 2024 Все права защищены</p>
+      <p>© 2024 Санкт-Петербург</p>
     </div>
     <ul class="flex items-center gap-2">
       <li class="ms-3 footer-link">

@@ -30,16 +30,6 @@ import About from "@/components/About.vue";
     <Abonements />
   </section>
   <div class="women"></div>
-  <section id="training" class="training container">
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam
-    reprehenderit qui tenetur non aliquam ullam totam? Doloremque assumenda
-    impedit modi dolorem porro natus sunt vitae, soluta ab maiores aliquam
-    officia, doloribus aspernatur accusamus ducimus? laudantium dignissimos
-    repellendus amet aliquid! Veritatis asperiores iste Excepturi obcaecati
-    molestias quibusdam modi dolores adipisci pariatur animi quae. Eligendi
-    velit eveniet reiciendis beatae corrupti, voluptas ut aliquid fugit
-    assumenda repellendus, non tempora deserunt.
-  </section>
 
   <section id="coach" class="coach container text-orange-300 my-14">
     <Coach />
@@ -73,12 +63,14 @@ import About from "@/components/About.vue";
   background-image: url(../assets/img/fitness-pool.jpg);
   background-attachment: fixed;
   background-size: cover;
+
   height: 500px;
 }
 
 .women {
   background-image: url(../assets/img/fitness1.png);
   background-attachment: local;
+  background-size: cover;
   height: 700px;
 
   background-repeat: no-repeat;
