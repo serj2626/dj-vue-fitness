@@ -12,7 +12,7 @@ const selectAbonement = ref(null);
 
 const getAbonements = async (): Promise<void> => {
   try {
-    const { data } = await axios.get("/api/abonemens/");
+    const { data } = await axios.get("/api/orders/abonements/");
     console.log(data);
     abonements.value = data;
   } catch {
@@ -27,9 +27,11 @@ onMounted(() => getAbonements());
 
 
 
-    <div class="relative overflow-x-auto  sm:rounded-lg">
-      <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead class="text-xs
+    <div class="abonements relative overflow-x-auto  sm:rounded-lg">
+      <table class="w-full text-sm text-left rtl:text-right 
+      text-gray-500 dark:text-gray-400">
+        <thead
+          class="text-xs
           text-white border-2 border-opacity-25 border-white uppercase bg-gray-300 bg-transparent dark:bg-gray-700 dark:text-gray-400">
           <tr>
             <th scope="col" class="p-4">
@@ -54,27 +56,23 @@ onMounted(() => getAbonements());
           </tr>
         </thead>
         <tbody>
-          <tr 
-          v-for="abonement in abonements" 
-          :key="abonement.id"
-          class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+          <tr v-for="abonement in abonements" :key="abonement.id"
+            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
             <td class="w-4 p-4">
               <div class="flex items-center">
-                <input 
-                v-model="selectAbonement"
-                id="checkbox-table-1" type="checkbox"
+                <input v-model="selectAbonement" id="checkbox-table-1" type="checkbox"
                   class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                 <label for="checkbox-table-1" class="sr-only">checkbox</label>
               </div>
             </td>
             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-             {{ abonement.title }}
+              {{ abonement.title }}
             </th>
             <td class="px-6 py-4">
               {{ abonement.number_of_months }}
             </td>
             <td class="px-6 py-4">
-              {{abonement.price}}
+              {{ abonement.price }}
             </td>
             <td class="px-6 py-4">
               {{ abonement.description }}
@@ -93,7 +91,7 @@ onMounted(() => getAbonements());
 </template>
 
 <style scoped>
-table{
-  box-shadow: 0 0 0 1px rgb(0 0 0 / 10%), 0 4px 11px rgb(0 0 0 / 10%);
+.abonements {
+  box-shadow: 0 5px 40px rgb(239, 224, 136);
 }
 </style>

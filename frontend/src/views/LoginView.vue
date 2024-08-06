@@ -30,8 +30,7 @@ const validateForm = () => {
 const login = async () => {
   if (validateForm()) {
     try {
-      const res = await axios.post("/api/auth/login/", user);
-      
+      await axios.post("/api/auth/login/", user);
       user.username = "";
       user.password = "";
       router.push({ name: "home" });
@@ -45,71 +44,39 @@ const login = async () => {
 
 <template>
   <div class="container row-2xl">
-    <section
-      id="loginID"
-      class="w-6/12 mx-auto mt-[180px] bg-transparent dark:bg-gray-900 rounded-2xl"
-    >
+    <section id="loginID" class="w-6/12 mx-auto mt-[180px] bg-transparent dark:bg-gray-900 rounded-2xl">
       <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-        <h1
-          id="login-title"
-          class="text-xl font-bold leading-tight tracking-tight text-yellow-500 text-center md:text-2xl dark:text-white"
-        >
+        <h1 id="login-title"
+          class="text-xl font-bold leading-tight tracking-tight text-yellow-500 text-center md:text-2xl dark:text-white">
           Войдите в аккаунт
         </h1>
-        <img
-          class="mx-auto form-img"
-          width="60"
-          height="auto"
-          src="../assets/icons/fitness2.png"
-          alt="Fitness"
-        />
+        <img class="mx-auto form-img" width="60" height="auto" src="../assets/icons/fitness2.png" alt="Fitness" />
         <form @submit.prevent="login" class="space-y-4 md:space-y-6">
-          <div id="login-text">
-            <label
-              for="username"
-              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-              >Ваша почта</label
-            >
-            <input
-              v-model="user.username"
-              type="text"
-              name="username"
-              id="username"
+          <div id="login-text" class="w-3/4 mx-auto">
+            <label for="username" class="block  text-sm font-medium text-gray-900 
+            dark:text-white">Ваша
+              почта</label>
+            <input v-model="user.username" type="text" name="username" id="username"
               class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder="Ваше имя "
-              required
-            />
+              placeholder="Ваше имя " required />
           </div>
-          <div id="login-password">
-            <label
-              for="password"
-              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-              >Пароль</label
-            >
-            <input
-              v-model="user.password"
-              type="password"
-              name="password"
-              id="password"
-              placeholder="••••••••"
+          <div id="login-password"  class="w-3/4 mx-auto">
+            <label for="password" class="block text-sm font-medium text-gray-900 dark:text-white">Пароль</label>
+            <input v-model="user.password" type="password" name="password" id="password" placeholder="••••••••"
               class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              required
-            />
+              required />
           </div>
-          <button type="submit" id="login-button" class="form-btn">
-            Войти
-          </button>
-          <p
-            id="login-help"
-            class="text-sm font-light text-yellow-500 dark:text-gray-400"
-          >
-            У вас нет аккаунта?
-            <RouterLink
-              class="font-medium text-primary-600 hover:underline dark:text-primary-500"
-              :to="{ name: 'register' }"
-              >Создать</RouterLink
-            >
-          </p>
+          <div class="flex justify-between items-center">
+
+            <button type="submit" id="login-button" class="form-btn">
+              Войти
+            </button>
+            <p id="login-help" class="text-sm font-bold text-yellow-500 dark:text-gray-400">
+              <span class="text-white"> Нет аккаунта? </span>
+              <RouterLink class="font-medium text-primary-600 hover:underline dark:text-primary-500"
+                :to="{ name: 'register' }">Создать</RouterLink>
+            </p>
+          </div>
         </form>
       </div>
     </section>

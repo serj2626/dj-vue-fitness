@@ -20,11 +20,11 @@ CORS_URL = os.getenv('CORS_URL')
 
 # CORS FOR VUE
 CORS_ALLOWED_ORIGINS = [
-   CORS_URL,
+    CORS_URL,
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-   CORS_URL,
+    CORS_URL,
 ]
 
 CORS_ALLOW_CREDENTIALS = True
@@ -46,11 +46,12 @@ SIMPLE_JWT = {
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
     "SIGNING_KEY": SECRET_KEY,
     "AUTH_HEADER_TYPES": ("Bearer",),
-    # "Bearer <Token>"
 }
 
 REST_FRAMEWORK = {
     "NON_FIELD_ERRORS_KEY": "errors",
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+    
     # "DEFAULT_AUTHENTICATION_CLASSES": (
     #     "rest_framework.authentication.SessionAuthentication",
     #     "rest_framework.authentication.TokenAuthentication",
@@ -79,6 +80,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'rest_framework_simplejwt',
+    "drf_spectacular",
 ]
 
 MIDDLEWARE = [
@@ -123,10 +125,6 @@ DATABASES = {
     }
 }
 
-
-# Password validation
-# https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
@@ -143,9 +141,6 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# Internationalization
-# https://docs.djangoproject.com/en/5.0/topics/i18n/
-
 LANGUAGE_CODE = 'ru'
 
 TIME_ZONE = 'Europe/Moscow'
@@ -155,16 +150,11 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.0/howto/static-files/
-
 STATIC_URL = 'static/'
 MEDIA_URL = '/media/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
@@ -190,7 +180,6 @@ CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'Europe/Moscow'
-
 
 
 # CKEDITOR-5

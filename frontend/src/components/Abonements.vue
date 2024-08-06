@@ -9,9 +9,10 @@ const abonements = ref([]);
 
 const getAbonements = async (): Promise<void> => {
   try {
-    const { data } = await axios.get("/api/abonemens/");
+    const { data } = await axios.get("/api/orders/abonements/");
     abonements.value = data;
-  } catch {
+  } catch(err) {
+    console.log(err);
     toast.error("Произошла ошибка");
   }
 };

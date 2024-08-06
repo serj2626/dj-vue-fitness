@@ -22,6 +22,7 @@ const sendSubscription = async () => {
         let [error] :string = err.response.data.email
         if (error) toast.error("Вы уже подписаны на рассылку")
         else toast.error("Что-то пошло не так")
+        subscription.value = ""
         console.log(error);
     }
 }
