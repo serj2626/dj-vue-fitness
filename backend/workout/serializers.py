@@ -13,7 +13,7 @@ class PostListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ("category",)
+        fields = ("id", "category",)
 
 
 class PostSerializer(serializers.ModelSerializer):

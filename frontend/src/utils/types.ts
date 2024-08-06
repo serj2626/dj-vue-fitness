@@ -5,4 +5,9 @@ type UserType = {
     password: string;
 };
 
-export type {UserType}
+interface IPost {
+    id: string;
+    category: string;
+}
+
+export type { UserType, IPost }

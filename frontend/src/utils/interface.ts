@@ -1,4 +1,4 @@
-interface IAuth {
+export interface IAuth {
     access: string | null;
     refresh: string | null;
     isAuthenticated: boolean;
@@ -7,19 +7,19 @@ interface IAuth {
     email: string | null;
 }
 
-interface ILogin {
+export interface ILogin {
     username: string;
     password: string;
 }
 
-interface IReview {
+export interface IReview {
     id: number | string;
     name: string;
     text: string;
     rating: number;
 }
 
-interface ITrainer {
+export interface ITrainer {
     id: number | string;
     first_name: string;
     last_name: string;
@@ -31,5 +31,13 @@ interface ITrainer {
     trainer_reviews: [];
 }
 
+export interface IAbonement {
+    id: number;
+    title: string;
+    description: string;
+    price: number;
+    number_of_months: number;
+}
 
-export type { IAuth, ILogin, ITrainer, IReview } 
+
+

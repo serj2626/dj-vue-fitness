@@ -29,7 +29,7 @@ interface ITrainer {
 }
 
 const trainers = ref<ITrainer[]>([]);
-const getCoaches = async () => {
+const getCoaches = async (): Promise<void> => {
   try {
     const { data } = await axios.get("/api/workout/trainers/");
     trainers.value = data;

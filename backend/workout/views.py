@@ -96,4 +96,6 @@ class TrainerListView(ListAPIView):
 @extend_schema(description="Детальная информация о тренере")
 class TrainerDetailView(RetrieveAPIView):
     serializer_class = TrainerSerializer
-    queryset = Trainer.objects.all()
+
+    def get_queryset(self):
+        return Trainer.objects.all().prefetch_related("trainer_reviews")

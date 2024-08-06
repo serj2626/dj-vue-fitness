@@ -4,15 +4,17 @@ import axios from "axios";
 import { ref, onMounted } from "vue";
 import { useToast } from "vue-toastification";
 import { useRouter } from "vue-router";
+import type { IPost } from "@/utils/types";
+
 
 const router = useRouter();
 const toast = useToast();
-const posts = ref([]);
+const posts = ref<IPost[]>([]);
 
 const getPosts = async () => {
   try {
-    const res = await axios.get("/api/workout/posts/");
-    posts.value = res.data;
+    const { data } = await axios.get("/api/workout/posts/");
+    posts.value = data;
   } catch {
     toast.error("Произошла ошибка при получении постов");
   }
@@ -23,11 +25,14 @@ onMounted(getPosts);
 
 <template>
   <div class="grid grid-cols-5 gap-5 mt-16">
-    <div 
-    @click="router.push({name: 'post', params: {category: post.category}})"
-    v-for="post in posts" 
-    :key="post.id" 
-    class="grid__box">
+    <div
+      @click="
+        router.push({ name: 'post', params: { category: post.category } })
+      "
+      v-for="post in posts"
+      :key="post.id"
+      class="grid__box"
+    >
       {{ post.category }}
     </div>
   </div>

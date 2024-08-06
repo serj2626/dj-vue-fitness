@@ -26,7 +26,7 @@ const router = createRouter({
     {
       path: "/coach/:id",
       name: "coach",
-      component: () => import("../views/CoachView.vue"),
+      component: () => import("../views/CoachDetailView.vue"),
     },
     {
       path: "/posts/:category",
@@ -36,7 +36,7 @@ const router = createRouter({
     {
       path: "/abonements/",
       name: "abonements",
-      component: () => import("../views/BuyAbonementView.vue"),
+      component: () => import("../views/AbonementsLIstView.vue"),
     },
   ],
 });
