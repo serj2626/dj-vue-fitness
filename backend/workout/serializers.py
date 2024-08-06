@@ -9,6 +9,13 @@ class SubscriptionSerializer(serializers.ModelSerializer):
         fields = ("email",)
 
 
+class PostListSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Post
+        fields = ("category",)
+
+
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
@@ -23,7 +30,8 @@ class RateSerializer(serializers.ModelSerializer):
 
 class ReviewsSerializer(serializers.ModelSerializer):
     user = serializers.CharField(source="user.username", read_only=True)
-    created_at = serializers.DateTimeField(format="%d.%m.%Y %H:%M:%S", read_only=True)
+    created_at = serializers.DateTimeField(
+        format="%d.%m.%Y %H:%M:%S", read_only=True)
     trainer = serializers.StringRelatedField(source="trainer.first_name")
 
     class Meta:

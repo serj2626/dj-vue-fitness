@@ -9,6 +9,7 @@ from rest_framework.generics import (
 
 from .models import Post, Rate, Reviews, Subscription, Trainer
 from .serializers import (
+    PostListSerializer,
     PostSerializer,
     RateSerializer,
     ReviewsSerializer,
@@ -68,7 +69,7 @@ class SubscriptionView(CreateAPIView):
 
 @extend_schema(description="Список постов")
 class PostListView(ListAPIView):
-    serializer_class = PostSerializer
+    serializer_class = PostListSerializer
     queryset = Post.objects.all()
 
 
