@@ -4,7 +4,10 @@ import { RouterLink } from "vue-router";
 import axios from "axios";
 import { useToast } from "vue-toastification";
 import { useRouter } from "vue-router";
+import { useUserStore } from "@/stores/auth";
 
+
+const store = useUserStore();
 const router = useRouter();
 const toast = useToast();
 
@@ -30,10 +33,7 @@ const validateForm = () => {
 const login = async () => {
   if (validateForm()) {
     try {
-      const res = await axios.post("/api/auth/login/", user);
-      console.log(res.data);
-      user.username = "";
-      user.password = "";
+      await store.login(user);
       router.push({ name: "home" });
       toast.success("Вы вошли в аккаунт");
     } catch (error) {

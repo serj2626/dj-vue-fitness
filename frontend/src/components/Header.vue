@@ -1,6 +1,9 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
 import { RouterLink } from "vue-router";
+import { useUserStore } from "@/stores/auth";
+
+const store = useUserStore();
 </script>
 
 <template>
@@ -19,11 +22,11 @@ import { RouterLink } from "vue-router";
         <a href="#coach" class="header__link">Тренеры</a>
         <!-- <a href="#" class="header__link">Расписание</a> -->
         <a href="#contacts" class="header__link">Контакты</a>
-        <RouterLink :to="{ name: 'login' }" 
-        class="header__link">Войти</RouterLink>
+        <RouterLink :to="{ name: 'login' }" class="header__link">Войти
+        </RouterLink>
+        <a @click="store.removeToken()" class="header__link">Выйти</a>
 
-        <RouterLink :to="{ name: 'abonements' }" 
-        class="header__link header__link__buy">Купить абонемент</RouterLink>
+        <RouterLink :to="{ name: 'abonements' }" class="header__link header__link__buy">Купить абонемент</RouterLink>
       </div>
     </div>
   </div>
@@ -33,6 +36,7 @@ import { RouterLink } from "vue-router";
 .router-link-exact-active {
   color: rgb(255, 212, 19);
 }
+
 #navigation {
   animation: show-nav 0.5s ease-in-out;
 }

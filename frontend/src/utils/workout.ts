@@ -25,11 +25,3 @@ export interface ITrainer {
   avatar: string;
   trainer_reviews: [];
 }
-
-export interface IAbonement {
-  id: number;
-  title: string;
-  description: string;
-  price: number;
-  number_of_months: number;
-}

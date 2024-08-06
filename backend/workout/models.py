@@ -108,9 +108,10 @@ class Reviews(models.Model):
     class Meta:
         verbose_name = "Отзыв о тренерах"
         verbose_name_plural = "Отзывы о тренерах"
+        ordering = ["created_at"]
 
     def __str__(self):
-        return f"Отзыв от {self.user.email}"
+        return f"Отзыв от {self.user.email}" if self.user else "Anonymous"
 
     @property
     def time_age(self):

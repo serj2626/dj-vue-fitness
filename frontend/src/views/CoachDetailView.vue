@@ -5,7 +5,7 @@ import { useToast } from "vue-toastification";
 import { useRoute } from "vue-router";
 import Stars from "@/components/Stars.vue";
 import Reviews from "@/components/Reviews.vue";
-import type { ITrainer } from "@/utils/interface";
+import type { ITrainer } from "@/utils/workout";
 
 const showReview = ref<boolean>(false);
 const route = useRoute();

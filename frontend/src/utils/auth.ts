@@ -1,32 +1,37 @@
 export interface IToken {
     access: string;
     refresh: string;
-  }
-  
-  export interface IAuth {
+}
+
+export interface IAuth {
     access: string | null;
     refresh: string | null;
     isAuthenticated: boolean;
     id: string | null;
     username: string | null;
     email: string | null;
-  }
-  
-  export interface IUserRegister {
+}
+
+export interface IUserRegister {
     username: string
     email: string
     password: string
-  }
+}
 
-  export interface IUserRegisterData {
+export interface IUserRegisterData {
     id: string;
     username: string;
     email: string;
     token: IToken
-  }
-  
-  export interface ILogin {
+}
+
+export interface ILogin {
     username: string;
     password: string;
-  }
-  
+}
+
+export interface IUserData {
+    id: string
+    username: string
+    email: string
+}

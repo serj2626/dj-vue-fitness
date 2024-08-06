@@ -22,12 +22,14 @@ class ReviewsAdmin(admin.ModelAdmin):
     """Admin View for Reviews"""
 
     list_display = (
+        "id",
         "user",
         "trainer",
         "get_text",
         "rating",
         "created_at",
     )
+    list_editable = ("rating", "user")
 
     def get_text(self, obj):
         return (obj.text)[:15] + "..."

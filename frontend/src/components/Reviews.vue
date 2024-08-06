@@ -1,7 +1,8 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
-import type { IReview } from "@/utils/interface";
+import type { IReview } from "@/utils/workout";
 import { defineEmits } from "vue";
+import ReviewDetail from "@/components/ReviewDetail.vue";
 
 const emit = defineEmits(["closeModal"]);
 
@@ -21,22 +22,14 @@ defineProps({
         <a @click="emit('closeModal')" class="close-btn">&times;</a>
       </div>
 
-      <ul class="my-10">
-        <li
+      <ul class="my-10"
           v-for="review in reviews"
-          :key="review.id"
-          class="reviews__desc flex flex-col gap-6 p-3 rounded-md mb-6"
-        >
-          <div class="reviews-desc__header flex justify-between items-center">
-            <h3>{{ review.user }}</h3>
-            <span>{{ review.created_at }}</span>
-          </div>
-          <div class="reviews-desc__body">
-            <p>{{ review.text }}.</p>
-          </div>
-        </li>
+          :key="review.id">
+        <ReviewDetail :review="review" />
       </ul>
     </div>
+
+
     <div v-else>
       <div class="reviews__header flex justify-between items-center mb-10">
         <a @click="emit('closeModal')" class="close-btn">&times;</a>
@@ -81,8 +74,8 @@ defineProps({
 
 .close-btn {
   position: fixed;
-  top: 10px;
-  right: 20px;
+  top: 20px;
+  right: 30px;
   font-size: 26px;
   color: white;
   cursor: pointer;
