@@ -30,7 +30,8 @@ const validateForm = () => {
 const login = async () => {
   if (validateForm()) {
     try {
-      await axios.post("/api/auth/login/", user);
+      const res = await axios.post("/api/auth/login/", user);
+      console.log(res.data);
       user.username = "";
       user.password = "";
       router.push({ name: "home" });

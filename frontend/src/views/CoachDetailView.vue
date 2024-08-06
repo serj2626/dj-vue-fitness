@@ -48,7 +48,7 @@ onMounted(getCoach);
       <div>
         <a class="text-white cursor-pointer">
           Отзывы
-          <span @click="showReview = true" class="text-yellow-500 hover:underline"> (126)</span>
+          <span @click="showReview =!showReview" class="text-yellow-500 hover:underline"> (126)</span>
         </a>
       </div>
     </div>

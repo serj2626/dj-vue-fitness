@@ -40,7 +40,7 @@ import Posts from "@/components/Posts.vue";
     url(../assets/img/home-bg.jpg);
 
   background-size: cover;
-  /* background-position: center; */
+  background-position: center;
 
   background-repeat: no-repeat;
   width: 100%;

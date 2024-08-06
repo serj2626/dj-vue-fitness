@@ -17,7 +17,7 @@ defineProps({
   <div class="reviews rounded-lg">
     <div v-if="reviews.length" class="reviews__main">
       <div class="reviews__header flex justify-between items-center mb-10">
-        <h1 class="text-3xl text-center text-white font-extrabold">Отзывы</h1>
+        <h4 class="text-2xl text-center text-white font-extrabold">Отзывы</h4>
         <a @click="emit('closeModal')" class="close-btn">&times;</a>
       </div>
 
@@ -80,7 +80,7 @@ defineProps({
 }
 
 .close-btn {
-  position: absolute;
+  position: fixed;
   top: 10px;
   right: 20px;
   font-size: 26px;
