@@ -1,7 +1,15 @@
 from django.urls import path
-from .views import (RateListView, TrainerListView, TrainerDetailView,
-                    PostListView, PostDetailView,
-                    ReviewsDetailView, ReviewsListView, SubscriptionView)
+
+from .views import (
+    PostDetailView,
+    PostListView,
+    RateListView,
+    ReviewsDetailView,
+    ReviewsListView,
+    SubscriptionView,
+    TrainerDetailView,
+    TrainerListView,
+)
 
 urlpatterns = [
     path("trainers/", TrainerListView.as_view(), name="trainer-list"),

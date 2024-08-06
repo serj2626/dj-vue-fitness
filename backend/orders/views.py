@@ -1,9 +1,16 @@
-from rest_framework.generics import ListCreateAPIView, ListAPIView, GenericAPIView
-from .serializers import AbonementSerializer, OrderAbonementSerializer, OrderTrainingSerializer
-from .models import Abonement, OrderAbonement, OrderTraining
-from rest_framework.request import Request
 from rest_framework import mixins
+from rest_framework.generics import GenericAPIView, ListAPIView, ListCreateAPIView
+from rest_framework.request import Request
+
 from workout.models import Trainer
+
+from .models import Abonement, OrderAbonement, OrderTraining
+from .serializers import (
+    AbonementSerializer,
+    OrderAbonementSerializer,
+    OrderTrainingSerializer,
+)
+
 
 class AbonemenListtView(ListAPIView):
     queryset = Abonement.objects.all()
@@ -31,7 +38,7 @@ class OrderTrainingCreateView(mixins.CreateModelMixin, GenericAPIView):
     queryset = OrderTraining.objects.all()
 
     def perform_create(self, serializer):
-        trainer  = Trainer.objects.get(id=self.kwargs['pk'])
+        trainer = Trainer.objects.get(id=self.kwargs["pk"])
         user = self.request.user
         serializer.save(user=user, trainer=trainer)
         return super().perform_create(serializer)

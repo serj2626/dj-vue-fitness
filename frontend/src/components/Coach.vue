@@ -5,17 +5,30 @@ import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { useToast } from "vue-toastification";
 import { Swiper, SwiperSlide } from "swiper/vue";
-import { Pagination } from "swiper/modules";
+import { Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
-
-import "swiper/css/pagination";
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 
 
 const router = useRouter();
 const toast = useToast();
-const modules = [Pagination];
+const modules = [Pagination , Navigation];
 
-const trainers = ref([]);
+
+interface ITrainer {
+  id: number|string;
+  first_name: string;
+  last_name: string;
+  position: string;
+  phone: string;
+  email: string;
+  bio: string;
+  avatar: string;
+  trainer_reviews: [];
+}
+
+const trainers = ref<ITrainer[]>([]);
 const getCoaches = async () => {
   try {
     const { data } = await axios.get("/api/workout/trainers/");
@@ -36,10 +49,11 @@ onMounted(getCoaches);
   <swiper
     :loop="true"
     :slidesPerView="1"
-    :spaceBetween="10"
+    :spaceBetween="5"
     :pagination="{
       clickable: true,
     }"
+    :navigation="true"
     :breakpoints="{
       '640': {
         slidesPerView: 2,
@@ -66,16 +80,38 @@ onMounted(getCoaches);
 </template>
 
 <style scoped>
+
 .swiper {
+  --swiper-pagination-color: #ff0000;
+  --swiper-pagination-bullet-size: 18px;
+  --swiper-pagination-bullet-width: 18px;
+  --swiper-pagination-bullet-height: 18px;
+  --swiper-pagination-bullet-inactive-color: #3322c9;
+  --swiper-pagination-bullet-inactive-opacity: 0.7;
+  --swiper-pagination-bullet-opacity: 1;
+  --swiper-pagination-bullet-horizontal-gap: 9px;
+  --swiper-pagination-bullet-vertical-gap: 6px;
+
+  --swiper-navigation-color: orange;
+  --swiper-navigation-size: 100px;
+
+  --swiper-navigation-offset-horizontal: 0;
+  --swiper-navigation-offset-vertical: 0;
+
+
+
+
   width: 100%;
   height: 100%;
 }
 
 .swiper-slide {
+  margin: 0 50px;
   text-align: center;
   font-size: 18px;
   background: #fff;
   cursor: pointer;
+
 
   /* Center slide text vertically */
   display: flex;

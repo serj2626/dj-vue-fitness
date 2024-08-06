@@ -1,12 +1,11 @@
-from django.contrib import admin
-from django.urls import path, include
 from django.conf import settings
+from django.contrib import admin
+from django.urls import include, path
 from drf_spectacular.views import (
     SpectacularAPIView,
     SpectacularRedocView,
     SpectacularSwaggerView,
 )
-
 
 urlpatterns = [
     path('ckeditor5/', include('django_ckeditor_5.urls')),

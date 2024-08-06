@@ -7,7 +7,25 @@
   </h1>
   <div class="flex justify-between gap-6 about">
         <div class="about__desc">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos, debitis consectetur voluptates quidem quae fugit sequi id. Ea delectus error enim recusandae mollitia nisi nihil tempore provident sint aliquid eum beatae, quod officiis iure sequi aspernatur numquam quam aliquam magni perspiciatis excepturi atque blanditiis nemo? Corrupti iure explicabo ad nihil, veritatis tempore eveniet sapiente vitae blanditiis accusantium quam nobis fugiat dolorum, nisi delectus repudiandae, reprehenderit natus adipisci odio perspiciatis! Sit dolorum aut ipsa ut error quo aperiam. Amet mollitia placeat consequuntur, eveniet perferendis eum sit quas vel atque dolorem ratione explicabo, quia dignissimos sapiente nesciunt adipisci dolore fugit. Impedit, fugit.
+          <h3 class="about__desc-title">Добро пожаловать в DV FITNESS.</h3>
+          <div class="about__desc-body">
+          Наша цель - здоровье и комфорт.
+           Мы помогаем людям достигать своих целей в лучшую сторону. В нашем клубе
+           вы можете отдохнуть и улучшить свою физическую форму. Мы предлагаем
+           различные программы, которые помогут вам достичь своих целей.
+           Наши тренеры помогут вам достичь своих целей. Мы предлагаем различные
+           программы, которые помогут вам достичь своих целей. На нашем сайте вы можете
+           ознакомиться с нашими программами. Приобрести абонемент можно на сайте.
+           Также вы можете ознакомиться с нашими тренерами. Заказать персональную тренировку.
+          </div>
+          <ul> На сайте вы можете:
+            <li>Приобрести абонемент</li>
+            <li>Посмотреть инофрмацию о тренерах</li>
+            <li>Приобрести персональную тренировку</li>
+            <li>Прочитать полезные статьи</li>
+            <li>Купить протеиновую продукцию</li>
+          </ul>
+
         </div>
         <img src="@/assets/img/image.jpg" width="600" height="auto" alt="" class="about__img">
     </div>
