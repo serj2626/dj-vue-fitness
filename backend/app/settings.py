@@ -62,6 +62,13 @@ REST_FRAMEWORK = {
     # "PAGE_SIZE": 3,
 }
 
+SPECTACULAR_SETTINGS = {
+    "TITLE": "FITNESS API",
+    "DESCRIPTION": "API for fitness app",
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
+    # OTHER SETTINGS
+}
 
 INSTALLED_APPS = [
     "django.contrib.admin",
