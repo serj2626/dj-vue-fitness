@@ -3,6 +3,8 @@ import axios from "axios";
 import { ref, onMounted } from "vue";
 import { useToast } from "vue-toastification";
 import { useRoute } from "vue-router";
+import Stars from "@/components/Stars.vue";
+import Reviews from "@/components/Reviews.vue";
 import type { ITrainer } from "@/utils/interface";
 
 
@@ -25,8 +27,8 @@ const showReviews = ref(false);
 const getCoach = async () => {
   try {
     const { data } = await axios.get(`/api/workout/trainers/${id}`);
-    console.log(data);
     coach.value = data;
+    console.log(coach.value);
   } catch {
     toast.error("Произошла ошибка при получении тренера");
   }
@@ -39,33 +41,7 @@ onMounted(getCoach);
   <div class="container mt-[220px] flex gap-4 p-9 rounded-xl shadow-2xl shadow-white">
     <div class="w-1/3 mx-auto rounded-2xl flex flex-col items-center justify-center gap-8">
       <img class="rounded-xl" :src="coach.avatar" alt="" />
-      <div class="flex items-center">
-        <svg class="w-8 h-8 ms-3 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-          fill="currentColor" viewBox="0 0 22 20">
-          <path
-            d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-        </svg>
-        <svg class="w-8 h-8 ms-3 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-          fill="currentColor" viewBox="0 0 22 20">
-          <path
-            d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-        </svg>
-        <svg class="w-8 h-8 ms-3 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-          fill="currentColor" viewBox="0 0 22 20">
-          <path
-            d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-        </svg>
-        <svg class="w-8 h-8 ms-3 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-          fill="currentColor" viewBox="0 0 22 20">
-          <path
-            d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-        </svg>
-        <svg class="w-8 h-8 ms-3 text-gray-300 dark:text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-          fill="currentColor" viewBox="0 0 22 20">
-          <path
-            d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-        </svg>
-      </div>
+      <Stars />
       <div>
         <a class="text-white">
           Отзывы
@@ -130,134 +106,17 @@ onMounted(getCoach);
       </ul>
     </div>
   </div>
-  <transition name="fade">
-    <div v-if="showReviews" class="reviews rounded-lg">
-      <div class="reviews__main">
-        <div class="reviews__main-header flex justify-between items-center mb-10 fixed top-0">
-          <h1 class="text-3xl text-center text-white font-extrabold">Отзывы</h1>
-          <a class="block text-red-500 cursor-pointer text-3xl">&times</a>
-        </div>
 
-        <ul>
-          <li class="reviews-desc flex flex-col gap-6 p-3 rounded-md mb-6">
-            <div class="reviews-desc__header flex justify-between items-center">
-              <h3>{{ coach.first_name }} {{ coach.last_name.at(0) }}</h3>
-              <span>10.10.2021</span>
-            </div>
-            <div class="reviews-desc__body">
-              <p>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolor
-                iste maiores tempora omnis illo mollitia.
-              </p>
-            </div>
-          </li>
-          <li class="reviews-desc flex flex-col gap-6 p-3 rounded-md mb-6">
-            <div class="reviews-desc__header flex justify-between items-center">
-              <h3>{{ coach.first_name }} {{ coach.last_name.at(0) }}</h3>
-              <span>10.10.2021</span>
-            </div>
-            <div class="reviews-desc__body">
-              <p>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolor
-                iste maiores tempora omnis illo mollitia.
-              </p>
-            </div>
-          </li>
-          <li class="reviews-desc flex flex-col gap-6 p-3 rounded-md mb-6">
-            <div class="reviews-desc__header flex justify-between items-center">
-              <h3>{{ coach.first_name }} {{ coach.last_name.at(0) }}</h3>
-              <span>10.10.2021</span>
-            </div>
-            <div class="reviews-desc__body">
-              <p>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolor
-                iste maiores tempora omnis illo mollitia.
-              </p>
-            </div>
-          </li>
-          <li class="reviews-desc flex flex-col gap-6 p-3 rounded-md mb-6">
-            <div class="reviews-desc__header flex justify-between items-center">
-              <h3>{{ coach.first_name }} {{ coach.last_name.at(0) }}</h3>
-              <span>10.10.2021</span>
-            </div>
-            <div class="reviews-desc__body">
-              <p>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolor
-                iste maiores tempora omnis illo mollitia.
-              </p>
-            </div>
-          </li>
-          <li class="reviews-desc flex flex-col gap-6 p-3 rounded-md mb-6">
-            <div class="reviews-desc__header flex justify-between items-center">
-              <h3>{{ coach.first_name }} {{ coach.last_name.at(0) }}</h3>
-              <span>10.10.2021</span>
-            </div>
-            <div class="reviews-desc__body">
-              <p>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolor
-                iste maiores tempora omnis illo mollitia.
-              </p>
-            </div>
-          </li>
-          <li class="reviews-desc flex flex-col gap-6 p-3 rounded-md mb-6">
-            <div class="reviews-desc__header flex justify-between items-center">
-              <h3>{{ coach.first_name }} {{ coach.last_name.at(0) }}</h3>
-              <span>10.10.2021</span>
-            </div>
-            <div class="reviews-desc__body">
-              <p>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolor
-                iste maiores tempora omnis illo mollitia.
-              </p>
-            </div>
-          </li>
-          <li class="reviews-desc flex flex-col gap-6 p-3 rounded-md mb-6">
-            <div class="reviews-desc__header flex justify-between items-center">
-              <h3>{{ coach.first_name }} {{ coach.last_name.at(0) }}</h3>
-              <span>10.10.2021</span>
-            </div>
-            <div class="reviews-desc__body">
-              <p>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolor
-                iste maiores tempora omnis illo mollitia.
-              </p>
-            </div>
-          </li>
-          <li class="reviews-desc flex flex-col gap-6 p-3 rounded-md mb-6">
-            <div class="reviews-desc__header flex justify-between items-center">
-              <h3>{{ coach.first_name }} {{ coach.last_name.at(0) }}</h3>
-              <span>10.10.2021</span>
-            </div>
-            <div class="reviews-desc__body">
-              <p>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolor
-                iste maiores tempora omnis illo mollitia.
-              </p>
-            </div>
-          </li>
-          <li class="reviews-desc flex flex-col gap-6 p-3 rounded-md mb-6">
-            <div class="reviews-desc__header flex justify-between items-center">
-              <h3>{{ coach.first_name }} {{ coach.last_name.at(0) }}</h3>
-              <span>10.10.2021</span>
-            </div>
-            <div class="reviews-desc__body">
-              <p>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolor
-                iste maiores tempora omnis illo mollitia.
-              </p>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
+  <transition name="fade">
+    <Reviews 
+    v-if="coach.trainer_reviews.length"
+    :reviews="coach.trainer_reviews" />
   </transition>
+
 </template>
 
 <style scoped>
-.reviews-desc {
-  background-color: rgb(255, 255, 255);
-}
-
+/* Show Reviews Animation */
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 2.5s linear;
@@ -269,17 +128,8 @@ onMounted(getCoach);
   transform: translateX(600px);
 }
 
-.reviews {
-  position: absolute;
-  padding: 15px;
-  top: 96px;
-  right: 0;
-  bottom: 0;
-  width: 30%;
-  background: #1b4543;
-  overflow-y: auto;
-  z-index: 100;
-}
+
+
 
 .coach-info li {
   width: 50%;

@@ -12,11 +12,20 @@ export interface ILogin {
     password: string;
 }
 
-export interface IReview {
-    id: number | string;
+export interface IReviewCreate {
+    id: string;
     name: string;
     text: string;
     rating: number;
+}
+
+export interface IReview {
+    id: number;
+    trainer: string;
+    text: string;
+    rating: number;
+    user : string;
+    created_at: string;
 }
 
 export interface ITrainer {
@@ -38,6 +47,4 @@ export interface IAbonement {
     price: number;
     number_of_months: number;
 }
-
-
 
