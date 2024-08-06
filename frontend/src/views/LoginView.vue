@@ -66,9 +66,8 @@ const login = async () => {
               class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               required />
           </div>
-          <div class="flex justify-between items-center">
 
-            <button type="submit" id="login-button" class="form-btn">
+            <button type="submit" id="login-button" class="form-btn w-3/4 mx-auto">
               Войти
             </button>
             <p id="login-help" class="text-sm font-bold text-yellow-500 dark:text-gray-400">
@@ -76,7 +75,7 @@ const login = async () => {
               <RouterLink class="font-medium text-primary-600 hover:underline dark:text-primary-500"
                 :to="{ name: 'register' }">Создать</RouterLink>
             </p>
-          </div>
+
         </form>
       </div>
     </section>
@@ -88,7 +87,7 @@ const login = async () => {
   animation: show-title 0.5s ease-in;
 }
 
-#login-email {
+#login-text {
   animation: show-email 0.5s ease-in;
 }
 
