@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from .models import Post, Rate, Reviews, Subscription, Trainer
+from django.utils.timesince import timesince
 
 
 class SubscriptionSerializer(serializers.ModelSerializer):
