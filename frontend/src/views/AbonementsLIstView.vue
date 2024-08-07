@@ -23,7 +23,7 @@ onMounted(() => getAbonements());
 </script>
 
 <template>
-  <div class="container row-3xl">
+  <div class="container row mt-44">
 
 
 
@@ -92,6 +92,6 @@ onMounted(() => getAbonements());
 
 <style scoped>
 .abonements {
-  box-shadow: 0 5px 40px rgb(239, 224, 136);
+  box-shadow: 0 5px 40px rgb(228, 227, 221);
 }
 </style>

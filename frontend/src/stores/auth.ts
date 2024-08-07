@@ -33,7 +33,7 @@ export const useUserStore = defineStore("user", () => {
   };
 
   const auth = computed(() => {
-    return user.isAuthenticated;
+    return user
   });
 
   const register = async (userData: IUserRegister) => {
