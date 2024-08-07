@@ -1,15 +1,23 @@
 <script setup lang="ts">
+import MyAbonement from "@/components/profile/MyAbonement.vue";
+import MySettings from "@/components/profile/MySettings.vue";
+import MyTrainings from "@/components/profile/MyTrainings.vue";
+
 import { useUserStore } from "@/stores/auth";
 import { storeToRefs } from "pinia";
+import { ref } from "vue";
 
 const store = useUserStore();
 const { auth: user } = storeToRefs(store);
+
+const showAction = ref(1);
 </script>
 
 <template>
   <div class="container row mt-[150px]">
-    <div class="profile w-2/4 mx-auto p-10 
-     rounded-xl flex flex-col items-center">
+    <div
+      class="profile w-2/4 mx-auto p-10 rounded-xl flex flex-col items-center"
+    >
       <img
         src="@/assets/img/profile.png"
         alt="Profile"
@@ -52,16 +60,47 @@ const { auth: user } = storeToRefs(store);
       </div>
     </div>
     <div class="actions flex justify-center items-center gap-10 mt-10">
-      <button class="action-btn">Настройки</button>
-      <button class="action-btn">Абонементы</button>
-      <button class="action-btn">Тренировки</button>
+      <button
+        :class="{ action__btn_active: showAction === 1 }"
+        @click="showAction = 1"
+        class="action__btn"
+      >
+        Настройки
+      </button>
+      <button
+        :class="{ action__btn_active: showAction === 2 }"
+        @click="showAction = 2"
+        class="action__btn"
+      >
+        Абонементы
+      </button>
+      <button
+        :class="{ action__btn_active: showAction === 3 }"
+        @click="showAction = 3"
+        class="action__btn"
+      >
+        Тренировки
+      </button>
+    </div>
+
+    <div
+      class="mt-28 text-white border-2 border-white border-opacity-25 rounded-2xl"
+    >
+      <MySettings v-if="showAction === 1" />
+      <MyAbonement v-if="showAction === 2" />
+      <MyTrainings v-if="showAction === 3" />
     </div>
   </div>
 </template>
 
 <style scoped>
-.profile{
-    background: linear-gradient(45deg, rgb(236, 48, 180) 0%, rgb(0, 255, 221) 100%);
+.profile {
+  background: linear-gradient(
+    45deg,
+    rgb(236, 48, 180) 0%,
+    rgb(0, 255, 221) 100%
+  );
+  box-shadow: 0 0 25px rgb(201, 192, 13);
 }
 
 img {
@@ -70,11 +109,32 @@ img {
   padding: 10px;
 }
 
-.action-btn {
+.action__btn {
   color: rgb(255, 255, 255);
   border-radius: 15px;
-  background:linear-gradient(45deg, rgb(236, 48, 180) 0%, rgb(0, 255, 221) 100%);
+  background: linear-gradient(
+    45deg,
+    rgb(236, 48, 180) 0%,
+    rgb(0, 255, 221) 100%
+  );
   padding: 15px 20px;
   font-size: 18px;
+  transition: all 0.3s ease-in;
+
+  &:hover {
+    background: linear-gradient(
+      45deg,
+      rgb(162, 54, 187) 0%,
+      rgb(221, 255, 2) 100%
+    );
+  }
+}
+
+.action__btn_active {
+  background: linear-gradient(
+    45deg,
+    rgb(162, 54, 187) 0%,
+    rgb(221, 255, 2) 100%
+  );
 }
 </style>

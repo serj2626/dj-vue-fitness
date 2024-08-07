@@ -75,6 +75,7 @@ defineProps({
 .close-btn {
   position: fixed;
   top: 20px;
+  font-size: 20px;
   right: 30px;
   font-size: 26px;
   color: white;

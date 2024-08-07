@@ -64,6 +64,7 @@ export const useUserStore = defineStore("user", () => {
       user.refresh = data.refresh;
       localStorage.setItem("fitness.access", data.access);
       localStorage.setItem("fitness.refresh", data.refresh);
+      setUserInfo();
       axios.defaults.headers.common["Authorization"] = "Bearer " + user.access;
     } catch (error) {
       throw new Error("Неверная почта или имя пользователя");
@@ -113,12 +114,14 @@ export const useUserStore = defineStore("user", () => {
 
   const setUserInfo = async () => {
     try {
-      const { data } = await axios.post("/api/auth/me/");
+      const { data } = await axios.post("/api/auth/me/", {
+        token: user.access,
+      });
       console.log(data);
-      //   user.id = data.id;
-      //   user.username = data.username;
-      //   user.email = data.email;
-      //   user.isAuthenticated = true;
+        user.id = data.id;
+        user.username = data.username;
+        user.email = data.email;
+        user.isAuthenticated = true;
     } catch (error) {
       throw new Error();
     }

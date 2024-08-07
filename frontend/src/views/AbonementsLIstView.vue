@@ -57,7 +57,8 @@ onMounted(() => getAbonements());
         </thead>
         <tbody>
           <tr v-for="abonement in abonements" :key="abonement.id"
-            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 
+            hover:bg-gray-50 dark:hover:bg-gray-600">
             <td class="w-4 p-4">
               <div class="flex items-center">
                 <input v-model="selectAbonement" id="checkbox-table-1" type="checkbox"
