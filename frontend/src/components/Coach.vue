@@ -29,7 +29,7 @@ interface ITrainer {
 }
 
 const trainers = ref<ITrainer[]>([]);
-const getCoaches = async (): Promise<void> => {
+const getCoaches = async () => {
   try {
     const { data } = await axios.get("/api/workout/trainers/");
     trainers.value = data;
@@ -48,6 +48,7 @@ onMounted(getCoaches);
 
   <swiper
     :loop="true"
+    :loopFillGroupWithBlank="true"
     :slidesPerView="1"
     :spaceBetween="5"
     :pagination="{

@@ -1,7 +1,7 @@
+from django.utils.timesince import timesince
 from rest_framework import serializers
 
 from .models import Post, Rate, Reviews, Subscription, Trainer
-from django.utils.timesince import timesince
 
 
 class SubscriptionSerializer(serializers.ModelSerializer):
@@ -14,7 +14,10 @@ class PostListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ("id", "category",)
+        fields = (
+            "id",
+            "category",
+        )
 
 
 class PostSerializer(serializers.ModelSerializer):
@@ -31,8 +34,7 @@ class RateSerializer(serializers.ModelSerializer):
 
 class ReviewsSerializer(serializers.ModelSerializer):
     user = serializers.CharField(source="user.username", read_only=True)
-    created_at = serializers.DateTimeField(
-        format="%d.%m.%Y %H:%M:%S", read_only=True)
+    created_at = serializers.DateTimeField(format="%d.%m.%Y %H:%M:%S", read_only=True)
     trainer = serializers.StringRelatedField(source="trainer.first_name")
 
     class Meta:

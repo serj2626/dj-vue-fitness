@@ -37,6 +37,7 @@ const login = async () => {
       router.push({ name: "home" });
       toast.success("Вы вошли в аккаунт");
     } catch (error) {
+      console.log(error);
       toast.error("Неверная почта или имя пользователя");
     }
   }

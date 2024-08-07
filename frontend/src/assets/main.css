@@ -21,7 +21,6 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    overflow-x: hidden;
 
 }
 
@@ -43,32 +42,14 @@ a {
     }
 
     .container {
-        @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ;
+        @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
     }
 
-    .row-sm {
-        @apply mt-7
-    }
 
-    .row-md {
-        @apply mt-16
-    }
-
-    .row-lg {
+    .row {
         @apply mt-24
     }
 
-    .row-xl {
-        @apply mt-32
-    }
-
-    .row-2xl {
-        @apply mt-40
-    }
-
-    .row-3xl {
-        @apply mt-48
-    }
 
     .header__link {
         @apply text-white font-bold transition-colors duration-300 ease-in hover:text-yellow-500

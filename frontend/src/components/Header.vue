@@ -2,8 +2,11 @@
 <script setup lang="ts">
 import { RouterLink } from "vue-router";
 import { useUserStore } from "@/stores/auth";
+import { storeToRefs } from "pinia";
 
 const store = useUserStore();
+const {auth} = storeToRefs(store);
+
 </script>
 
 <template>
@@ -22,9 +25,14 @@ const store = useUserStore();
         <a href="#coach" class="header__link">Тренеры</a>
         <!-- <a href="#" class="header__link">Расписание</a> -->
         <a href="#contacts" class="header__link">Контакты</a>
-        <RouterLink :to="{ name: 'login' }" class="header__link">Войти
+        <RouterLink 
+        v-if="!auth"
+        :to="{ name: 'login' }" 
+        class="header__link">Войти
         </RouterLink>
-        <a @click="store.removeToken()" class="header__link">Выйти</a>
+        <a
+        v-if="auth"
+        @click="store.removeToken()" class="header__link">Выйти</a>
 
         <RouterLink :to="{ name: 'abonements' }" class="header__link header__link__buy">Купить абонемент</RouterLink>
       </div>

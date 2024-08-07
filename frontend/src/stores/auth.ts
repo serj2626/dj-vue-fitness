@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { reactive } from "vue";
+import { computed, reactive } from "vue";
 import axios from "axios";
 import type { IAuth, ILogin, IUserRegister } from "@/utils/auth";
 
@@ -11,6 +11,29 @@ export const useUserStore = defineStore("user", () => {
     id: null,
     username: null,
     email: null,
+  });
+
+  const initStore = () => {
+    if (localStorage.getItem("fitness.access")) {
+      console.log("Вы авторизовались!");
+
+      user.access = localStorage.getItem("fitness.access");
+      user.refresh = localStorage.getItem("fitness.refresh");
+      user.id = localStorage.getItem("fitness.id");
+      user.username = localStorage.getItem("fitness.username");
+      user.email = localStorage.getItem("fitness.email");
+      user.isAuthenticated = true;
+
+      refreshToken();
+
+      console.log("Initialized user:", user);
+    } else {
+      ("asd");
+    }
+  };
+
+  const auth = computed(() => {
+    return user.isAuthenticated;
   });
 
   const register = async (userData: IUserRegister) => {
@@ -42,10 +65,24 @@ export const useUserStore = defineStore("user", () => {
       localStorage.setItem("fitness.access", data.access);
       localStorage.setItem("fitness.refresh", data.refresh);
       axios.defaults.headers.common["Authorization"] = "Bearer " + user.access;
-      await setUserInfo();
     } catch (error) {
-      throw new Error();
+      throw new Error("Неверная почта или имя пользователя");
     }
+  };
+
+  const logout = () => {
+    user.refresh = null;
+    user.access = null;
+    user.isAuthenticated = false;
+    user.id = null;
+    user.username = null;
+    user.email = null;
+
+    localStorage.removeItem("fitness.access");
+    localStorage.removeItem("fitness.refresh");
+    localStorage.removeItem("fitness.id");
+    localStorage.removeItem("fitness.email");
+    localStorage.removeItem("fitness.username");
   };
 
   const removeToken = () => {
@@ -62,7 +99,9 @@ export const useUserStore = defineStore("user", () => {
 
   const refreshToken = async () => {
     try {
-      const { data } = await axios.post("/api/auth/refresh/");
+      const { data } = await axios.post("/api/auth/refresh/", {
+        refresh: user.refresh,
+      });
       user.access = data.access;
       localStorage.setItem("fitness.access", data.access);
       axios.defaults.headers.common["Authorization"] = "Bearer " + data.access;
@@ -72,35 +111,14 @@ export const useUserStore = defineStore("user", () => {
     }
   };
 
-  const initStore = () => {
-    console.log("initStore", localStorage.getItem("fitness.access"));
-
-    if (localStorage.getItem("fitness.access")) {
-      console.log("Вы авторизовались!");
-
-    //   user.access = localStorage.getItem("fitness.access");
-    //   user.refresh = localStorage.getItem("fitness.refresh");
-      user.id = localStorage.getItem("fitness.id");
-      user.username = localStorage.getItem("fitness.username");
-      user.email = localStorage.getItem("fitness.email");
-      user.isAuthenticated = true;
-
-      // refreshToken();
-
-      // console.log("Initialized user:", user);
-    } else {
-      ("asd");
-    }
-  };
-
   const setUserInfo = async () => {
     try {
       const { data } = await axios.post("/api/auth/me/");
       console.log(data);
-    //   user.id = data.id;
-    //   user.username = data.username;
-    //   user.email = data.email;
-    //   user.isAuthenticated = true;
+      //   user.id = data.id;
+      //   user.username = data.username;
+      //   user.email = data.email;
+      //   user.isAuthenticated = true;
     } catch (error) {
       throw new Error();
     }
@@ -114,5 +132,7 @@ export const useUserStore = defineStore("user", () => {
     initStore,
     setUserInfo,
     refreshToken,
+    logout,
+    auth,
   };
 });

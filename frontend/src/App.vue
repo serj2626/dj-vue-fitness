@@ -1,17 +1,26 @@
 <script setup lang="ts">
 import { RouterView } from "vue-router";
-import {onMounted} from "vue";
-import {useToast} from "vue-toastification";
+import { onBeforeMount } from "vue";
+import { useToast } from "vue-toastification";
 import { useUserStore } from "./stores/auth";
-import  Header from "./components/Header.vue";
+import Header from "./components/Header.vue";
+import axios from "axios";
 
 
 const store = useUserStore();
 const toast = useToast();
 
-onMounted(() =>{
+onBeforeMount(() => {
   try {
     store.initStore();
+    const token = store.user.access
+
+    if (token) {
+      console.log("token", token);
+      axios.defaults.headers.common["Authorization"] = "Bearer " + token;
+    } else {
+      axios.defaults.headers.common["Authorization"] = "";
+    }
   } catch (error) {
     toast.error("Произошла ошибка");
   }
@@ -23,7 +32,7 @@ onMounted(() =>{
     <Header />
   </header>
 
-  <main>
+  <main class="row">
     <RouterView />
   </main>
 
