@@ -29,13 +29,40 @@ onMounted(getPosts);
       @click="
         router.push({ name: 'post', params: { category: post.category } })
       "
-      v-for="post in posts"
-      :key="post.id"
-      class="grid__box"
+      v-for="(post, index) in posts"
+      :key="index"
+      class="grid__box post"
+      data-post="index"
     >
       {{ post.category }}
     </div>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+[data-post] {
+  cursor: pointer;
+  animation-name: show-post;
+  animation-timing-function: ease-in-out;
+  animation-duration: calc(atr(data-post) * 2s);
+  animation-fill-mode: forwards;
+}
+
+@keyframes show-post {
+  0% {
+    opacity: 0;
+    scale: 0.5;
+    border: 1px solid orange;
+  }
+  50% {
+    opacity: 1;
+    scale: 1;
+    border: 2px solid orange;
+  }
+  100% {
+    opacity: 1;
+    scale: 1;
+  }
+  
+}
+</style>

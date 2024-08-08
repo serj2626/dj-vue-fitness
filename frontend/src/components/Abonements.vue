@@ -3,7 +3,7 @@
 import axios from "axios";
 import { ref, onMounted } from "vue";
 import { useToast } from "vue-toastification";
-import type { IAbonement } from "@/utils/interface";
+import type { IAbonement } from "@/utils/orders";
 
 
 const toast = useToast();
@@ -110,7 +110,7 @@ onMounted(() => getAbonements());
     transform: translateX(60px);
   }
 
-  50% {
+  60% {
     opacity: 1;
     scale: 1;
     transform: translateX(0);
@@ -124,7 +124,7 @@ onMounted(() => getAbonements());
     transform: translateX(-60px);
   }
 
-  50% {
+  60% {
     opacity: 1;
     scale: 1;
     transform: translateX(0);

@@ -44,13 +44,6 @@ import BlockHeader from "@/components/BlockHeader.vue";
   min-height: 120vh;
 }
 
-.header__block {
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
 #about{
  margin-top: 120vh;
  padding-block: 50px;

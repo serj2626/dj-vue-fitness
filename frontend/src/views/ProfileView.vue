@@ -24,7 +24,9 @@ const showAction = ref(1);
         width="100px"
         height="auto"
       />
-      <div class="flex items-center gap-2 mt-5 py-3 px-4 rounded-xl bg-slate-500">
+      <div
+        class="flex items-center gap-2 mt-5 py-3 px-4 rounded-xl bg-slate-500"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -41,7 +43,9 @@ const showAction = ref(1);
         </svg>
         {{ user.username }}
       </div>
-      <div class="flex items-center gap-2 mt-5  py-3 px-4 rounded-xl bg-slate-500">
+      <div
+        class="flex items-center gap-2 mt-5 py-3 px-4 rounded-xl bg-slate-500"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -60,27 +64,21 @@ const showAction = ref(1);
       </div>
     </div>
     <div class="actions flex justify-center items-center gap-10 mt-10">
-      <button
-        :class="{ action__btn_active: showAction === 1 }"
+      <ProfileButton
         @click="showAction = 1"
-        class="action__btn"
-      >
-        Настройки
-      </button>
-      <button
-        :class="{ action__btn_active: showAction === 2 }"
+        :class="{ action__btn_active: showAction === 1 }"
+        title="Настройки"
+      />
+      <ProfileButton
         @click="showAction = 2"
-        class="action__btn"
-      >
-        Абонементы
-      </button>
-      <button
-        :class="{ action__btn_active: showAction === 3 }"
+        :class="{ action__btn_active: showAction === 2 }"
+        title="Абонементы"
+      />
+      <ProfileButton
         @click="showAction = 3"
-        class="action__btn"
-      >
-        Тренировки
-      </button>
+        :class="{ action__btn_active: showAction === 3 }"
+        title="Тренировки"
+      />
     </div>
 
     <div
@@ -107,27 +105,6 @@ img {
   border-radius: 50%;
   border: 3px solid orange;
   padding: 10px;
-}
-
-.action__btn {
-  color: rgb(255, 255, 255);
-  border-radius: 15px;
-  background: linear-gradient(
-    45deg,
-    rgb(236, 48, 180) 0%,
-    rgb(0, 255, 221) 100%
-  );
-  padding: 15px 20px;
-  font-size: 18px;
-  transition: all 0.3s ease-in;
-
-  &:hover {
-    background: linear-gradient(
-      45deg,
-      rgb(162, 54, 187) 0%,
-      rgb(221, 255, 2) 100%
-    );
-  }
 }
 
 .action__btn_active {
