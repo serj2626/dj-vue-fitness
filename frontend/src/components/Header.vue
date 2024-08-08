@@ -1,11 +1,25 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
-import { RouterLink } from "vue-router";
+import { RouterLink, useRoute } from "vue-router";
 import { useUserStore } from "@/stores/auth";
 import { storeToRefs } from "pinia";
+import { computed, watchEffect } from "vue";
+
+
+
+const route = useRoute()
+let routeName = computed(() => route.name)
+
+
+// watchEffect(() => {
+//   routeName = route.name
+//   console.log(routeName);
+// })
 
 const store = useUserStore();
 const { auth } = storeToRefs(store);
+
+
 </script>
 
 <template>
@@ -20,11 +34,11 @@ const { auth } = storeToRefs(store);
         <RouterLink :to="{ name: 'home' }">DV FITNESS </RouterLink>
       </h3>
       <div class="header__menu flex items-center gap-4">
-        <a href="#about" class="header__link">О клубе</a>
-        <a href="#abonements" class="header__link">Абонементы</a>
-        <a href="#coach" class="header__link">Тренеры</a>
+        <a v-if="routeName === 'home'" href="#about" class="header__link">О клубе</a>
+        <a v-if="routeName === 'home'" href="#abonements" class="header__link">Абонементы</a>
+        <a v-if="routeName === 'home'" href="#coach" class="header__link">Тренеры</a>
         <!-- <a href="#" class="header__link">Расписание</a> -->
-        <a href="#contacts" class="header__link">Контакты</a>
+        <a v-if="routeName === 'home'" href="#contacts" class="header__link">Контакты</a>
         <RouterLink v-if="auth.isAuthenticated" :to="{ name: 'profile' }" class="header__link"
           >Мой профиль
         </RouterLink>

@@ -1,8 +1,7 @@
 import uuid
-
 from django.contrib.auth import get_user_model
 from django.db import models
-from django.utils import timezone
+from django.utils import timezone, timesince
 from django.utils.translation import gettext_lazy as _
 from django_ckeditor_5.fields import CKEditor5Field
 
@@ -115,7 +114,7 @@ class Reviews(models.Model):
 
     @property
     def time_age(self):
-        return abs((timezone.now() - self.created_at).seconds // 3600)
+        return timesince.timesince(self.created_at)
 
 
 class Post(models.Model):

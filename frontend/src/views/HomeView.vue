@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Subscribe from "../components/Subscribe.vue";
-import Coach from "../components/Coach.vue";
+import Coach from "../components/trainer/Coach.vue";
 import Abonements from "@/components/Abonements.vue";
 import About from "@/components/About.vue";
 import Posts from "@/components/Posts.vue";

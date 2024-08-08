@@ -3,8 +3,8 @@ import axios from "axios";
 import { ref, onMounted } from "vue";
 import { useToast } from "vue-toastification";
 import { useRoute } from "vue-router";
-import Stars from "@/components/Stars.vue";
-import Reviews from "@/components/Reviews.vue";
+import Stars from "@/components/trainer/Stars.vue";
+import Reviews from "@/components/trainer/Reviews.vue";
 import type { ITrainer } from "@/utils/workout";
 
 const showReview = ref<boolean>(false);

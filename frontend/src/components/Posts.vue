@@ -24,7 +24,7 @@ onMounted(getPosts);
 </script>
 
 <template>
-  <div class="grid grid-cols-5 gap-5">
+  <div class="grid grid-cols-5 gap-5 mt-5">
     <div
       @click="
         router.push({ name: 'post', params: { category: post.category } })

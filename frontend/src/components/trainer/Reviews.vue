@@ -2,7 +2,7 @@
 <script setup lang="ts">
 import type { IReview } from "@/utils/workout";
 import { defineEmits } from "vue";
-import ReviewDetail from "@/components/ReviewDetail.vue";
+import ReviewDetail from "@/components/trainer/ReviewDetail.vue";
 
 const emit = defineEmits(["closeModal"]);
 
@@ -39,7 +39,7 @@ defineProps({
       >
         <img
           class="w-1/3 mx-auto"
-          src="../assets/icons/anti-smile.png"
+          src="@/assets/icons/anti-smile.png"
           alt="Отзывы отсутствуют"
         />
         <h4 class="text-3xl text-center text-white font-extrabold">
@@ -54,7 +54,8 @@ defineProps({
 .reviews {
   position: absolute;
   padding: 15px;
-  top: 96px;
+  /* top: 96px; */
+  top: 0;
   right: 0;
   bottom: 0;
   width: 30%;
