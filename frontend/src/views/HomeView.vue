@@ -3,7 +3,7 @@ import Subscribe from "../components/Subscribe.vue";
 import Coach from "../components/trainer/Coach.vue";
 import Abonements from "@/components/Abonements.vue";
 import About from "@/components/About.vue";
-import Posts from "@/components/Posts.vue";
+import BlockHeader from "@/components/BlockHeader.vue";
 
 
 </script>
@@ -11,12 +11,7 @@ import Posts from "@/components/Posts.vue";
 <template>
   <ArrowUpButton />
   <section id="header" class="header relative">
-    <div class="header__block">
-      <h3 class="header__title text-3xl text-center text-white font-extrabold">
-        Начни сейчас <br />и никогда не останавливайся.
-      </h3>
-      <Posts />
-    </div>
+    <BlockHeader />
   </section>
   <section id="about" class="about container text-purple-500">
     <About />
@@ -36,6 +31,8 @@ import Posts from "@/components/Posts.vue";
 </template>
 <style scoped>
 .header {
+  position: absolute;
+  top: 0;
   background: linear-gradient(45deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
     url(../assets/img/home-bg.jpg);
 
@@ -52,6 +49,11 @@ import Posts from "@/components/Posts.vue";
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+#about{
+ margin-top: 120vh;
+ padding-block: 50px;
 }
 
 .pool {

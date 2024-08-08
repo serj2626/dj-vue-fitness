@@ -1,25 +1,25 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
-import { RouterLink, useRoute } from "vue-router";
+import { RouterLink, useRoute, useRouter } from "vue-router";
 import { useUserStore } from "@/stores/auth";
 import { storeToRefs } from "pinia";
-import { computed, watchEffect } from "vue";
+import { computed } from "vue";
+import { useToast } from "vue-toastification";
 
+const router = useRouter();
+const route = useRoute();
+let routeName = computed(() => route.name);
 
-
-const route = useRoute()
-let routeName = computed(() => route.name)
-
-
-// watchEffect(() => {
-//   routeName = route.name
-//   console.log(routeName);
-// })
-
+const toast = useToast();
 const store = useUserStore();
 const { auth } = storeToRefs(store);
 
 
+const logout = () => {
+  store.removeToken();
+  router.push({name: "home"})
+  toast.success("Вы вышли из аккаунта");
+};
 </script>
 
 <template>
@@ -34,20 +34,35 @@ const { auth } = storeToRefs(store);
         <RouterLink :to="{ name: 'home' }">DV FITNESS </RouterLink>
       </h3>
       <div class="header__menu flex items-center gap-4">
-        <a v-if="routeName === 'home'" href="#about" class="header__link">О клубе</a>
-        <a v-if="routeName === 'home'" href="#abonements" class="header__link">Абонементы</a>
-        <a v-if="routeName === 'home'" href="#coach" class="header__link">Тренеры</a>
+        <a v-if="routeName === 'home'" href="#about" class="header__link"
+          >О клубе</a
+        >
+        <a v-if="routeName === 'home'" href="#abonements" class="header__link"
+          >Абонементы</a
+        >
+        <a v-if="routeName === 'home'" href="#coach" class="header__link"
+          >Тренеры</a
+        >
         <!-- <a href="#" class="header__link">Расписание</a> -->
-        <a v-if="routeName === 'home'" href="#contacts" class="header__link">Контакты</a>
-        <RouterLink v-if="auth.isAuthenticated" :to="{ name: 'profile' }" class="header__link"
+        <a v-if="routeName === 'home'" href="#contacts" class="header__link"
+          >Контакты</a
+        >
+        <RouterLink
+          v-if="auth.isAuthenticated"
+          :to="{ name: 'profile' }"
+          class="header__link"
           >Мой профиль
         </RouterLink>
-        <RouterLink v-if="!auth.isAuthenticated" :to="{ name: 'login' }" class="header__link"
+        <RouterLink
+          v-if="!auth.isAuthenticated"
+          :to="{ name: 'login' }"
+          class="header__link"
           >Войти
         </RouterLink>
-        <a 
-        v-if="auth.isAuthenticated" @click="store.removeToken()" 
-        class="header__link"
+        <a
+          v-if="auth.isAuthenticated"
+          @click="logout()"
+          class="header__link"
           >Выйти</a
         >
 

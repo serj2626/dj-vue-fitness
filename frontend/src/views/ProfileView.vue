@@ -24,7 +24,7 @@ const showAction = ref(1);
         width="100px"
         height="auto"
       />
-      <div class="flex items-center gap-2 mt-5">
+      <div class="flex items-center gap-2 mt-5 py-3 px-4 rounded-xl bg-slate-500">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -41,7 +41,7 @@ const showAction = ref(1);
         </svg>
         {{ user.username }}
       </div>
-      <div class="flex items-center gap-2 mt-5">
+      <div class="flex items-center gap-2 mt-5  py-3 px-4 rounded-xl bg-slate-500">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

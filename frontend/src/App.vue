@@ -5,6 +5,7 @@ import { useToast } from "vue-toastification";
 import { useUserStore } from "./stores/auth";
 import Header from "./components/Header.vue";
 import axios from "axios";
+import CreateReview from "./components/trainer/CreateReview.vue";
 
 
 const store = useUserStore();
@@ -35,7 +36,6 @@ onBeforeMount(() => {
   <main class="row">
     <RouterView />
   </main>
-
 </template>
 
 <style scoped></style>

@@ -3,6 +3,7 @@
 import type { IReview } from "@/utils/workout";
 import { defineEmits } from "vue";
 import ReviewDetail from "@/components/trainer/ReviewDetail.vue";
+import Stars from "./Stars.vue";
 
 const emit = defineEmits(["closeModal"]);
 
@@ -19,16 +20,49 @@ defineProps({
     <div v-if="reviews.length" class="reviews__main">
       <div class="reviews__header flex justify-between items-center mb-10">
         <h4 class="text-2xl text-center text-white font-extrabold">Отзывы</h4>
-        <a @click="emit('closeModal')" class="close-btn">&times;</a>
+        <a
+          @click="emit('closeModal')"
+          class="text-3xl text-white hover:text-red-700 cursor-pointer"
+          >&times;</a
+        >
       </div>
 
-      <ul class="my-10"
-          v-for="review in reviews"
-          :key="review.id">
+      <div>
+        <form>
+          <Stars />
+          <div
+            class="flex items-center "
+          >
+            <textarea
+              id="chat"
+              rows="1"
+              class="block mx-4 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              placeholder="Ваш отзыв..."
+            ></textarea>
+            <button
+              type="submit"
+              class="inline-flex justify-center p-2 text-blue-600 rounded-full cursor-pointer hover:bg-blue-100 dark:text-blue-500 dark:hover:bg-gray-600"
+            >
+              <svg
+                class="w-5 h-5 rotate-90 rtl:-rotate-90 text-red-700"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 18 20"
+              >
+                <path
+                  d="m17.914 18.594-8-18a1 1 0 0 0-1.828 0l-8 18a1 1 0 0 0 1.157 1.376L8 18.281V9a1 1 0 0 1 2 0v9.281l6.758 1.689a1 1 0 0 0 1.156-1.376Z"
+                />
+              </svg>
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <ul class="my-10" v-for="review in reviews" :key="review.id">
         <ReviewDetail :review="review" />
       </ul>
     </div>
-
 
     <div v-else>
       <div class="reviews__header flex justify-between items-center mb-10">
@@ -88,7 +122,8 @@ defineProps({
   }
 }
 
-.reviews__no h4, .reviews__header h1{
+.reviews__no h4,
+.reviews__header h1 {
   text-shadow: 0 0 10px rgb(0, 0, 0);
 }
 </style>

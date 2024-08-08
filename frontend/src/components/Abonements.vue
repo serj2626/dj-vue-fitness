@@ -59,23 +59,89 @@ onMounted(() => getAbonements());
   background: linear-gradient(45deg,
       rgb(0, 0, 0) 0%,
       rgba(188, 11, 94, 0.917) 50%);
+  animation: show-one linear both;
+  animation-timeline: view();
 }
 
 .box:nth-child(2) {
   background: linear-gradient(45deg,
       rgb(4, 4, 4) 5%,
       rgba(255, 177, 31, 0.917) 100%);
+  animation: show-two linear both;
+  animation-timeline: view();
 }
 
 .box:nth-child(3) {
   background: linear-gradient(45deg,
       rgb(32, 41, 49) 0%,
       rgba(251, 39, 255, 0.917) 100%);
+  animation: show-three linear both;
+  animation-timeline: view();
 }
 
 .box:nth-child(4) {
   background: linear-gradient(45deg,
       rgb(0, 0, 0) 0%,
       rgba(26, 224, 197, 0.917) 100%);
+
+  animation: show-four linear both;
+  animation-timeline: view();
+}
+
+
+@keyframes show-four {
+  0% {
+    opacity: 0;
+    scale: 0.5;
+    transform: translateX(100px);
+  }
+
+  50% {
+    opacity: 1;
+    scale: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes show-three {
+  0% {
+    opacity: 0;
+    scale: 0.5;
+    transform: translateX(60px);
+  }
+
+  50% {
+    opacity: 1;
+    scale: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes show-two {
+  0% {
+    opacity: 0;
+    scale: 0.5;
+    transform: translateX(-60px);
+  }
+
+  50% {
+    opacity: 1;
+    scale: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes show-one {
+  0% {
+    opacity: 0;
+    scale: 0.5;
+    transform: translateX(-100px);
+  }
+
+  50% {
+    opacity: 1;
+    scale: 1;
+    transform: translateX(0);
+  }
 }
 </style>
