@@ -37,7 +37,6 @@ class OrderAbonement(models.Model):
     user = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="abonements", verbose_name="Клиент"
     )
-    phone = models.CharField("Телефон", max_length=12, null=True, blank=True)
     abonement = models.ForeignKey(
         Abonement,
         on_delete=models.CASCADE,

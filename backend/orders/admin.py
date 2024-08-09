@@ -58,7 +58,6 @@ class OrderAbonementAdmin(admin.ModelAdmin):
 
     list_display = (
         "user",
-        "phone",
         "abonement",
         "start",
         "end",
@@ -77,7 +76,6 @@ class OrderAbonementAdmin(admin.ModelAdmin):
     get_number_of_months.short_description = "Количество месяцев"
     get_price.short_description = "Цена"
 
-    list_editable = ("phone",)
 
     # list_filter = ('',)
     # inlines = [
