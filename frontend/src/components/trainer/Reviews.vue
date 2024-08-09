@@ -20,8 +20,8 @@ defineProps({
 
     <div v-if="reviews.length" class="reviews__body relative">
 
-      <div class="reviews__header flex flex-col justify-between items-center fixed top-0 ">
-        <div class="reviews__title flex justify-between">
+      <div class="reviews__header  flex flex-col justify-between items-center absolute top-0 left-0 w-full">
+        <div class="reviews__title flex justify-between items-center">
           <h4 class="text-2xl text-center text-white font-extrabold">Отзывы</h4>
           <a @click="emit('closeModal')" class="text-3xl block text-white
            hover:text-red-700 cursor-pointer">&times;</a>
@@ -29,10 +29,7 @@ defineProps({
         <CreateReview />
       </div>
 
-
-
-
-      <ul class="my-10" v-for="review in reviews" :key="review.id">
+      <ul class="absolute top-[300px] left-1/2 -translate-x-1/2 w-full" v-for="review in reviews" :key="review.id">
         <ReviewDetail :review="review" />
       </ul>
     </div>
