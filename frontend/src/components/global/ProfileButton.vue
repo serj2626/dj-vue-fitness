@@ -33,14 +33,4 @@ defineProps({
     );
   }
 }
-
-
-
-.action__btn_active {
-  background: linear-gradient(
-    45deg,
-    rgb(162, 54, 187) 0%,
-    rgb(221, 255, 2) 100%
-  );
-}
 </style>

@@ -44,15 +44,15 @@ onMounted(() => getAbonements());
   width: 300px;
   height: 300px;
 
-  transition: all 0.3s ease-in;
+  /* transition: all 0.3s ease-in; */
   border-radius: 10px;
   font-size: 18px;
   box-shadow: 0 0 15px rgba(255, 255, 255, 0.918);
   padding: 15px;
 
-  &:hover {
+  /* &:hover {
     transform: scale(1.1);
-  }
+  } */
 }
 
 .box:nth-child(1) {
@@ -96,7 +96,7 @@ onMounted(() => getAbonements());
     transform: translateX(100px);
   }
 
-  50% {
+  40% {
     opacity: 1;
     scale: 1;
     transform: translateX(0);
@@ -138,7 +138,7 @@ onMounted(() => getAbonements());
     transform: translateX(-100px);
   }
 
-  50% {
+  40% {
     opacity: 1;
     scale: 1;
     transform: translateX(0);

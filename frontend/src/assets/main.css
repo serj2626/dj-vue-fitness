@@ -2,210 +2,212 @@
 @tailwind components;
 @tailwind utilities;
 
- 
+
 html {
-    /**
+  /**
       Пригодится в большинстве ситуаций
       (когда, например, нужно будет "прижать" футер к низу сайта)
      */
-   
-    scroll-behavior: smooth;
-    scrollbar-color: #d8b803 #000000;
-    scrollbar-width: auto;
-    background-color: black;
-  }
-  
+  scroll-behavior: smooth;
+  scrollbar-color: #d8b803 #000000;
+  scrollbar-width: auto;
+  background-color: black;
+}
+
 
 /**
   Нормализация блочной модели
  */
- *,
- ::before,
- ::after {
-   box-sizing: border-box;
- }
- 
- /**
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+/**
    Убираем внутренние отступы слева тегам списков,
    у которых есть атрибут class
   */
- :where(ul, ol):where([class]) {
-   padding-left: 0;
- }
- 
- /**
+:where(ul, ol):where([class]) {
+  padding-left: 0;
+}
+
+/**
    Убираем внешние отступы body и двум другим тегам,
    у которых есть атрибут class
   */
- body,
- :where(blockquote, figure):where([class]) {
-   margin: 0;
- }
- 
- /**
+body,
+:where(blockquote, figure):where([class]) {
+  margin: 0;
+}
+
+/**
    Убираем внешние отступы вертикали нужным тегам,
    у которых есть атрибут class
   */
- :where(
-   h1,
-   h2,
-   h3,
-   h4,
-   h5,
-   h6,
-   p,
-   ul,
-   ol,
-   dl
- ):where([class]) {
-   margin-block: 0;
- }
- 
- :where(dd[class]) {
-   margin-left: 0;
- }
- 
- :where(fieldset[class]) {
-   margin-left: 0;
-   padding: 0;
-   border: none;
- }
- 
- /**
+:where(h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  ul,
+  ol,
+  dl):where([class]) {
+  margin-block: 0;
+}
+
+:where(dd[class]) {
+  margin-left: 0;
+}
+
+:where(fieldset[class]) {
+  margin-left: 0;
+  padding: 0;
+  border: none;
+}
+
+/**
    Убираем стандартный маркер маркированному списку,
    у которого есть атрибут class
   */
- :where(ul[class]) {
-   list-style: none;
- }
- 
- :where(address[class]) {
-   font-style: normal;
- }
- 
- /**
+:where(ul[class]) {
+  list-style: none;
+}
+
+:where(address[class]) {
+  font-style: normal;
+}
+
+/**
    Обнуляем вертикальные внешние отступы параграфа,
    объявляем локальную переменную для внешнего отступа вниз,
    чтобы избежать взаимодействие с более сложным селектором
   */
- p {
-   --paragraphMarginBottom: 24px;
- 
-   margin-block: 0;
- }
- 
- /**
+p {
+  --paragraphMarginBottom: 24px;
+
+  margin-block: 0;
+}
+
+/**
    Внешний отступ вниз для параграфа без атрибута class,
    который расположен не последним среди своих соседних элементов
   */
- p:where(:not([class]):not(:last-child)) {
-   margin-bottom: var(--paragraphMarginBottom);
- }
- 
- 
- /**
+p:where(:not([class]):not(:last-child)) {
+  margin-bottom: var(--paragraphMarginBottom);
+}
+
+
+/**
    Упрощаем работу с изображениями
   */
- img {
-   display: block;
-   max-width: 100%;
- }
- 
- /**
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/**
    Наследуем свойства шрифт для полей ввода
   */
- input,
- textarea,
- select,
- button {
-   font: inherit;
- }
+input,
+textarea,
+select,
+button {
+  font: inherit;
+}
 
- /**
+/**
    Плавный скролл
   */
- html,
- :has(:target) {
-   scroll-behavior: smooth;
- }
- 
- body {
-   /**
+html,
+:has(:target) {
+  scroll-behavior: smooth;
+}
+
+body {
+  /**
      Пригодится в большинстве ситуаций
      (когда, например, нужно будет "прижать" футер к низу сайта)
     */
-   min-height: 100%;
-   /**
+  min-height: 100%;
+  /**
      Унифицированный интерлиньяж
     */
-   line-height: 1.5;
- }
- 
- /**
+  line-height: 1.5;
+}
+
+/**
    Приводим к единому цвету svg-элементы
   */
- svg *[fill] { fill: currentColor }
- svg *[stroke] { stroke: currentColor }
- 
- /**
+svg *[fill] {
+  fill: currentColor
+}
+
+svg *[stroke] {
+  stroke: currentColor
+}
+
+/**
    Чиним баг задержки смены цвета при взаимодействии с svg-элементами
   */
- svg * {
-   transition-property: fill, stroke;
- }
- 
- /**
+svg * {
+  transition-property: fill, stroke;
+}
+
+/**
    Удаляем все анимации и переходы для людей,
    которые предпочитают их не использовать
   */
- @media (prefers-reduced-motion: reduce) {
-   *,
-   ::before,
-   ::after {
-     animation-duration: 0.01ms !important;
-     animation-iteration-count: 1 !important;
-     transition-duration: 0.01ms !important;
-     scroll-behavior: auto !important;
-   }
- }
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
 
 @layer components {
-    .btn {
-        @apply bg-sky-500 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded;
-    }
+  .btn {
+    @apply bg-sky-500 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded;
+  }
 
-    .container {
-        @apply max-w-7xl mx-auto ;
-    }
-
-
-    .row {
-        @apply mt-24
-    }
+  .container {
+    @apply max-w-7xl mx-auto;
+  }
 
 
-    .header__link {
-        @apply text-white font-bold transition-colors duration-300 ease-in hover:text-yellow-500
-    }
+  .row {
+    @apply mt-24
+  }
 
-    .header__link__buy {
-        @apply py-3 px-5 rounded-md border-2 border-yellow-500 ms-6 transition-colors duration-300 ease-in
-    }
 
-    .grid__box {
-        @apply border-2 border-slate-50 border-opacity-20 rounded-md p-12 text-xl text-center font-bold hover:border-yellow-500 text-yellow-500 transition-all duration-300 ease-in cursor-pointer
-    }
+  .header__link {
+    @apply text-white font-bold transition-colors duration-300 ease-in hover:text-yellow-500
+  }
 
-    .footer-link {
-        @apply transition-all duration-300 ease-in hover:transform hover:scale-150
-    }
+  .header__link__buy {
+    @apply py-3 px-5 rounded-md border-2 border-yellow-500 ms-6 transition-colors duration-300 ease-in
+  }
 
-    .form-btn {
-        @apply w-2/4 mx-auto block border-2 border-white border-opacity-30
-         rounded-md py-3 text-yellow-500 hover:border-yellow-500
-    }
+  .grid__box {
+    @apply border-2 border-slate-50 border-opacity-20 rounded-md p-12 text-xl text-center font-bold hover:border-yellow-500 text-yellow-500 transition-all duration-300 ease-in cursor-pointer
+  }
 
-    /* 
+  .footer-link {
+    @apply transition-all duration-300 ease-in hover:transform hover:scale-150
+  }
+
+  .form-btn {
+    @apply w-2/4 mx-auto block border-2 border-white border-opacity-30 rounded-md py-3 text-yellow-500 hover:border-yellow-500
+  }
+
+  /* 
     .input-login {
         @apply bg-gray-50 border border-gray-300 text-gray-900 
               rounded-lg focus:ring-primary-600 focus:border-primary-600 
@@ -233,4 +235,4 @@ html {
     --swiper-pagination-bullet-horizontal-gap: 4px;
     --swiper-pagination-bullet-vertical-gap: 6px;
     */
-  /* } */ 
+/* } */

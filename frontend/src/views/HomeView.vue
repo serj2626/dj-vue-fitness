@@ -44,9 +44,9 @@ import BlockHeader from "@/components/BlockHeader.vue";
   min-height: 120vh;
 }
 
-#about{
- margin-top: 120vh;
- padding-block: 50px;
+#about {
+  margin-top: 120vh;
+  padding-block: 50px;
 }
 
 .pool {
@@ -64,5 +64,21 @@ import BlockHeader from "@/components/BlockHeader.vue";
   height: 700px;
 
   background-repeat: no-repeat;
+
+  animation: women-opacity linear both;
+  animation-timeline: view();
+}
+
+
+@keyframes women-opacity {
+  0% {
+    opacity: 0;
+  }
+
+  70% {
+    opacity: 1;
+  }
+
+
 }
 </style>
