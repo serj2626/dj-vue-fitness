@@ -19,7 +19,6 @@ class OrderAbonementListSerializer(serializers.ModelSerializer):
     class Meta:
         model = OrderAbonement
         fields = (
-            "phone",
             "abonement",
             "start",
             "user",
@@ -30,7 +29,6 @@ class OrderAbonementSerializer(serializers.ModelSerializer):
     class Meta:
         model = OrderAbonement
         fields = (
-            "phone",
             "abonement",
             "start",
         )

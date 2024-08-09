@@ -43,8 +43,8 @@ class OrderAbonement(models.Model):
         related_name="orders",
         verbose_name="Абонемент",
     )
-    start = models.DateTimeField("Начало", blank=True, null=True)
-    end = models.DateTimeField("Конец", blank=True, null=True)
+    start = models.DateField("Начало", blank=True, null=True)
+    end = models.DateField("Конец", blank=True, null=True)
     status = models.BooleanField("Оплачен", default=False)
     active = models.BooleanField("Активен", default=False)
 
