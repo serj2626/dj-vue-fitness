@@ -9,7 +9,7 @@ const rating = ref(0);
 </script>
 
 <template>
-  <form class="py-6 px-4 w-full mx-auto bg-purple-300 flex flex-col items-center gap-5
+  <form class="py-6 px-4 w-full mx-auto flex flex-col items-center gap-5
          rounded-2xl">
           <Stars />
           <div
@@ -41,6 +41,6 @@ const rating = ref(0);
 
 <style scoped>
 form{
-  box-shadow: 0 5px 40px rgb(32, 32, 30);
+  box-shadow: 0 5px 40px rgb(195, 195, 183);
 }
 </style>

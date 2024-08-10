@@ -25,8 +25,9 @@ defineProps({
 
 <style scoped>
 .reviews__desc {
-  background-color: rgb(255, 255, 255);
-  box-shadow: 0 0 15px black;
+  background-color: rgb(2, 2, 2);
+  color: white;
+  box-shadow: 0 0 15px rgb(219, 217, 217);
 }
 
 </style>

@@ -29,10 +29,16 @@ defineProps({
         <CreateReview />
       </div>
 
-      <ul class="absolute top-[300px] left-1/2 -translate-x-1/2 w-full" v-for="review in reviews" :key="review.id">
-        <ReviewDetail :review="review" />
-      </ul>
+      <div class="absolute top-[220px] w-full">
+        <ul class="" v-for="review in reviews" :key="review.id">
+          <ReviewDetail :review="review" />
+        </ul>
+      </div>
+
     </div>
+
+
+
 
     <div v-else>
       <div class="reviews__header flex justify-between items-center mb-10">
@@ -56,7 +62,7 @@ defineProps({
   /* top: 96px; */
   top: 0;
   right: 0;
-  bottom: 0;
+  bottom: 10px;
   width: 30%;
   background: linear-gradient(45deg, #da71a4 20%, #a852b7 35%, #227975 100%);
   overflow-y: auto;
