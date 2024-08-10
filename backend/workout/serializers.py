@@ -33,13 +33,24 @@ class RateSerializer(serializers.ModelSerializer):
 
 
 class ReviewsSerializer(serializers.ModelSerializer):
+    # rating = serializers.IntegerField(min_value=1, max_value=5)
     user = serializers.CharField(source="user.username", read_only=True)
-    created_at = serializers.DateTimeField(format="%d.%m.%Y %H:%M:%S", read_only=True)
-    trainer = serializers.StringRelatedField(source="trainer.first_name")
+    created_at = serializers.DateTimeField(
+        format="%d.%m.%Y %H:%M:%S", read_only=True)
+    trainer = serializers.StringRelatedField(read_only=True)
+    # trainer = serializers.StringRelatedField(source="trainer.first_name")
 
     class Meta:
         model = Reviews
         fields = "__all__"
+
+
+# class CreateReviewsSerializer(serializers.ModelSerializer):
+#     rating = serializers.IntegerField(min_value=1, max_value=5)
+
+#     class Meta:
+#         model = Reviews
+#         fields = ("rating", "text")
 
 
 class TrainerSerializer(serializers.ModelSerializer):

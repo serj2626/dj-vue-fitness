@@ -33,6 +33,7 @@ const getCoaches = async () => {
   try {
     const { data } = await axios.get("/api/workout/trainers/");
     trainers.value = data;
+    console.log(data);
   } catch {
     toast.error("Произошла ошибка");
   }

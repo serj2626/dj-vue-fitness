@@ -17,12 +17,32 @@ from .serializers import (
     TrainerSerializer,
 )
 
+# class CreateReviewsView(CreateAPIView):
+#     serializer_class = CreateReviewsSerializer
+#     queryset = Reviews.objects.all()
+
+#     def perform_create(self, serializer):
+#         user = self.request.user
+#         trainer = Trainer.objects.get(id=self.kwargs["uuid"])
+#         serializer.save(user=user, trainer=trainer)
+#         return super().perform_create(serializer)
+
+#     def post(self, request, *args, **kwargs):
+#         return self.create(request, *args, **kwargs)
+
 
 @extend_schema(description="Список отзывов")
 class ReviewsListView(ListCreateAPIView):
     serializer_class = ReviewsSerializer
     queryset = Reviews.objects.all()
 
+    def perform_create(self, serializer):
+        user = self.request.user
+        serializer.save(user=user)
+        return super().perform_create(serializer)
+
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
 
 class ReviewsDetailView(RetrieveUpdateDestroyAPIView):
     serializer_class = ReviewsSerializer
