@@ -1,19 +1,24 @@
 from django.contrib.auth import get_user_model
-from django.http import JsonResponse
 from rest_framework import status
 from rest_framework.decorators import api_view
-from rest_framework.generics import CreateAPIView
+from rest_framework.generics import CreateAPIView, ListAPIView
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.response import Response
 
+from orders.serializers import OrderAbonementListSerializer
+from orders.models import OrderAbonement
 from .serializers import RegisterSerializer
 
 User = get_user_model()
 
 
+
+
+
 @api_view(["GET"])
-def me(request):
-    return JsonResponse(
+def get_my_info(request):
+    return Response(
         {
             "id": request.user.id,
             "username": request.user.username,
@@ -21,6 +26,12 @@ def me(request):
         }
     )
 
+class MyAbonementsListView(ListAPIView):
+
+    serializer_class = OrderAbonementListSerializer
+
+    def get_queryset(self):
+        return OrderAbonement.objects.filter(user=self.request.user)
 
 class RegisterView(CreateAPIView):
     queryset = User.objects.all()
