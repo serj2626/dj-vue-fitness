@@ -11,7 +11,7 @@ defineProps({
 
 <template>
         <li
-          class="reviews__desc flex flex-col gap-6 p-3 rounded-md my-10"
+          class="reviews__desc flex flex-col gap-6 mx-2 p-2 rounded-md my-10"
         >
           <div class="reviews-desc__header flex justify-between items-center">
             <h3>{{ review.user }}</h3>

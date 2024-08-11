@@ -9,6 +9,7 @@ import { Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
+import type { ITrainerList } from "@/interfaces/workout";
 
 
 const router = useRouter();
@@ -16,19 +17,9 @@ const toast = useToast();
 const modules = [Pagination , Navigation];
 
 
-interface ITrainer {
-  id: number|string;
-  first_name: string;
-  last_name: string;
-  position: string;
-  phone: string;
-  email: string;
-  bio: string;
-  avatar: string;
-  trainer_reviews: [];
-}
 
-const trainers = ref<ITrainer[]>([]);
+
+const trainers = ref<ITrainerList[]>([]);
 const getCoaches = async () => {
   try {
     const { data } = await axios.get("/api/workout/trainers/");
@@ -84,7 +75,7 @@ onMounted(getCoaches);
 <style scoped>
 
 .swiper {
-  --swiper-pagination-color: #ff0000;
+  --swiper-pagination-color: #fcc707;
   --swiper-pagination-bullet-size: 18px;
   --swiper-pagination-bullet-width: 18px;
   --swiper-pagination-bullet-height: 18px;
@@ -112,6 +103,7 @@ onMounted(getCoaches);
   text-align: center;
   font-size: 18px;
   background: #fff;
+  width: auto;
   cursor: pointer;
 
 

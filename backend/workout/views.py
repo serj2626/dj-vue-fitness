@@ -14,6 +14,7 @@ from .serializers import (
     RateSerializer,
     ReviewsSerializer,
     SubscriptionSerializer,
+    TrainerListSerializer,
     TrainerSerializer,
 )
 
@@ -110,7 +111,7 @@ class RateListView(ListAPIView):
 
 @extend_schema(description="Список тренеров")
 class TrainerListView(ListAPIView):
-    serializer_class = TrainerSerializer
+    serializer_class = TrainerListSerializer
     queryset = Trainer.objects.all()
 
 

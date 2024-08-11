@@ -1,3 +1,5 @@
+import exp from "constants";
+
 export interface IReviewCreate {
   id: string;
   name: string;
@@ -24,4 +26,9 @@ export interface ITrainer {
   bio: string;
   avatar: string;
   trainer_reviews: [];
+}
+
+export interface ITrainerList {
+  id: number|string;
+  avatar: string;
 }
