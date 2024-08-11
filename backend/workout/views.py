@@ -44,6 +44,7 @@ class ReviewsListView(ListCreateAPIView):
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
 
+
 class ReviewsDetailView(RetrieveUpdateDestroyAPIView):
     serializer_class = ReviewsSerializer
     queryset = Reviews.objects.all()

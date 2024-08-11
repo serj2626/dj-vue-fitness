@@ -5,7 +5,7 @@ import { useToast } from "vue-toastification";
 import { useRoute } from "vue-router";
 import Stars from "@/components/trainer/Stars.vue";
 import Reviews from "@/components/trainer/Reviews.vue";
-import type { ITrainer } from "@/utils/workout";
+import type { ITrainer } from "@/interfaces/workout";
 import ReviewDetail from "@/components/trainer/ReviewDetail.vue";
 import CreateReview from "@/components/trainer/CreateReview.vue";
 

@@ -10,3 +10,12 @@ export interface ICreateOrderAbonement {
   abonement: IAbonement;
   start: Date;
 }
+
+export interface IMyAbonement {
+  abonement: IAbonement;
+  id: number;
+  start: Date;
+  end: Date;
+  status: boolean;
+  active: boolean;
+}

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { IReview } from '@/utils/workout';
+import type { IReview } from '@/interfaces/workout';
 
 defineProps({
     review: {

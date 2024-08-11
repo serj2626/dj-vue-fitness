@@ -35,8 +35,7 @@ class RateSerializer(serializers.ModelSerializer):
 class ReviewsSerializer(serializers.ModelSerializer):
     # rating = serializers.IntegerField(min_value=1, max_value=5)
     user = serializers.CharField(source="user.username", read_only=True)
-    created_at = serializers.DateTimeField(
-        format="%d.%m.%Y %H:%M:%S", read_only=True)
+    created_at = serializers.DateTimeField(format="%d.%m.%Y %H:%M:%S", read_only=True)
     trainer = serializers.StringRelatedField(read_only=True)
     # trainer = serializers.StringRelatedField(source="trainer.first_name")
 

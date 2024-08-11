@@ -1,8 +1,13 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+defineProps({
+    user: Object
+})
+</script>
 
 <template>
-    <div>
-        <h1>Мои настройки</h1>
+    <div class="flex  text-white">
+        <p >{{ user.username }}</p>
+        <p>{{ user.email }}</p>
     </div>
 </template>
 

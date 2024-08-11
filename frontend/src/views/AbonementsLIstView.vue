@@ -3,7 +3,7 @@ import axios from "axios";
 import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { useToast } from "vue-toastification";
-import type { IAbonement } from "@/utils/orders";
+import type { IAbonement } from "@/interfaces/orders";
 import ModalForm from "@/components/ModalForm.vue";
 
 

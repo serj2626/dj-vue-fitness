@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
-import type { IReview } from "@/utils/workout";
+import type { IReview } from "@/interfaces/workout";
 import { defineEmits } from "vue";
 import ReviewDetail from "@/components/trainer/ReviewDetail.vue";
 import CreateReview from "./CreateReview.vue";

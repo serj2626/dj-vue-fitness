@@ -76,7 +76,6 @@ class OrderAbonementAdmin(admin.ModelAdmin):
     get_number_of_months.short_description = "Количество месяцев"
     get_price.short_description = "Цена"
 
-
     # list_filter = ('',)
     # inlines = [
     #     Inline,

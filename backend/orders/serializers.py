@@ -1,10 +1,9 @@
-from rest_framework import serializers
 from django.contrib.auth import get_user_model
+from rest_framework import serializers
 
 from workout.serializers import RateSerializer
 
 from .models import Abonement, OrderAbonement, OrderTraining
-
 
 User = get_user_model()
 
@@ -20,7 +19,14 @@ class OrderAbonementListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = OrderAbonement
-        fields = ('abonement', 'start', 'end', 'status', 'active', )
+        fields = (
+            "id",
+            "abonement",
+            "start",
+            "end",
+            "status",
+            "active",
+        )
 
 
 class OrderAbonementSerializer(serializers.ModelSerializer):
@@ -47,4 +53,12 @@ class OrderTrainingListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = OrderTraining
-        fields =  ("id", 'trainer', 'rate', 'start', 'end', 'status', 'active', )
+        fields = (
+            "id",
+            "trainer",
+            "rate",
+            "start",
+            "end",
+            "status",
+            "active",
+        )

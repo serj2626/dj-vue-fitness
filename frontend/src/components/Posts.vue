@@ -3,7 +3,7 @@
 import axios from "axios";
 import { ref, onMounted } from "vue";
 import { useToast } from "vue-toastification";
-import type { IPost } from "@/utils/types";
+import type { IPost } from "@/interfaces/types";
 import { gsap } from "gsap";
 import { useRouter } from "vue-router";
 

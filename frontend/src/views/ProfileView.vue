@@ -14,7 +14,9 @@ const showAction = ref(1);
 </script>
 
 <template>
-  <div class="container row mt-[150px]">
+  <div class="container row mt-[150px] overflow-x-hidden">
+
+    <!-- <p class="text-white">{{ user }}</p> -->
     <div class="actions flex justify-center items-center gap-10 mt-10">
       <ProfileButton
         @click="showAction = 1"
@@ -34,9 +36,9 @@ const showAction = ref(1);
     </div>
 
     <div
-      class="mt-28 text-white border-2 border-white border-opacity-25 rounded-2xl"
+      class="mt-28"
     >
-      <MySettings v-if="showAction === 1" />
+      <MySettings :user="user" v-if="showAction === 1" />
       <MyAbonement v-if="showAction === 2" />
       <MyTrainings v-if="showAction === 3" />
     </div>
