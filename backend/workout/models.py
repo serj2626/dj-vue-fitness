@@ -18,7 +18,7 @@ class Rate(models.Model):
 
     title = models.CharField("Название тарифа", max_length=100)
     count_minutes = models.SmallIntegerField("Количество минут", blank=True, null=True)
-    price = models.DecimalField("Цена", max_digits=10, decimal_places=2, default=1000)
+    price = models.SmallIntegerField("Цена",  default=1000)
     description = models.TextField("Описание тарифа", blank=True)
 
     class Meta:
