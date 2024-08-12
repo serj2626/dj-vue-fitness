@@ -5,7 +5,6 @@ import { useToast } from "vue-toastification";
 import { useUserStore } from "./stores/auth";
 import Header from "./components/Header.vue";
 import axios from "axios";
-import CreateReview from "./components/trainer/CreateReview.vue";
 
 
 const store = useUserStore();
@@ -17,7 +16,6 @@ onBeforeMount(() => {
     const token = store.user.access
 
     if (token) {
-      console.log("token", token);
       axios.defaults.headers.common["Authorization"] = "Bearer " + token;
     } else {
       axios.defaults.headers.common["Authorization"] = "";
