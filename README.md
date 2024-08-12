@@ -2,8 +2,10 @@
 
 ![Django](./frontend/src/assets/screen.png)
 
-
 ![Django](./frontend/src/assets/screen-order.png)
+
+![Django](./frontend/src/assets/screen-order-training.png)
+
 ### Инструменты
 
 #### Backend
