@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import AbonemenListtView, OrderAbonementCreateView, OrderTrainingCreateView
 
+from .views import AbonemenListtView, OrderAbonementCreateView, OrderTrainingCreateView
 
 urlpatterns = [
     path("abonements/", AbonemenListtView.as_view(), name="abonement-list"),
@@ -10,9 +10,7 @@ urlpatterns = [
         name="abonement-buy",
     ),
     path(
-        "training/<int:pk>/order/", 
-        OrderTrainingCreateView.as_view(), 
-        name="training-create"
-    ),
-
+        "trainings/create/order/",
+        OrderTrainingCreateView.as_view(),
+        name="training-create",)
 ]

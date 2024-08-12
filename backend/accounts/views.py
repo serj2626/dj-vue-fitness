@@ -5,9 +5,13 @@ from rest_framework.generics import CreateAPIView, GenericAPIView, ListAPIView
 from rest_framework.mixins import DestroyModelMixin
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
-
+from drf_spectacular.utils import extend_schema
 from orders.models import OrderAbonement, OrderTraining
-from orders.serializers import OrderAbonementListSerializer, OrderTrainingListSerializer, OrderTrainingSerializer
+from orders.serializers import (
+    OrderAbonementListSerializer,
+    OrderTrainingCreateSerializer,
+    OrderTrainingListSerializer,
+)
 
 from .serializers import RegisterSerializer
 
@@ -15,6 +19,7 @@ User = get_user_model()
 
 
 @api_view(["GET"])
+@extend_schema(summary="Личные данные пользователя")
 def get_my_info(request):
     return Response(
         {

@@ -51,8 +51,9 @@ class ReviewsSerializer(serializers.ModelSerializer):
 #         model = Reviews
 #         fields = ("rating", "text")
 
+
 class TrainerListSerializer(serializers.ModelSerializer):
-      class Meta:
+    class Meta:
         model = Trainer
         fields = ("id", "avatar")
 

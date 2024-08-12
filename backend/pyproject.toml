@@ -13,6 +13,8 @@ line_length = 88
 
 
 [tool.autoflake]
+[autoflake]
+check=true
 check_diff = true
 remove-all-unused-imports = true
 remove-unused-variables = true

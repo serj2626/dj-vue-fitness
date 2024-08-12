@@ -38,6 +38,7 @@ class OrderAbonementSerializer(serializers.ModelSerializer):
             "start",
         )
 
+
 class OrderTrainingListSerializer(serializers.ModelSerializer):
     trainer = TrainerSerializer()
     rate = RateSerializer()
@@ -48,11 +49,12 @@ class OrderTrainingListSerializer(serializers.ModelSerializer):
         model = OrderTraining
         fields = "__all__"
 
-class OrderTrainingSerializer(serializers.ModelSerializer):
 
+class OrderTrainingCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = OrderTraining
         fields = (
             "rate",
             "start",
+            "trainer"
         )
