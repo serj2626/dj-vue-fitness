@@ -4,6 +4,7 @@ import { useToast } from "vue-toastification";
 import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import type {IMyTrainig} from "@/interfaces/orders";
+import Paginator from 'primevue/paginator';
 
 const router = useRouter();
 const toast = useToast();
@@ -23,7 +24,7 @@ onMounted(() => getMyTrainings());
 </script>
 
 <template>
-  <div class="mb-5">
+  <div class="mb-16">
     <h1 class="text-3xl text-center text-uppercase text-yellow-500 py-4 mb-10">
     Мои тренировки
   </h1>
@@ -272,15 +273,22 @@ onMounted(() => getMyTrainings());
             <td class="px-6 py-4">{{ train.end }}</td>
             <td class="px-6 py-4">{{ train.rate.title }}</td>
             <td class="px-6 py-4">{{ train.rate.price }} руб</td>
-            <td class="px-6 py-4">
+            <td v-if="train.status" class="px-6 py-4">
               <i class="fa-solid fa-check fa-2xl" style="color: #55ed02"></i>
             </td>
-            <td class="px-6 py-4">
+            <td v-else class="px-6 py-4">
+              <i class="fa-solid fa-xmark fa-2xl" style="color: #ff0000"></i>
+            </td>
+            <td v-if="train.status" class="px-6 py-4">
+              <i class="fa-solid fa-check fa-2xl" style="color: #55ed02"></i>
+            </td>
+            <td v-else class="px-6 py-4">
               <i class="fa-solid fa-xmark fa-2xl" style="color: #ff0000"></i>
             </td>
           </tr>
         </tbody>
       </table>
+      <Paginator :rows="10" :totalRecords="120" :rowsPerPageOptions="[10, 20, 30]"></Paginator>
     </div>
   </div>
 </template>

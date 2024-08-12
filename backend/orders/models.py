@@ -96,6 +96,7 @@ class OrderTraining(models.Model):
     class Meta:
         verbose_name = "Забронированное занятие"
         verbose_name_plural = "Забронированные занятия"
+        ordering = ["start"]
 
     def __str__(self):
         return f"Занятие {self.rate} - {self.trainer}"
