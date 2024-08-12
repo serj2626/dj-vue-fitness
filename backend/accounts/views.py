@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 
 from orders.models import OrderAbonement, OrderTraining
-from orders.serializers import OrderAbonementListSerializer, OrderTrainingListSerializer
+from orders.serializers import OrderAbonementListSerializer, OrderTrainingListSerializer, OrderTrainingSerializer
 
 from .serializers import RegisterSerializer
 
