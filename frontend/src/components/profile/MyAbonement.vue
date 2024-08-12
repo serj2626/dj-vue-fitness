@@ -7,15 +7,14 @@ import type { IMyAbonement } from "@/interfaces/orders";
 const toast = useToast();
 const abonemets = ref<IMyAbonement[]>([]);
 
-
 const deleteAbonement = async (id: number) => {
-    try {
-        await axios.delete(`/api/auth/my-abonements/${id}/delete`);
-        toast.success("Абонемент удален");
-        getMyAbonements();
-    } catch (e) {
-        toast.error("Произошла ошибка при удалении абонемента");
-    }
+  try {
+    await axios.delete(`/api/auth/my-abonements/${id}/delete`);
+    toast.success("Абонемент удален");
+    getMyAbonements();
+  } catch (e) {
+    toast.error("Произошла ошибка при удалении абонемента");
+  }
 };
 
 const getMyAbonements = async () => {
@@ -74,12 +73,14 @@ onMounted(() => {
           <td v-else>
             <div class="flex justify-center gap-4">
               <i
-              @click="deleteAbonement(abonement.id)"
-                class="block cursor-pointer fa-solid fa-trash fa-xl text-red-600"
+                @click="deleteAbonement(abonement.id)"
+                class="block cursor-pointer fa-solid fa-trash fa-xl text-red-600
+                 hover:scale-125 duration-300 ease-in"
                 title="Удалить"
               ></i>
               <i
-                class="block cursor-pointer fa-solid fa-dollar-sign fa-xl text-green-500"
+                class="block cursor-pointer fa-solid fa-dollar-sign fa-xl text-green-500
+                    hover:scale-125 duration-300 ease-in"
                 title="Оплатить"
               ></i>
             </div>
