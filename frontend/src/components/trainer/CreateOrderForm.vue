@@ -2,7 +2,7 @@
 import axios from "axios";
 import { ref, onMounted } from "vue";
 import { useToast } from "vue-toastification";
-import type {iRate} from "@/interfaces/orders";
+import type {iRate} from "@/interfaces/workout";
 
 
 defineProps({
@@ -79,8 +79,9 @@ onMounted(getRates);
           id=date
           v-model="date"
             class="w-full p-2 border border-gray-300 rounded"
-            type="date"
+            type="datetime-local"
           />
+          
           <label
             for="small"
             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -94,7 +95,7 @@ onMounted(getRates);
           >
             <option 
             v-for="rate in rates" :key="rate.id"  :value="rate.id">
-              {{rate.title}}
+              {{rate.title}} - {{ rate.count_minutes }} мин по цене {{ rate.price }} рублей
             </option>
           </select>
           <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">

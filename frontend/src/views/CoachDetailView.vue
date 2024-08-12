@@ -13,30 +13,24 @@ import CreateOrderForm from "@/components/trainer/CreateOrderForm.vue";
 const route = useRoute();
 const { id } = route.params;
 
-const date = ref(null);
-const rate = ref(null);
+const dateTrain = ref('');
+const rateTrain = ref(null);
 const toast = useToast();
 
 const showModal = ref<boolean>(false);
 const showReview = ref<boolean>(false);
 
-const coach = ref<ITrainer>({
-  id: "",
-  first_name: "",
-  last_name: "",
-  position: "",
-  phone: "",
-  email: "",
-  bio: "",
-  avatar: "",
-  trainer_reviews: [],
-});
+const coach = ref<ITrainer>({} as ITrainer);
 
 const orderTraining = async() => {
   try{
-    const res = await axios.post("/api/workout/order/", {
-      
+    await axios.post("/api/orders/trainings/create/order/", {
+      start: dateTrain.value,
+      rate: rateTrain.value,
+      trainer: id
     })
+    toast.success("Вы записались на тренировку");
+    showModal.value = false
   }catch{
     toast.error("Произошла ошибка при записи на тренировку");
   }
@@ -181,8 +175,8 @@ onMounted(getCoach);
 
   <div v-if="showModal">
     <CreateOrderForm
-      v-model:date="date"
-      v-model:rate="rate"
+      v-model:date="dateTrain"
+      v-model:rate="rateTrain"
       :lastName="coach.last_name"
       :firstName="coach.first_name"
       :position="coach.position"
