@@ -4,6 +4,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from .views import (
     MyAbonementDeleteView,
     MyAbonementListView,
+    MytrainingDeleteView,
     MytrainingListView,
     RegisterView,
     get_my_info,
@@ -18,6 +19,11 @@ urlpatterns = [
         name="abonement-delete",
     ),
     path("my-trainings/", MytrainingListView.as_view(), name="my-trainings"),
+    path(
+        "my-trainings/<int:pk>/delete",
+        MytrainingDeleteView.as_view(),
+        name="training-detail",
+    ),
     path("register/", RegisterView.as_view(), name="register"),
     path("login/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
     path("refresh/", TokenRefreshView.as_view(), name="token_refresh"),

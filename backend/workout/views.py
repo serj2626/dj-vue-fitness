@@ -6,11 +6,14 @@ from rest_framework.generics import (
     RetrieveAPIView,
     RetrieveUpdateDestroyAPIView,
 )
-
-from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.views import APIView
+
 from orders.models import OrderTraining
-from orders.serializers import OrderTrainingCreateSerializer, OrderTrainingListSerializer
+from orders.serializers import (
+    OrderTrainingCreateSerializer,
+    OrderTrainingListSerializer,
+)
 
 from .models import Post, Rate, Reviews, Subscription, Trainer
 from .serializers import (
@@ -126,5 +129,3 @@ class TrainerDetailView(RetrieveAPIView):
 
     def get_queryset(self):
         return Trainer.objects.all().prefetch_related("trainer_reviews")
-
-

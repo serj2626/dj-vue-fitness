@@ -1,17 +1,14 @@
 from django.contrib.auth import get_user_model
+from drf_spectacular.utils import extend_schema
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.generics import CreateAPIView, GenericAPIView, ListAPIView
-from rest_framework.mixins import DestroyModelMixin
+from rest_framework.mixins import DestroyModelMixin, UpdateModelMixin
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
-from drf_spectacular.utils import extend_schema
+
 from orders.models import OrderAbonement, OrderTraining
-from orders.serializers import (
-    OrderAbonementListSerializer,
-    OrderTrainingCreateSerializer,
-    OrderTrainingListSerializer,
-)
+from orders.serializers import OrderAbonementListSerializer, OrderTrainingListSerializer
 
 from .serializers import RegisterSerializer
 
@@ -19,7 +16,6 @@ User = get_user_model()
 
 
 @api_view(["GET"])
-@extend_schema(summary="Личные данные пользователя")
 def get_my_info(request):
     return Response(
         {
@@ -37,6 +33,22 @@ class MytrainingListView(ListAPIView):
     def get_queryset(self):
         return OrderTraining.objects.filter(user=self.request.user)
 
+    @extend_schema(summary="Список моих тренировок")
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+class MytrainingDeleteView(DestroyModelMixin, UpdateModelMixin, GenericAPIView):
+    serializer_class = OrderTrainingListSerializer
+    queryset = OrderTraining.objects.all()
+
+    @extend_schema(summary="Удалить тренировку")
+    def delete(self, request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)
+
+    @extend_schema(summary="Изменить тренировку")
+    def put(self, request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)
+
 
 class MyAbonementListView(ListAPIView):
 
@@ -45,11 +57,15 @@ class MyAbonementListView(ListAPIView):
     def get_queryset(self):
         return OrderAbonement.objects.filter(user=self.request.user)
 
+    @extend_schema(summary="Список моих абонементов")
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
 
 class MyAbonementDeleteView(DestroyModelMixin, GenericAPIView):
     serializer_class = OrderAbonementListSerializer
     queryset = OrderAbonement.objects.all()
 
+    @extend_schema(summary="Удалить абонемент")
     def delete(self, request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)
 

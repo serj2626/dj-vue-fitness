@@ -12,5 +12,6 @@ urlpatterns = [
     path(
         "trainings/create/order/",
         OrderTrainingCreateView.as_view(),
-        name="training-create",)
+        name="training-create",
+    ),
 ]

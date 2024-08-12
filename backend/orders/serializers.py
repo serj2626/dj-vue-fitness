@@ -53,8 +53,4 @@ class OrderTrainingListSerializer(serializers.ModelSerializer):
 class OrderTrainingCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = OrderTraining
-        fields = (
-            "rate",
-            "start",
-            "trainer"
-        )
+        fields = ("rate", "start", "trainer")

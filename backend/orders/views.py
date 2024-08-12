@@ -1,13 +1,17 @@
+from drf_spectacular.utils import extend_schema
 from rest_framework import mixins
 from rest_framework.generics import GenericAPIView, ListAPIView, ListCreateAPIView
 from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
-from drf_spectacular.utils import extend_schema
 
 from .models import Abonement, OrderAbonement, OrderTraining
-from .serializers import AbonementSerializer, OrderAbonementSerializer, OrderTrainingCreateSerializer
+from .serializers import (
+    AbonementSerializer,
+    OrderAbonementSerializer,
+    OrderTrainingCreateSerializer,
+)
 
 
 class AbonemenListtView(ListAPIView):
@@ -28,8 +32,10 @@ class OrderAbonementCreateView(mixins.CreateModelMixin, GenericAPIView):
         serializer.save(user=user)
         return super().perform_create(serializer)
 
-    @extend_schema(summary="Бронировать абонемент",
-                   description="Бронировать абонемент по id абонемента")
+    @extend_schema(
+        summary="Бронировать абонемент",
+        description="Бронировать абонемент по id абонемента",
+    )
     def post(self, request: Request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
 
@@ -43,7 +49,6 @@ class OrderTrainingCreateView(mixins.CreateModelMixin, GenericAPIView):
         serializer.save(user=user)
         return super().perform_create(serializer)
 
-    @extend_schema(
-            summary="Бронировать тренировку")
+    @extend_schema(summary="Бронировать тренировку")
     def post(self, request: Request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
