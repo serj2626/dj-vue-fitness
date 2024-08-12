@@ -2,9 +2,12 @@
 import axios from "axios";
 import { useToast } from "vue-toastification";
 import { ref, onMounted } from "vue";
+import { useRouter } from "vue-router";
+import type {IMyTrainig} from "@/interfaces/orders";
 
+const router = useRouter();
 const toast = useToast();
-const trainings = ref([]);
+const trainings = ref<IMyTrainig[]>([]);
 
 const getMyTrainings = async () => {
   try {
@@ -21,9 +24,9 @@ onMounted(() => getMyTrainings());
 
 <template>
   <div class="mb-5">
-    <div>
-      <h1>Мои тренировки</h1>
-    </div>
+    <h1 class="text-3xl text-center text-uppercase text-yellow-500 py-4 mb-10">
+    Мои тренировки
+  </h1>
 
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
       <div
@@ -176,7 +179,7 @@ onMounted(() => getMyTrainings());
             </ul>
           </div>
         </div>
-        <label for="table-search" class="sr-only">Search</label>
+        <label for="table-search" class="sr-only">Поиск</label>
         <div class="relative">
           <div
             class="absolute inset-y-0 left-0 rtl:inset-r-0 rtl:right-0 flex items-center ps-3 pointer-events-none"
@@ -205,7 +208,7 @@ onMounted(() => getMyTrainings());
       </div>
 
       <table
-        class="w-full text-center text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+        class="w-full text-center text-sm rtl:text-right text-gray-500 dark:text-gray-400"
       >
         <thead
           class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
@@ -252,7 +255,17 @@ onMounted(() => getMyTrainings());
               </div>
             </td>
             <td class="px-6 py-4">
-              {{ train.trainer.first_name }} {{ train.trainer.last_name }}
+              <a
+              class="text-blue-600 hover:underline cursor-pointer"
+                @click="
+                  router.push({
+                    name: 'coach',
+                    params: { id: train.trainer.id },
+                  })
+                "
+              >
+                {{ train.trainer.first_name }} {{ train.trainer.last_name }}
+              </a>
             </td>
             <td class="px-6 py-4">{{ train.trainer.position }}</td>
             <td class="px-6 py-4">{{ train.start }}</td>

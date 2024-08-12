@@ -1,3 +1,6 @@
+import type { IUserData } from "./auth";
+import type { iRate, ITrainer } from "./workout";
+
 export interface IAbonement {
   id: number;
   title: string;
@@ -18,4 +21,15 @@ export interface IMyAbonement {
   end: Date;
   status: boolean;
   active: boolean;
+}
+
+export interface IMyTrainig {
+  id?: number | string;
+  start: Date;
+  end: Date;
+  status: boolean;
+  active: boolean;
+  rate: iRate;
+  trainer: ITrainer;
+  user?: IUserData | null;
 }

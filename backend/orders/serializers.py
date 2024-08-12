@@ -41,6 +41,8 @@ class OrderAbonementSerializer(serializers.ModelSerializer):
 class OrderTrainingListSerializer(serializers.ModelSerializer):
     trainer = TrainerSerializer()
     rate = RateSerializer()
+    start = serializers.DateTimeField(format="%d.%m.%Y %H:%M:%S")
+    end = serializers.DateTimeField(format="%d.%m.%Y %H:%M:%S")
 
     class Meta:
         model = OrderTraining

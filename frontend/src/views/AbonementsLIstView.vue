@@ -27,7 +27,7 @@ const choiceAbonement = (abonement: IAbonement) => {
 const buyAbonement = async () => {
   showModal.value = false;
   try {
-    await axios.post(`/api/orders/abonements/${selectAbonement.value.id}/buy/`,
+    await axios.post(`/api/orders/abonements/${selectAbonement.value.id}/order/`,
       {
         abonement: selectAbonement.value.id,
         start: orderDate.value,
@@ -35,7 +35,7 @@ const buyAbonement = async () => {
     )
     toast.success("Вы забронировали абонемент");
     router.push({ name: "profile" })
-  } catch(error) {
+  } catch(error:any) {
     if(error.response.data.start){
       toast.error(error.response.data.start[0])
     }else{
