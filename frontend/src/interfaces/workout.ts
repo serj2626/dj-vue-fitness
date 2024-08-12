@@ -1,5 +1,3 @@
-import exp from "constants";
-
 export interface IReviewCreate {
   id: string;
   name: string;
@@ -17,7 +15,7 @@ export interface IReview {
 }
 
 export interface ITrainer {
-  id: number | string;
+  id: string | null;
   first_name: string;
   last_name: string;
   position: string;
@@ -29,6 +27,14 @@ export interface ITrainer {
 }
 
 export interface ITrainerList {
-  id: number|string;
+  id: number | string;
   avatar: string;
+}
+
+export interface iRate {
+  id: string,
+  title: string,
+  count_minutes: number,
+  price: number,
+  description: string
 }
