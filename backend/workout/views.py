@@ -117,7 +117,7 @@ class RateListView(ListAPIView):
     queryset = Rate.objects.all()
 
 
-@extend_schema(description="Список тренеров")
+@extend_schema(description="Список тренеров на домашней странице")
 class TrainerListView(ListAPIView):
     serializer_class = TrainerListSerializer
     queryset = Trainer.objects.all()
@@ -129,3 +129,9 @@ class TrainerDetailView(RetrieveAPIView):
 
     def get_queryset(self):
         return Trainer.objects.all().prefetch_related("trainer_reviews")
+
+
+@extend_schema(description="Список тренеров на отдельной страницы")
+class TrainerListForPageView(ListAPIView):
+    serializer_class = TrainerSerializer
+    queryset = Trainer.objects.all()

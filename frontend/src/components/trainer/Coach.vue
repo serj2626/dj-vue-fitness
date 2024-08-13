@@ -34,7 +34,9 @@ onMounted(getCoaches);
 </script>
 
 <template>
-  <h1 class="text-3xl text-center text-uppercase text-yellow-500 my-16">
+  <h1
+  @click="router.push({ name: 'coachList' })"
+  class="text-3xl text-center text-uppercase text-yellow-500 my-16 hover:underline cursor-pointer">
     Наши тренеры
   </h1>
 

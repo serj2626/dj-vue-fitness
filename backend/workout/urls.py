@@ -9,10 +9,12 @@ from .views import (
     SubscriptionView,
     TrainerDetailView,
     TrainerListView,
+    TrainerListForPageView
 )
 
 urlpatterns = [
     path("trainers/", TrainerListView.as_view(), name="trainer-list"),
+    path("all-trainers/", TrainerListForPageView.as_view(), name="all-trainer-list"),
     path("trainers/<pk>/", TrainerDetailView.as_view(), name="trainer-detail"),
     path("rates/", RateListView.as_view(), name="rate-list"),
     path("posts/", PostListView.as_view(), name="post-list"),
