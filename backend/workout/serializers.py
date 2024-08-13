@@ -65,4 +65,3 @@ class TrainerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Trainer
         fields = "__all__"
-        include = ["trainer_reviews"]
