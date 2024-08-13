@@ -3,7 +3,6 @@ import uuid
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils import timesince, timezone
-from django.utils.translation import gettext_lazy as _
 from django_ckeditor_5.fields import CKEditor5Field
 
 from .service import get_path_for_avatar_for_trainer

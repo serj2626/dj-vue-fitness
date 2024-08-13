@@ -37,6 +37,7 @@ class MytrainingListView(ListAPIView):
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
 
+
 class MytrainingDeleteView(DestroyModelMixin, UpdateModelMixin, GenericAPIView):
     serializer_class = OrderTrainingListSerializer
     queryset = OrderTraining.objects.all()
@@ -61,6 +62,7 @@ class MyAbonementListView(ListAPIView):
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
 
+
 class MyAbonementDeleteView(DestroyModelMixin, GenericAPIView):
     serializer_class = OrderAbonementListSerializer
     queryset = OrderAbonement.objects.all()
@@ -70,6 +72,7 @@ class MyAbonementDeleteView(DestroyModelMixin, GenericAPIView):
         return self.destroy(request, *args, **kwargs)
 
 
+@extend_schema(summary="Регистрация")
 class RegisterView(CreateAPIView):
     queryset = User.objects.all()
     serializer_class = RegisterSerializer

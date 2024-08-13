@@ -6,14 +6,7 @@ from rest_framework.generics import (
     RetrieveAPIView,
     RetrieveUpdateDestroyAPIView,
 )
-from rest_framework.response import Response
-from rest_framework.views import APIView
 
-from orders.models import OrderTraining
-from orders.serializers import (
-    OrderTrainingCreateSerializer,
-    OrderTrainingListSerializer,
-)
 
 from .models import Post, Rate, Reviews, Subscription, Trainer
 from .serializers import (
@@ -40,7 +33,6 @@ from .serializers import (
 #         return self.create(request, *args, **kwargs)
 
 
-
 class ReviewsListView(ListCreateAPIView):
     serializer_class = ReviewsSerializer
     queryset = Reviews.objects.all()
@@ -50,15 +42,11 @@ class ReviewsListView(ListCreateAPIView):
         serializer.save(user=user)
         return super().perform_create(serializer)
 
-    @extend_schema(
-        summary="Создать отзыв"
-    )
+    @extend_schema(summary="Создать отзыв")
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
-    
-    @extend_schema(
-        summary="Получить отзывы"
-    )
+
+    @extend_schema(summary="Получить отзывы")
     def get(self, request, *args, **kwargs):
         return super().get(request, *args, **kwargs)
 
@@ -106,12 +94,10 @@ class SubscriptionView(CreateAPIView):
     queryset = Subscription.objects.all()
 
 
-
 @extend_schema(summary="Список постов")
 class PostListView(ListAPIView):
     serializer_class = PostListSerializer
     queryset = Post.objects.all()
-
 
 
 @extend_schema(summary="Детальная информация о посте")
@@ -146,5 +132,3 @@ class TrainerDetailView(RetrieveAPIView):
 class TrainerListForPageView(ListAPIView):
     serializer_class = TrainerSerializer
     queryset = Trainer.objects.all()
-
- 

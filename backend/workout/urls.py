@@ -8,8 +8,8 @@ from .views import (
     ReviewsListView,
     SubscriptionView,
     TrainerDetailView,
+    TrainerListForPageView,
     TrainerListView,
-    TrainerListForPageView
 )
 
 urlpatterns = [
