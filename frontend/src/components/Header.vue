@@ -49,20 +49,12 @@ const logout = () => {
           >Контакты</a
         >
         <RouterLink
-          v-if="auth.isAuthenticated"
-          :to="{ name: 'profile' }"
-          class="header__link"
-          >Мой профиль
-        </RouterLink>
-        <RouterLink
           v-if="!auth.isAuthenticated"
           :to="{ name: 'login' }"
           class="header__link"
           >Войти
         </RouterLink>
-        <a v-if="auth.isAuthenticated" @click="logout()" class="header__link"
-          >Выйти</a
-        >
+
         <div class="flex flex-col items-center relative">
           <a
             @click="showProfile = !showProfile"
@@ -82,12 +74,15 @@ const logout = () => {
             <RouterLink :to="{ name: 'myTrainings' }">
               <li>Тренировки</li>
             </RouterLink>
-            <hr class="my-5">
-            <li 
-            @click="showProfile = false">Закрыть</li>
+            <hr class="my-5" />
+            <li class="cursor-pointer text-center" @click="showProfile = false">
+              Закрыть
+            </li>
           </ul>
         </div>
-
+        <a v-if="auth.isAuthenticated" @click="logout()" class="header__link"
+          >Выйти</a
+        >
         <RouterLink
           :to="{ name: 'abonements' }"
           class="header__link header__link__buy"
@@ -102,7 +97,7 @@ const logout = () => {
 .showDropdownMenu {
   position: absolute;
   top: 140%;
-  background-color: rgba(0, 0, 0, 0.502);
+  background-color: rgba(0, 0, 0, 0.912);
   border: 1px solid #ffffff;
   border-radius: 10px;
   padding: 10px;

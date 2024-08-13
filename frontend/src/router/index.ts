@@ -39,11 +39,6 @@ const router = createRouter({
       component: () => import("../views/AbonementsLIstView.vue"),
     },
     {
-      path: "/profile/",
-      name: "profile",
-      component: () => import("../views/ProfileView.vue"),
-    },
-    {
       path: "/my-abonements/",
       name: "myAbonements",
       component: () => import("../views/MyAbonementsView.vue"),
