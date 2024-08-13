@@ -7,6 +7,11 @@ import { computed, ref } from "vue";
 import { useToast } from "vue-toastification";
 
 const showProfile = ref(false);
+const closeShowProfile = () => {
+  setTimeout(() => {
+    showProfile.value = false;
+  }, 500);
+};
 
 const router = useRouter();
 const route = useRoute();
@@ -55,14 +60,11 @@ const logout = () => {
         </RouterLink>
 
         <div
-        @click="showProfile = true"
-        @mouseleave="showProfile = false"
-        class="flex flex-col items-center relative">
-          <a
-            
-            class="header__link cursor-pointer"
-            >Профиль</a
-          >
+          @click="showProfile = true"
+          @mouseleave="closeShowProfile"
+          class="flex flex-col items-center relative"
+        >
+          <a class="header__link cursor-pointer">Профиль</a>
           <ul
             :class="showProfile ? 'showDropdownMenu' : 'hidden'"
             class="text-white"
