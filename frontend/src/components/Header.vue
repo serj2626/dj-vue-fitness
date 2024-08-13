@@ -64,12 +64,27 @@ const logout = () => {
           >Выйти</a
         >
         <div class="flex flex-col items-center relative">
-          <a @click="showProfile = !showProfile" class="header__link cursor-pointer">Профиль</a>
-          <ul :class="showProfile ? 'showDropdownMenu' : 'hidden'" class="text-white">
-            <li>Абонементы</li>
-            <li>Настройки</li>
-            <li>Тренировки</li>
-
+          <a
+            @click="showProfile = !showProfile"
+            class="header__link cursor-pointer"
+            >Профиль</a
+          >
+          <ul
+            :class="showProfile ? 'showDropdownMenu' : 'hidden'"
+            class="text-white"
+          >
+            <RouterLink :to="{ name: 'myAbonements' }">
+              <li>Абонементы</li>
+            </RouterLink>
+            <RouterLink :to="{ name: 'home' }">
+              <li>Настройки</li>
+            </RouterLink>
+            <RouterLink :to="{ name: 'myTrainings' }">
+              <li>Тренировки</li>
+            </RouterLink>
+            <hr class="my-5">
+            <li 
+            @click="showProfile = false">Закрыть</li>
           </ul>
         </div>
 
@@ -84,7 +99,6 @@ const logout = () => {
 </template>
 
 <style scoped>
-
 .showDropdownMenu {
   position: absolute;
   top: 140%;
@@ -108,7 +122,6 @@ const logout = () => {
   100% {
     opacity: 1;
   }
-  
 }
 
 .showDropdownMenu li {
@@ -121,7 +134,6 @@ const logout = () => {
     color: #fed504;
   }
 }
-
 
 .router-link-exact-active {
   color: rgb(255, 212, 19);
