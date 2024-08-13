@@ -44,7 +44,6 @@ const logout = () => {
         <a v-if="routeName === 'home'" href="#coach" class="header__link"
           >Тренеры</a
         >
-        <!-- <a href="#" class="header__link">Расписание</a> -->
         <a v-if="routeName === 'home'" href="#contacts" class="header__link"
           >Контакты</a
         >
@@ -55,9 +54,12 @@ const logout = () => {
           >Войти
         </RouterLink>
 
-        <div class="flex flex-col items-center relative">
+        <div
+        @click="showProfile = true"
+        @mouseleave="showProfile = false"
+        class="flex flex-col items-center relative">
           <a
-            @click="showProfile = !showProfile"
+            
             class="header__link cursor-pointer"
             >Профиль</a
           >
@@ -74,10 +76,6 @@ const logout = () => {
             <RouterLink :to="{ name: 'myTrainings' }">
               <li>Тренировки</li>
             </RouterLink>
-            <hr class="my-5" />
-            <li class="cursor-pointer text-center" @click="showProfile = false">
-              Закрыть
-            </li>
           </ul>
         </div>
         <a v-if="auth.isAuthenticated" @click="logout()" class="header__link"
@@ -96,11 +94,11 @@ const logout = () => {
 <style scoped>
 .showDropdownMenu {
   position: absolute;
-  top: 140%;
+  top: 120%;
   background-color: rgba(0, 0, 0, 0.912);
-  border: 1px solid #ffffff;
+  border: 2px solid #ffffff;
   border-radius: 10px;
-  padding: 10px;
+  padding: 15px;
   box-shadow: 0 2px 4px rgba(117, 115, 115, 0.2);
   z-index: 1;
 
@@ -120,7 +118,7 @@ const logout = () => {
 }
 
 .showDropdownMenu li {
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   cursor: pointer;
   color: #ffffff;
   transition: all 0.3s ease;
