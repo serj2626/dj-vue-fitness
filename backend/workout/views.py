@@ -40,7 +40,7 @@ from .serializers import (
 #         return self.create(request, *args, **kwargs)
 
 
-@extend_schema(description="Список отзывов")
+
 class ReviewsListView(ListCreateAPIView):
     serializer_class = ReviewsSerializer
     queryset = Reviews.objects.all()
@@ -50,8 +50,17 @@ class ReviewsListView(ListCreateAPIView):
         serializer.save(user=user)
         return super().perform_create(serializer)
 
+    @extend_schema(
+        summary="Создать отзыв"
+    )
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
+    
+    @extend_schema(
+        summary="Получить отзывы"
+    )
+    def get(self, request, *args, **kwargs):
+        return super().get(request, *args, **kwargs)
 
 
 class ReviewsDetailView(RetrieveUpdateDestroyAPIView):
@@ -87,7 +96,7 @@ class ReviewsDetailView(RetrieveUpdateDestroyAPIView):
         return super().patch(request, *args, **kwargs)
 
 
-@extend_schema(description="Подписка на рассылку")
+@extend_schema(summary="Подписка на рассылку")
 class SubscriptionView(CreateAPIView):
     """
     Подписка на рассылку
@@ -97,13 +106,15 @@ class SubscriptionView(CreateAPIView):
     queryset = Subscription.objects.all()
 
 
-@extend_schema(description="Список постов")
+
+@extend_schema(summary="Список постов")
 class PostListView(ListAPIView):
     serializer_class = PostListSerializer
     queryset = Post.objects.all()
 
 
-@extend_schema(description="Детальная информация о посте")
+
+@extend_schema(summary="Детальная информация о посте")
 class PostDetailView(RetrieveAPIView):
     serializer_class = PostSerializer
     queryset = Post.objects.all()
@@ -111,19 +122,19 @@ class PostDetailView(RetrieveAPIView):
     lookup_field = "category"
 
 
-@extend_schema(description="Список тарифов")
+@extend_schema(summary="Список тарифов")
 class RateListView(ListAPIView):
     serializer_class = RateSerializer
     queryset = Rate.objects.all()
 
 
-@extend_schema(description="Список тренеров на домашней странице")
+@extend_schema(summary="Список тренеров на домашней странице")
 class TrainerListView(ListAPIView):
     serializer_class = TrainerListSerializer
     queryset = Trainer.objects.all()
 
 
-@extend_schema(description="Детальная информация о тренере")
+@extend_schema(summary="Детальная информация о тренере")
 class TrainerDetailView(RetrieveAPIView):
     serializer_class = TrainerSerializer
 
@@ -131,7 +142,9 @@ class TrainerDetailView(RetrieveAPIView):
         return Trainer.objects.all().prefetch_related("trainer_reviews")
 
 
-@extend_schema(description="Список тренеров на отдельной страницы")
+@extend_schema(summary="Список тренеров на отдельной странице")
 class TrainerListForPageView(ListAPIView):
     serializer_class = TrainerSerializer
     queryset = Trainer.objects.all()
+
+ 
