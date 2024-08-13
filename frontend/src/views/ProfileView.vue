@@ -12,9 +12,7 @@ const { auth: user } = storeToRefs(store);
 
 const showAction = ref(1);
 
-const showActionSelect = computed(() => {
-  return localStorage.getItem("showAction");
-})
+
 
 const changeShow = (value: number) => {
   showAction.value = value;

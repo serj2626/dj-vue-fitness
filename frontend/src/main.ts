@@ -23,7 +23,9 @@ app.use(axios)
     .use(PrimeVue, {
         theme: {
             preset: Aura
-        }
+        },
+        ripple: true
+        
     })
     .use(globalComponents)
     .use(Toast)

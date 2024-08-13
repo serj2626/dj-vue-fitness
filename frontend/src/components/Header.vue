@@ -3,8 +3,10 @@
 import { RouterLink, useRoute, useRouter } from "vue-router";
 import { useUserStore } from "@/stores/auth";
 import { storeToRefs } from "pinia";
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { useToast } from "vue-toastification";
+
+const showProfile = ref(false);
 
 const router = useRouter();
 const route = useRoute();
@@ -14,10 +16,9 @@ const toast = useToast();
 const store = useUserStore();
 const { auth } = storeToRefs(store);
 
-
 const logout = () => {
   store.removeToken();
-  router.push({name: "home"})
+  router.push({ name: "home" });
   toast.success("Вы вышли из аккаунта");
 };
 </script>
@@ -59,12 +60,18 @@ const logout = () => {
           class="header__link"
           >Войти
         </RouterLink>
-        <a
-          v-if="auth.isAuthenticated"
-          @click="logout()"
-          class="header__link"
+        <a v-if="auth.isAuthenticated" @click="logout()" class="header__link"
           >Выйти</a
         >
+        <div class="flex flex-col items-center relative">
+          <a @click="showProfile = !showProfile" class="header__link cursor-pointer">Профиль</a>
+          <ul :class="showProfile ? 'showDropdownMenu' : 'hidden'" class="text-white">
+            <li>Абонементы</li>
+            <li>Настройки</li>
+            <li>Тренировки</li>
+
+          </ul>
+        </div>
 
         <RouterLink
           :to="{ name: 'abonements' }"
@@ -77,6 +84,45 @@ const logout = () => {
 </template>
 
 <style scoped>
+
+.showDropdownMenu {
+  position: absolute;
+  top: 140%;
+  background-color: rgba(0, 0, 0, 0.502);
+  border: 1px solid #ffffff;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(117, 115, 115, 0.2);
+  z-index: 1;
+
+  animation: show-dropdown 0.5s ease-in-out;
+}
+
+@keyframes show-dropdown {
+  0% {
+    opacity: 0;
+    scale: 0.5;
+    transform: translateY(-150px);
+  }
+
+  100% {
+    opacity: 1;
+  }
+  
+}
+
+.showDropdownMenu li {
+  margin-bottom: 5px;
+  cursor: pointer;
+  color: #ffffff;
+  transition: all 0.3s ease;
+
+  &:hover {
+    color: #fed504;
+  }
+}
+
+
 .router-link-exact-active {
   color: rgb(255, 212, 19);
 }
