@@ -34,7 +34,7 @@ const buyAbonement = async () => {
       }
     )
     toast.success("Вы забронировали абонемент");
-    router.push({ name: "profile" })
+    router.push({ name: "home" })
   } catch(error:any) {
     if(error.response.data.start){
       toast.error(error.response.data.start[0])

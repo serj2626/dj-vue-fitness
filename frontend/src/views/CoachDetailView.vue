@@ -2,7 +2,7 @@
 import axios from "axios";
 import { ref, onMounted } from "vue";
 import { useToast } from "vue-toastification";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import Stars from "@/components/trainer/Stars.vue";
 
 import type { ITrainer } from "@/interfaces/workout";
@@ -10,6 +10,8 @@ import ReviewDetail from "@/components/trainer/ReviewDetail.vue";
 import CreateReview from "@/components/trainer/CreateReview.vue";
 import CreateOrderForm from "@/components/trainer/CreateOrderForm.vue";
 
+
+const router = useRouter();
 const route = useRoute();
 const { id } = route.params;
 
@@ -31,6 +33,7 @@ const orderTraining = async() => {
     })
     toast.success("Вы записались на тренировку");
     showModal.value = false
+    router.push({ name: "home" })
   }catch{
     toast.error("Произошла ошибка при записи на тренировку");
   }
