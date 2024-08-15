@@ -5,11 +5,11 @@ from .views import (
     PostListView,
     RateListView,
     ReviewsDetailView,
-    ReviewsListView,
     SubscriptionView,
     TrainerDetailView,
     TrainerListForPageView,
     TrainerListView,
+    CreateReviewsView
 )
 
 urlpatterns = [
@@ -20,6 +20,6 @@ urlpatterns = [
     path("posts/", PostListView.as_view(), name="post-list"),
     path("posts/<str:category>/", PostDetailView.as_view(), name="post-detail"),
     path("subscribe/", SubscriptionView.as_view(), name="subscribe"),
-    path("reviews/", ReviewsListView.as_view(), name="review-list"),
+    path("reviews/create", CreateReviewsView.as_view(), name="review-create"),
     path("reviews/<int:pk>/", ReviewsDetailView.as_view(), name="review-detail"),
 ]
