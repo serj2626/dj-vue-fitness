@@ -60,9 +60,10 @@ const logout = () => {
         </RouterLink>
 
         <div
+         v-if="auth.isAuthenticated"
           @click="showProfile = true"
           @mouseleave="closeShowProfile"
-          class="flex flex-col items-center relative"
+          class="flex flex-col items-center relative z-50"
         >
           <a class="header__link cursor-pointer">Профиль</a>
           <ul
@@ -72,7 +73,7 @@ const logout = () => {
             <RouterLink :to="{ name: 'myAbonements' }">
               <li>Абонементы</li>
             </RouterLink>
-            <RouterLink :to="{ name: 'home' }">
+            <RouterLink :to="{ name: 'mySettings' }">
               <li>Настройки</li>
             </RouterLink>
             <RouterLink :to="{ name: 'myTrainings' }">
