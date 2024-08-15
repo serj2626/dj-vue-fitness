@@ -126,6 +126,7 @@ onMounted(() => getMyTrainings());
       ></Paginator>
     </div>
   </div>
+
 </template>
 
 <style scoped></style>
