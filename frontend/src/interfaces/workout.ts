@@ -15,7 +15,7 @@ export interface IReview {
 }
 
 export interface ITrainer {
-  id: string | null;
+  id: string | undefined;
   first_name: string;
   last_name: string;
   position: string;
@@ -32,9 +32,9 @@ export interface ITrainerList {
 }
 
 export interface iRate {
-  id: string,
-  title: string,
-  count_minutes: number,
-  price: number,
-  description: string
+  id: string;
+  title: string;
+  count_minutes: number;
+  price: number;
+  description: string;
 }
