@@ -27,6 +27,7 @@
 - Swiper
 - Gsap
 - Axios
+- PrimeVue
 
 ---
 
