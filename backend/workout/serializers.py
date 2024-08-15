@@ -43,12 +43,10 @@ class ReviewsSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-# class CreateReviewsSerializer(serializers.ModelSerializer):
-#     rating = serializers.IntegerField(min_value=1, max_value=5)
-
-#     class Meta:
-#         model = Reviews
-#         fields = ("rating", "text")
+class CreateReviewsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Reviews
+        fields = ("rating", "text", "trainer")
 
 
 class TrainerListSerializer(serializers.ModelSerializer):
