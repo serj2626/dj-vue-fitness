@@ -7,8 +7,10 @@ from rest_framework.generics import (
     RetrieveUpdateDestroyAPIView,
 )
 
+from rest_framework.response import Response
 
-from .models import Post, Rate, Reviews, Subscription, Trainer
+
+from .models import Post, Rate, RatingStar, Reviews, Subscription, Trainer
 from .serializers import (
     PostListSerializer,
     PostSerializer,
@@ -17,38 +19,26 @@ from .serializers import (
     SubscriptionSerializer,
     TrainerListSerializer,
     TrainerSerializer,
+    CreateReviewsSerializer
 )
 
-# class CreateReviewsView(CreateAPIView):
-#     serializer_class = CreateReviewsSerializer
-#     queryset = Reviews.objects.all()
-
-#     def perform_create(self, serializer):
-#         user = self.request.user
-#         trainer = Trainer.objects.get(id=self.kwargs["uuid"])
-#         serializer.save(user=user, trainer=trainer)
-#         return super().perform_create(serializer)
-
-#     def post(self, request, *args, **kwargs):
-#         return self.create(request, *args, **kwargs)
-
-
-class ReviewsListView(ListCreateAPIView):
-    serializer_class = ReviewsSerializer
+class CreateReviewsView(CreateAPIView):
+    serializer_class = CreateReviewsSerializer
     queryset = Reviews.objects.all()
 
     def perform_create(self, serializer):
-        user = self.request.user
-        serializer.save(user=user)
+        data = self.request.data
+        rating = RatingStar.objects.get(value=int(data.get("rating")))
+        trainer = Trainer.objects.get(id=data.get("trainer"))
+
+        serializer.save(user=self.request.user, rating=rating, trainer=trainer)
         return super().perform_create(serializer)
 
-    @extend_schema(summary="Создать отзыв")
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
 
-    @extend_schema(summary="Получить отзывы")
-    def get(self, request, *args, **kwargs):
-        return super().get(request, *args, **kwargs)
+
+
 
 
 class ReviewsDetailView(RetrieveUpdateDestroyAPIView):
