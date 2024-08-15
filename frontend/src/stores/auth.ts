@@ -15,7 +15,7 @@ export const useUserStore = defineStore("user", () => {
 
   const initStore = () => {
     if (localStorage.getItem("fitness.access")) {
-      console.log("Вы авторизовались!");
+      // console.log("Вы авторизовались!");
 
       user.access = localStorage.getItem("fitness.access");
       user.refresh = localStorage.getItem("fitness.refresh");
@@ -26,9 +26,9 @@ export const useUserStore = defineStore("user", () => {
 
       refreshToken();
 
-      console.log("Initialized user:", user);
+      // console.log("Initialized user:", user);
     } else {
-      ("asd");
+      console.log("Вы не авторизованы!");
     }
   };
 
