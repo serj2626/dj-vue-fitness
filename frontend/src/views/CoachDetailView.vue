@@ -3,19 +3,18 @@ import axios from "axios";
 import { ref, onMounted } from "vue";
 import { useToast } from "vue-toastification";
 import { useRoute, useRouter } from "vue-router";
-import Stars from "@/components/trainer/Stars.vue";
+import Rating from "primevue/rating";
 
 import type { ITrainer } from "@/interfaces/workout";
 import ReviewDetail from "@/components/trainer/ReviewDetail.vue";
 import CreateReview from "@/components/trainer/CreateReview.vue";
 import CreateOrderForm from "@/components/trainer/CreateOrderForm.vue";
 
-
 const router = useRouter();
 const route = useRoute();
 const { id } = route.params;
 
-const dateTrain = ref('');
+const dateTrain = ref("");
 const rateTrain = ref(null);
 const toast = useToast();
 
@@ -24,26 +23,39 @@ const showReview = ref<boolean>(false);
 
 const coach = ref<ITrainer>({} as ITrainer);
 
-const orderTraining = async() => {
+const createReview = async(  rating: number, text: string ) => {
   try{
+    await axios.post("/api/workout/reviews/create",{
+      text: text,
+      trainer: coach.value.id,
+      rating: rating
+    })
+    toast.success("Отзыв успешно создан");
+  }catch(err){
+    console.log(err);
+    toast.error("Произошла ошибка при создании отзыва");
+  }
+}
+
+const orderTraining = async () => {
+  try {
     await axios.post("/api/orders/trainings/create/order/", {
       start: dateTrain.value,
       rate: rateTrain.value,
-      trainer: id
-    })
+      trainer: id,
+    });
     toast.success("Вы записались на тренировку");
-    showModal.value = false
-    router.push({ name: "home" })
-  }catch{
+    showModal.value = false;
+    router.push({ name: "home" });
+  } catch {
     toast.error("Произошла ошибка при записи на тренировку");
   }
-}
+};
 
 const getCoach = async () => {
   try {
     const { data } = await axios.get(`/api/workout/trainers/${id}`);
     coach.value = data;
-    console.log(coach.value);
   } catch {
     toast.error("Произошла ошибка при получении тренера");
   }
@@ -60,7 +72,7 @@ onMounted(getCoach);
       class="w-1/3 mx-auto rounded-2xl flex flex-col items-center justify-center gap-8"
     >
       <img class="rounded-xl" :src="coach.avatar" alt="" />
-      <Stars />
+      <Rating disabled readonly :stars="5" :modelValue="4" />
       <div>
         <a class="text-white cursor-pointer">
           Отзывы
@@ -191,30 +203,30 @@ onMounted(getCoach);
 
   <div v-if="showReview" class="reviews container mt-32 rounded-2xl">
     <div class="w-3/4 mx-auto px-3 relative">
-      <div class="flex">
+      <div class="flex justify-between items-center px-3">
+        <h4 class="text-2xl text-center text-yellow-500 font-extrabold">
+          Отзывы
+        </h4>
         <a
+          @click="showReview = false"
           class="text-[40px] block text-white hover:text-red-700 cursor-pointer"
           >&times;</a
         >
-        <h4 class="text-2xl text-center text-white font-extrabold">Отзывы</h4>
       </div>
 
-      <CreateReview class="my-4" />
-      <ul class="h-[500px] overflow-y-auto">
+      <CreateReview @sendReview="createReview"  />
+
+
+
+
+
+      <ul class="h-[500px] overflow-y-auto my-4">
         <li v-for="(review, index) in coach.trainer_reviews" :key="index">
           <ReviewDetail :review="review" />
         </li>
       </ul>
     </div>
   </div>
-
-  <!-- <transition name="fade">
-    <Reviews
-      v-if="showReview"
-      :reviews="coach.trainer_reviews"
-      @closeModal="showReview = false"
-    />
-  </transition> -->
 </template>
 
 <style scoped>
@@ -223,9 +235,9 @@ onMounted(getCoach);
   top: 20px;
   left: 50%;
   transform: translateX(-50%);
-  background: linear-gradient(45deg, #938a8e 20%, #936393 35%, #7bbcb9 100%);
+  background-color: black;
   overflow-y: auto;
-  z-index: 100;
+  z-index: 40;
   padding: 20px;
 }
 
