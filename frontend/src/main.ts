@@ -3,7 +3,7 @@ import { createPinia } from "pinia";
 
 import PrimeVue from "primevue/config";
 import Aura from "@primevue/themes/aura";
-
+import ConfirmationService from 'primevue/confirmationservice';
 
 
 import axios from "axios";
@@ -11,6 +11,7 @@ import App from "./App.vue";
 import router from "./router";
 import globalComponents from "./components/global";
 import Toast from "vue-toastification";
+// import '../node_modules/flowbite-vue/dist/index.css'
 import "vue-toastification/dist/index.css";
 import "./assets/main.css";
 
@@ -20,6 +21,7 @@ axios.defaults.baseURL = import.meta.env.VITE_API_URL;
 const app = createApp(App);
 app
   .use(axios)
+  .use(ConfirmationService)
   .use(PrimeVue, {
     theme: {
       preset: Aura,
