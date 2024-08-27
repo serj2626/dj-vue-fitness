@@ -7,6 +7,9 @@ export interface IAbonement {
   description: string;
   price: number;
   number_of_months: number;
+  start?: Date;
+  end?: Date;
+  status?: boolean;
 }
 
 export interface ICreateOrderAbonement {
