@@ -2,9 +2,9 @@ import uuid
 
 from django.contrib.auth import get_user_model
 from django.db import models
-from django.utils import timesince, timezone
+from django.utils import  timezone
 from django_ckeditor_5.fields import CKEditor5Field
-
+from django.utils.timesince import timesince
 from .service import get_path_for_avatar_for_trainer
 
 User = get_user_model()
@@ -104,10 +104,15 @@ class Reviews(models.Model):
     text = models.TextField("Текст отзыва", max_length=5000, null=True)
     created_at = models.DateTimeField(verbose_name="Создано", default=timezone.now)
 
+
+
+    def date_age(self):
+        return timesince(self.created_at)
+
     class Meta:
         verbose_name = "Отзыв о тренерах"
         verbose_name_plural = "Отзывы о тренерах"
-        ordering = ["created_at"]
+        ordering = ["-created_at"]
 
     def __str__(self):
         return f"Отзыв от {self.user.email}" if self.user else "Anonymous"
