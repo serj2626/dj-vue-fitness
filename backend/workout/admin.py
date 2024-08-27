@@ -30,6 +30,7 @@ class ReviewsAdmin(admin.ModelAdmin):
         "created_at",
     )
     list_editable = ("rating", "user")
+    list_filter = ('trainer',)
 
     def get_text(self, obj):
         return (obj.text)[:15] + "..."
