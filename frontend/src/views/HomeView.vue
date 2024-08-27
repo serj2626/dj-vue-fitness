@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Subscribe from "../components/Subscribe.vue";
-import Coach from "../components/trainer/Coach.vue";
+import Coach from "../components/trainer/CoachList.vue";
 import Abonements from "@/components/Abonements.vue";
 import About from "@/components/About.vue";
 import BlockHeader from "@/components/BlockHeader.vue";
@@ -13,7 +13,7 @@ import BlockHeader from "@/components/BlockHeader.vue";
   <section id="header" class="header relative">
     <BlockHeader />
   </section>
-  <section id="about" class="about container text-purple-500">
+  <section id="about" class="about container text-white">
     <About />
   </section>
   <section id="abonements" class="container abonements mt-16">
