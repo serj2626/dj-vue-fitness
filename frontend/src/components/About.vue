@@ -2,24 +2,23 @@
 <script setup lang="ts"></script>
 
 <template>
-  <h1 class="text-3xl text-center text-uppercase text-yellow-500  mb-16">
+  <h1 class="text-3xl text-center  text-yellow-500  mb-16">
     О клубе
   </h1>
   <div class="flex justify-between gap-6 about">
     <div class="about__desc">
-      <h3 class="about__desc-title">Добро пожаловать в DV FITNESS.</h3>
-      <div class="about__desc-body">
+      <h3 class="about__desc-title uppercase mb-4">Добро пожаловать в DV FITNESS.</h3>
+      <div class="about__desc-body leading-7">
         Наша цель - здоровье и комфорт.
         Мы помогаем людям достигать своих целей в лучшую сторону. В нашем клубе
         вы можете отдохнуть и улучшить свою физическую форму. Мы предлагаем
         различные программы, которые помогут вам достичь своих целей.
-        Наши тренеры помогут вам достичь своих целей. Мы предлагаем различные
-        программы, которые помогут вам достичь своих целей. На нашем сайте вы можете
+        На нашем сайте вы можете
         ознакомиться с нашими программами. Приобрести абонемент можно на сайте.
         Также вы можете ознакомиться с нашими тренерами. Заказать персональную тренировку.
       </div>
-      <ul> На сайте вы можете:
-        <li>Приобрести абонемент</li>
+      <ul class=""> На сайте вы можете:
+        <li class="">Приобрести абонемент</li>
         <li>Посмотреть инофрмацию о тренерах</li>
         <li>Приобрести персональную тренировку</li>
         <li>Прочитать полезные статьи</li>
@@ -47,5 +46,19 @@
 .about__img {
   animation: reveal linear both;
   animation-timeline: view();
+}
+
+ul{
+  margin-top: 30px;
+  margin-inline: 0;
+  list-style-type: disc;
+  list-style-position: inside;
+  margin-bottom: 20px;
+
+
+}
+ul li{
+  margin-bottom: 10px;
+
 }
 </style>
