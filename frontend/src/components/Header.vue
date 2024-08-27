@@ -36,7 +36,7 @@ const logout = () => {
     <div
       class="header__container container h-20 flex justify-center flex-wrap items-center gap-6"
     >
-      <h3 class="header__logo text-yellow-400 font-bold text-lg mr-14">
+      <h3 class="header__logo text-yellow-300 font-bold text-lg mr-14">
         <RouterLink :to="{ name: 'home' }">DV FITNESS </RouterLink>
       </h3>
       <div class="header__menu flex items-center gap-4">
@@ -103,7 +103,7 @@ const logout = () => {
   border-radius: 10px;
   padding: 15px;
   box-shadow: 0 2px 4px rgba(117, 115, 115, 0.2);
-  z-index: 1;
+  z-index: 100;
 
   animation: show-dropdown 0.5s ease-in-out;
 }
