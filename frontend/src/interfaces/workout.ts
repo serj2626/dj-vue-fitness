@@ -24,6 +24,8 @@ export interface ITrainer {
   bio: string;
   avatar: string;
   trainer_reviews: [];
+  count_reviews?: number;
+  total_rating?: number;
 }
 
 export interface ITrainerList {
