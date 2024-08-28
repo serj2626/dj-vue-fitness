@@ -34,6 +34,11 @@ const router = createRouter({
       component: () => import("../views/CoachDetailView.vue"),
     },
     {
+      path: "/coach/:id/reviews",
+      name: "coachReviews",
+      component: () => import("../views/CoachReviews.vue"),
+    },
+    {
       path: "/posts/:category",
       name: "post",
       component: () => import("../views/PostView.vue"),
@@ -57,6 +62,16 @@ const router = createRouter({
       path: "/my-settings/",
       name: "mySettings",
       component: () => import("../views/MySettingsView.vue"),
+    },
+    {
+      path: "/reviews/:id/delete",
+      name: "reviewDelete",
+      component: () => import("../views/ReviewDeleteView.vue"),
+    },
+    {
+      path: "/reviews/:id/update",
+      name: "reviewUpdate",
+      component: () => import("../views/ReviewUpdateView.vue"),
     },
   ],
 });
