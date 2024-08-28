@@ -4,7 +4,7 @@ import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { useToast } from "vue-toastification";
 import type { IAbonement } from "@/interfaces/orders";
-import ModalForm from "@/components/ModalForm.vue";
+import CreateOrderForm from "@/components/abonements/CreateOrderAbonement.vue";
 
 
 const router = useRouter();
@@ -24,7 +24,7 @@ const choiceAbonement = (abonement: IAbonement) => {
 };
 
 
-const buyAbonement = async () => {
+const orderAbonement = async () => {
   showModal.value = false;
   try {
     await axios.post(`/api/orders/abonements/${selectAbonement.value.id}/order/`,
@@ -34,7 +34,7 @@ const buyAbonement = async () => {
       }
     )
     toast.success("Вы забронировали абонемент");
-    router.push({ name: "home" })
+    router.push({ name: "myAbonements" })
   } catch(error:any) {
     if(error.response.data.start){
       toast.error(error.response.data.start[0])
@@ -123,12 +123,12 @@ onMounted(() => getAbonements());
     </div>
   </div>
 
-  <ModalForm 
+  <CreateOrderForm 
     v-model:date="orderDate"
     :abonement="selectAbonement" 
     v-if="showModal" 
     @closeModal="showModal = false"
-    @orderAbonement="buyAbonement"
+    @orderAbonement="orderAbonement"
     />
 </template>
 
