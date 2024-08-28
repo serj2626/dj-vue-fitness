@@ -56,6 +56,26 @@ export const useUserStore = defineStore("user", () => {
     }
   };
 
+
+  const setUserInfo = async () => {
+    try {
+      const { data } = await axios.get("/api/auth/me/");
+      console.log(data);
+        user.id = data.id;
+        user.username = data.username;
+        user.email = data.email;
+        user.isAuthenticated = true;
+        localStorage.setItem("fitness.id", data.id);
+        localStorage.setItem("fitness.username", data.username);
+        localStorage.setItem("fitness.email", data.email);
+    } catch (error) {
+      console.log(error);
+      console.log("Произошла ошибка при получении информации о пользователе");
+
+      throw new Error();
+    }
+  };
+
   const login = async (userData: ILogin) => {
     try {
       const { data } = await axios.post("/api/auth/login/", userData);
@@ -64,8 +84,9 @@ export const useUserStore = defineStore("user", () => {
       user.refresh = data.refresh;
       localStorage.setItem("fitness.access", data.access);
       localStorage.setItem("fitness.refresh", data.refresh);
-      setUserInfo();
+      
       axios.defaults.headers.common["Authorization"] = "Bearer " + user.access;
+      await setUserInfo();
     } catch (error) {
       throw new Error("Неверная почта или имя пользователя");
     }
@@ -112,20 +133,6 @@ export const useUserStore = defineStore("user", () => {
     }
   };
 
-  const setUserInfo = async () => {
-    try {
-      const { data } = await axios.post("/api/auth/me/", {
-        token: user.access,
-      });
-      console.log(data);
-        user.id = data.id;
-        user.username = data.username;
-        user.email = data.email;
-        user.isAuthenticated = true;
-    } catch (error) {
-      throw new Error();
-    }
-  };
 
   return {
     user,
