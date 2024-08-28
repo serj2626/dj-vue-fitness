@@ -13,7 +13,7 @@ const toast = useToast();
 onBeforeMount(() => {
   try {
     store.initStore();
-    const token = store.user.access
+    const token = store.auth.access
 
     if (token) {
       axios.defaults.headers.common["Authorization"] = "Bearer " + token;
