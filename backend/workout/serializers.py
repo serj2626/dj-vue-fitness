@@ -1,5 +1,7 @@
 from rest_framework import serializers
 
+from accounts.serializers import UserSerializer
+
 from .models import Post, Rate, Reviews, Subscription, Trainer
 from django.db.models import Sum
 
@@ -43,20 +45,28 @@ class RateSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class TrainerForReviewsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Trainer
+        fields = ("id", "avatar", "first_name", "last_name")
+
+
+
 class ReviewsSerializer(serializers.ModelSerializer):
     """
     Список отзывов
     """
     # rating = serializers.IntegerField(min_value=1, max_value=5)
-    user = serializers.CharField(source="user.username", read_only=True)
+    user = UserSerializer(read_only=True)
     created_at = serializers.DateTimeField(
         format="%d.%m.%Y %H:%M:%S", read_only=True)
-    trainer = serializers.StringRelatedField(read_only=True)
-    # trainer = serializers.StringRelatedField(source="trainer.first_name")
+    trainer = TrainerForReviewsSerializer(read_only=True)
+
 
     class Meta:
         model = Reviews
-        fields = "__all__"
+        fields = ("id", "user", "trainer", "created_at",
+                  "text", "rating", "date_age",)
 
 
 class CreateReviewsSerializer(serializers.ModelSerializer):
