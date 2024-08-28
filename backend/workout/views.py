@@ -82,6 +82,7 @@ class ReviewsDetailView(RetrieveUpdateDestroyAPIView):
         return super().patch(request, *args, **kwargs)
 
 
+
 @extend_schema(summary="Подписка на рассылку")
 class SubscriptionView(CreateAPIView):
     """
