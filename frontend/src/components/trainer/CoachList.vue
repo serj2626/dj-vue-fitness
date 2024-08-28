@@ -20,7 +20,6 @@ const getCoaches = async () => {
   try {
     const { data } = await axios.get("/api/workout/trainers/");
     trainers.value = data;
-    console.log(data);
   } catch {
     toast.error("Произошла ошибка");
   }
@@ -32,7 +31,7 @@ onMounted(getCoaches);
 <template>
   <h1
     @click="router.push({ name: 'coachList' })"
-    class="text-3xl text-center text-uppercase text-yellow-500 my-16 hover:text-yellow-600 cursor-pointer"
+    class="text-3xl text-center text-uppercase text-yellow-300 my-16 hover:text-yellow-400 cursor-pointer"
   >
     Наши тренеры
   </h1>
@@ -45,7 +44,7 @@ onMounted(getCoaches);
     :pagination="{
       clickable: true,
     }"
-    :navigation="true"
+
     :breakpoints="{
       '640': {
         slidesPerView: 2,
