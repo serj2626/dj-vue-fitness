@@ -78,7 +78,7 @@ class TrainerAdmin(admin.ModelAdmin):
 
     def get_image(self, obj):
         return mark_safe(
-            f'<img src={obj.avatar.url} style="border-radius: 50%;" " width="100" height="60"'
+            f'<img src={obj.avatar.url} style="border-radius: 50%;" " width="70" height="70"'
         )
 
     get_image.short_description = "Фото"
