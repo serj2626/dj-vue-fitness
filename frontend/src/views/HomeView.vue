@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Subscribe from "../components/Subscribe.vue";
-import Coach from "../components/trainer/CoachList.vue";
-import Abonements from "@/components/Abonements.vue";
+import CoachList from "../components/trainer/CoachList.vue";
+import Abonements from "@/components/abonements/Abonements.vue";
 import About from "@/components/About.vue";
 import BlockHeader from "@/components/BlockHeader.vue";
 
@@ -22,7 +22,7 @@ import BlockHeader from "@/components/BlockHeader.vue";
   <div class="women"></div>
 
   <section id="coach" class="coach container text-orange-300 my-14">
-    <Coach />
+    <CoachList />
   </section>
   <section id="pool" class="pool"></section>
   <section id="contacts" class="feedback container text-lime-300">
