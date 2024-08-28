@@ -5,13 +5,20 @@ export interface IReviewCreate {
   rating: number;
 }
 
+export interface IUser {
+  id: string;
+  username: string;
+  email: string;
+}
+
 export interface IReview {
   id: number;
   trainer: string;
   text: string;
   rating: number;
-  user: string;
+  user: IUser;
   created_at: string;
+  date_age?: string;
 }
 
 export interface ITrainer {
