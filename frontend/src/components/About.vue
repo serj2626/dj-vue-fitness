@@ -2,7 +2,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <h1 class="text-3xl text-center  text-yellow-500  mb-16">
+  <h1 class="text-3xl text-center  text-yellow-300  mb-16">
     О клубе
   </h1>
   <div class="flex justify-between gap-6 about">
