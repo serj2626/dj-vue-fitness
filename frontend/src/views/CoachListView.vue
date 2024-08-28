@@ -42,7 +42,7 @@ onMounted(getCoaches);
 
 <template>
   <div class="container row my-36">
-    <h1 class="text-3xl text-center text-uppercase text-yellow-500 mb-12">
+    <h1 class="text-3xl text-center text-uppercase text-yellow-300 mb-12">
       Тренеры
     </h1>
     <div
