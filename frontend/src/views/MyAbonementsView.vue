@@ -51,7 +51,7 @@ onMounted(() => {
 
 <template>
   <div class="my-36 mx-16">
-    <h1 class="text-3xl text-center text-uppercase text-yellow-500 py-4 mb-10">
+    <h1 class="text-3xl text-center text-uppercase text-yellow-300 py-4 mb-10">
       Мои абонементы
     </h1>
 
