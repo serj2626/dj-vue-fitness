@@ -47,7 +47,7 @@ const afterEnter = (el: any) => {
 <template>
   <div class="contact">
     <transition-group @before-enter="beforeEnter" @enter="enter" @after-enter="afterEnter" appear
-      class="grid grid-cols-5 gap-5 mt-5" name="list" tag="ul">
+      class="grid grid-cols-5 gap-5  mt-5" name="list" tag="ul">
       <li @click="
         router.push({ name: 'post', params: { category: post.category } })
         " class="grid__box post" v-for="(post, index) in posts" :key="index" :data-index="index">
