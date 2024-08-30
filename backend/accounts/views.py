@@ -9,7 +9,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 
 from orders.models import OrderAbonement, OrderTraining
 from orders.serializers import OrderAbonementListSerializer, OrderTrainingListSerializer
-
+from rest_framework.pagination import PageNumberPagination
 from .serializers import RegisterSerializer
 
 User = get_user_model()
@@ -26,8 +26,14 @@ def get_my_info(request):
     )
 
 
-class MytrainingListView(ListAPIView):
+class MyTrainingPagination(PageNumberPagination):
+    page_size = 5
+    page_size_query_param = 'page_size'
+    max_page_size = 100
 
+
+class MytrainingListView(ListAPIView):
+    pagination_class = MyTrainingPagination
     serializer_class = OrderTrainingListSerializer
 
     def get_queryset(self):
@@ -83,5 +89,6 @@ class RegisterView(CreateAPIView):
         user = serializer.save()
         data = serializer.data
         refresh = RefreshToken.for_user(user)
-        data["token"] = {"refresh": str(refresh), "access": str(refresh.access_token)}
+        data["token"] = {"refresh": str(
+            refresh), "access": str(refresh.access_token)}
         return Response(data, status=status.HTTP_201_CREATED)
