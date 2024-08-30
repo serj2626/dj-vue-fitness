@@ -15,6 +15,7 @@ from .serializers import RegisterSerializer
 User = get_user_model()
 
 
+@extend_schema(summary="Информация о пользователе",responses={200: RegisterSerializer})
 @api_view(["GET"])
 def get_my_info(request):
     return Response(
