@@ -7,7 +7,7 @@ import { useRoute, useRouter } from "vue-router";
 import { useToast } from "vue-toastification";
 import ReviewDetail from "@/components/trainer/ReviewDetail.vue";
 import CreateReviewForm from "@/components/trainer/CreateReviewForm.vue";
-
+import DeleteModal from "@/components/DeleteModal.vue";
 
 const router = useRouter();
 const route = useRoute();
@@ -15,7 +15,7 @@ const route = useRoute();
 const coach = ref<ITrainer>({} as ITrainer);
 
 const showFormCreateReview = ref(false);
-const selectDeleteReview = ref(null);
+const selectDelReview = ref(null);
 
 const toast = useToast();
 
@@ -49,6 +49,18 @@ const createReview = async (form: IForm) => {
   } catch (err) {
     console.log(err);
     toast.error("Произошла ошибка при создании отзыва");
+  }
+};
+
+const deleteReview = async () => {
+  try {
+    await axios.delete(`/api/workout/reviews/${selectDelReview.value}`);
+    toast.success("Отзыв успешно удален");
+    selectDelReview.value = null;
+    getCoach();
+  } catch (err) {
+    console.log(err);
+    toast.error("Произошла ошибка при удалении отзыва");
   }
 };
 
@@ -98,10 +110,18 @@ watchEffect(getCoach);
       </h3>
       <div v-for="review in coach.trainer_reviews" :key="review">
         <ReviewDetail
-          :review="review"
+        :review="review"
+        @deleteReview="selectDelReview = review.id"
         />
       </div>
     </div>
+
+    <DeleteModal
+      v-if="selectDelReview"
+      :text="`Вы действительно хотите удалить отзыв?`"
+      @closeModal="selectDelReview = null"
+      @delete="deleteReview"
+    />
   </div>
 </template>
 <style scoped>
