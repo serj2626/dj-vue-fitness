@@ -10,6 +10,9 @@ defineProps({
     required: true,
   },
 });
+
+const emit = defineEmits(["closeModal", "deleteReview"]);
+
 const store = useUserStore();
 </script>
 
@@ -27,9 +30,7 @@ const store = useUserStore();
           class="flex gap-2"
         >
           <svg
-            @click="
-              router.push({ name: 'reviewDelete', params: { id: review.id } })
-            "
+            @click="emit('deleteReview', review.id)"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
