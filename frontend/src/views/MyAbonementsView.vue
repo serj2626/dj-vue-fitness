@@ -14,16 +14,7 @@ const abonemets = ref<IMyAbonement[]>([]);
 
 const selectAbonement = ref(null);
 
-const deleteAbonement = async (id: number) => {
-  // try {
-  //   await axios.delete(`/api/auth/my-abonements/${abon.value.id}/delete`);
-  //   toast.success("Абонемент удален");
-  //   abon.value = null;
-  //   getMyAbonements();
-  // } catch (e) {
-  //   toast.error("Произошла ошибка при удалении абонемента");
-  // }
-};
+
 
 const getMyAbonements = async () => {
   try {
@@ -32,6 +23,18 @@ const getMyAbonements = async () => {
     console.log(abonemets.value);
   } catch (e) {
     toast.error("Произошла ошибка при получении данных");
+  }
+};
+
+
+const deleteAbonement = async (id: number) => {
+  try {
+    await axios.delete(`/api/auth/my-abonements/${selectAbonement.value}/delete`);
+    toast.success("Абонемент удален");
+    selectAbonement.value = null;
+    getMyAbonements();
+  } catch (e) {
+    toast.error("Произошла ошибка при удалении абонемента");
   }
 };
 
@@ -107,7 +110,7 @@ onMounted(() => {
           </tr>
         </tbody>
       </table>
-      <Paginator :rows="10" :totalRecords="120" :rowsPerPageOptions="[10, 20, 30]"></Paginator>
+      <Paginator :rows="10" :totalRecords="120"></Paginator>
     </div>
   </div>
 
