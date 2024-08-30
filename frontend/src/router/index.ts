@@ -9,11 +9,6 @@ const router = createRouter({
       component: () => import("../views/HomeView.vue"),
     },
     {
-      path: "/about",
-      name: "about",
-      component: () => import("../views/AboutView.vue"),
-    },
-    {
       path: "/login",
       name: "login",
       component: () => import("../views/LoginView.vue"),
@@ -49,6 +44,11 @@ const router = createRouter({
       component: () => import("../views/AbonementsLIstView.vue"),
     },
     {
+      path: "/my-abonements/:id/pay",
+      name: "payAbonement",
+      component: () => import("../views/AbonementPaymentView.vue"),
+    },
+    {
       path: "/my-abonements/",
       name: "myAbonements",
       component: () => import("../views/MyAbonementsView.vue"),
@@ -59,14 +59,14 @@ const router = createRouter({
       component: () => import("../views/MyTrainingsView.vue"),
     },
     {
+      path: "/my-trainings/:id/pay",
+      name: "payTraining",
+      component: () => import("../views/TrainingPaymentView.vue"),
+    },
+    {
       path: "/my-settings/",
       name: "mySettings",
       component: () => import("../views/MySettingsView.vue"),
-    },
-    {
-      path: "/reviews/:id/delete",
-      name: "reviewDelete",
-      component: () => import("../views/ReviewDeleteView.vue"),
     },
     {
       path: "/reviews/:id/update",
