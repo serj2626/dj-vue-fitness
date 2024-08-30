@@ -3,15 +3,21 @@
 import axios from 'axios';
 import { ref, onMounted } from 'vue';
 import { useToast } from 'vue-toastification';
-import { useRoute, useRouter } from 'vue-router';
+import { useRoute } from 'vue-router';
+
+interface IPost {
+    id: number;
+    title: string;
+    content: string;
+    created_at : string;
+    updated_at : string;
+    category: string;
+}
 
 const route = useRoute();
-const router = useRouter();
-
-
 const { category } = route.params
 const toast = useToast();
-const post = ref([]);
+const post = ref<IPost>({} as IPost);
 
 const getPost = async () => {
     try {
