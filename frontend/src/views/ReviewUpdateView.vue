@@ -24,17 +24,28 @@ const getReview = async () => {
     }
 }
 
+const validateForm = () => {
+    if (text.value === '' || rating.value === null) {
+        toast.error('Заполните все поля');
+        return false;
+    } else {
+        return true;
+    }
+}
+
 const updateReview = async () => {
-    try {
-        await axios.patch(`/api/workout/reviews/${route.params.id}/`, {
-            text: text.value,
-            rating: rating.value,
-            trainer: review.value.trainer
-        });
-        toast.success('Отзыв успешно обновлен');
-        router.push({name: 'coachReviews', params: {id: review.value.trainer.id}})
-    } catch (err) {
-        toast.error('Произошла ошибка при обновлении отзыва');
+    if (validateForm()) {
+        try {
+            await axios.patch(`/api/workout/reviews/${route.params.id}/`, {
+                text: text.value,
+                rating: rating.value,
+                trainer: review.value.trainer
+            });
+            toast.success('Отзыв успешно обновлен');
+            router.push({ name: 'coachReviews', params: { id: review.value.trainer.id } })
+        } catch (err) {
+            toast.error('Произошла ошибка при обновлении отзыва');
+        }
     }
 }
 
@@ -47,26 +58,22 @@ watchEffect(getReview);
                 <h3 class="text-center text-yellow-300 text-2xl">Редактировать отзыв</h3>
             </div>
             <div class="card__body my-10">
-                <form
-                @submit.prevent="updateReview"
-                id="formReview"
-                class="py-6 px-4 w-full mx-auto flex flex-col items-center gap-5">
+                <form @submit.prevent="updateReview" id="formReview"
+                    class="py-6 px-4 w-full mx-auto flex flex-col items-center gap-5">
 
-                <Rating v-model="rating" />
+                    <Rating v-model="rating" />
 
-                <textarea class="bg-slate-100 text-black w-full 
-                border-0 outline-none p-2 rounded-md" :placeholder="review.text"
-                v-model="text">
+                    <textarea class="bg-slate-100 text-black w-full 
+                border-0 outline-none p-2 rounded-md" :placeholder="review.text" v-model="text">
                 </textarea>
 
-            </form>
+                </form>
             </div>
             <div class="card__footer flex justify-center gap-6 items-center py-5">
                 <button @click="router.go(-1)"
                     class="bg-slate-400 rounded-lg py-2 px-3 hover:bg-slate-500 transition-all duration-300 ease-in">Отмена</button>
-                <button 
-                form="formReview"
-                class="bg-green-500 rounded-lg py-2 px-3 hover:bg-green-600 transition-all duration-300 ease-in">
+                <button form="formReview"
+                    class="bg-green-500 rounded-lg py-2 px-3 hover:bg-green-600 transition-all duration-300 ease-in">
                     Редактировать
                 </button>
             </div>
@@ -75,7 +82,7 @@ watchEffect(getReview);
 </template>
 <style scoped>
 .word-wrap {
-  word-wrap: break-word;
+    word-wrap: break-word;
 }
 
 .card {
