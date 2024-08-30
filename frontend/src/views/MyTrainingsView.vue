@@ -30,6 +30,17 @@ const getMyTrainings = async () => {
   }
 };
 
+const deleteAbonement = async (id: number) => {
+  try {
+    await axios.delete(`/api/auth/my-trainings/${selectTrain.value}/delete`);
+    toast.success("Тренировка удалена");
+    selectTrain.value = null;
+    getMyTrainings();
+  } catch (e) {
+    toast.error("Произошла ошибка при удалении тренировки");
+  }
+};
+
 onMounted(() => getMyTrainings());
 </script>
 
@@ -95,7 +106,7 @@ onMounted(() => getMyTrainings());
                   class="w-52 border-2 border-slate-300 rounded-lg shadow-xl shadow-zinc-400"
                 >
                   <p 
-                  @click="selectTrain = train"
+                  @click="selectTrain = train.id"
                   class="p-2 hover:bg-slate-200 cursor-pointer">Удалить</p>
                   <p
                     @click="
@@ -126,7 +137,7 @@ onMounted(() => getMyTrainings());
     :text="`Вы действительно хотите удалить тренировку?`"
     v-if="selectTrain" 
     @closeModal="selectTrain = null" 
-    @delete="getMyTrainings" />
+    @delete="deleteAbonement" />
   </div>
 </template>
 
