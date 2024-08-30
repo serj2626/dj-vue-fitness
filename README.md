@@ -12,6 +12,7 @@
 
 - Python
 - Django
+- Django Rest Framework
 - CK-Editor
 - PostgreSQL
 - Celery
@@ -28,6 +29,9 @@
 - Gsap
 - Axios
 - PrimeVue
+- Flowbite
+- Docker
+
 
 ---
 
@@ -37,10 +41,22 @@
 - JWT авторизация
 - Просмотр постов
 - Детальная информация о тренере
-- Оставление отзыва и рейтинга
+- Оставление отзыва и рейтинга тренеру
 - Запись на персональную тренировку
 - Покупка абонемента
 - Подписка на новости
+
+---
+
+### Скачать проект
+
+> через github
+
+    git clone https://github.com/serj2626/dj-vue-fitness
+
+> через docker
+
+    docker pull serj2626/dj-vue-fitness
 
 ---
 
