@@ -32,7 +32,7 @@ const form = ref({
 
 <template>
 
-    <fwb-modal  @close="emit('closeModal')">
+    <fwb-modal   @close="emit('closeModal')">
         <template #header>
             <div class="flex items-center text-lg">Оставьте свой отзыв</div>
         </template>
