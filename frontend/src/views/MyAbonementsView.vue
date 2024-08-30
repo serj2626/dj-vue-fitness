@@ -2,33 +2,27 @@
 import axios from "axios";
 import { ref, onMounted } from "vue";
 import { useToast } from "vue-toastification";
-
+import { FwbDropdown } from "flowbite-vue";
 import type { IMyAbonement } from "@/interfaces/orders";
-
 import Paginator from "primevue/paginator";
-import Dropdown from "primevue/dropdown";
+import { useRouter } from "vue-router";
+import DeleteModal from "@/components/DeleteModal.vue";
 
+const router = useRouter();
 const toast = useToast();
 const abonemets = ref<IMyAbonement[]>([]);
 
 const selectAbonement = ref(null);
 
-const choiceAbonement = (abonId: number) => {
-  if (selectAbonement.value === abonId) {
-    selectAbonement.value = null;
-  } else {
-    selectAbonement.value = abonId;
-  }
-};
-
 const deleteAbonement = async (id: number) => {
-  try {
-    await axios.delete(`/api/auth/my-abonements/${id}/delete`);
-    toast.success("Абонемент удален");
-    getMyAbonements();
-  } catch (e) {
-    toast.error("Произошла ошибка при удалении абонемента");
-  }
+  // try {
+  //   await axios.delete(`/api/auth/my-abonements/${abon.value.id}/delete`);
+  //   toast.success("Абонемент удален");
+  //   abon.value = null;
+  //   getMyAbonements();
+  // } catch (e) {
+  //   toast.error("Произошла ошибка при удалении абонемента");
+  // }
 };
 
 const getMyAbonements = async () => {
@@ -41,9 +35,6 @@ const getMyAbonements = async () => {
   }
 };
 
-const actions = ref([{ name: "Удалить" }, { name: "Оплатить" }]);
-const selectAction = ref(null);
-  
 onMounted(() => {
   getMyAbonements();
 });
@@ -56,25 +47,10 @@ onMounted(() => {
     </h1>
 
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-      <table
-        class="w-full text-center text-sm rtl:text-right text-gray-500 dark:text-gray-400"
-      >
-        <thead
-          class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
-        >
+      <table class="w-full text-center text-sm rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
-            <th scope="col" class="p-4">
-              <div class="flex items-center">
-                <input
-                  id="checkbox-all-search"
-                  type="checkbox"
-                  class="hidden w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                />
-                <label for="checkbox-all-search" class="sr-only"
-                  >checkbox</label
-                >
-              </div>
-            </th>
+            <th scope="col" class="px-6 py-3">№</th>
             <th scope="col" class="px-6 py-3">Тариф</th>
             <th scope="col" class="px-6 py-3">Кол-во месяцев</th>
             <th scope="col" class="px-6 py-3">Начало</th>
@@ -86,27 +62,11 @@ onMounted(() => {
           </tr>
         </thead>
         <tbody>
-          <tr
-            v-for="(abonement, index) in abonemets"
-            :key="index"
-            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
-          >
-            <td class="w-4 p-4">
-              <div class="flex items-center">
-                <input
-                  @click="choiceAbonement(abonement.id)"
-                  :checked="selectAbonement === abonement.id"
-                  id="checkbox-table-search-1"
-                  type="checkbox"
-                  class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                />
-                <label for="checkbox-table-search-1" class="sr-only"
-                  >checkbox</label
-                >
-              </div>
-            </td>
+          <tr v-for="(abonement, index) in abonemets" :key="index"
+            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+            <td class="px-6 py-4">{{ index + 1 }}</td>
             <td class="px-6 py-4">
-              <a class="text-blue-600 hover:underline cursor-pointer">
+              <a class="text-blue-600">
                 {{ abonement.abonement.title }}
               </a>
             </td>
@@ -124,26 +84,37 @@ onMounted(() => {
               <i class="fa-solid fa-xmark fa-2xl" style="color: #ff0000"></i>
             </td>
             <td class="px-6 py-4">
-              <div class="card flex justify-content-center">
-                <Dropdown
-                  v-model="selectAbonement"
-                  :disabled="selectAbonement !== abonement.id || abonement.status"
-                  :options="actions"
-                  optionLabel="name"
-                  placeholder="Выбрать"
-                  class="w-full md:w-14rem"
-                />
-              </div>
+              <fwb-dropdown v-if="!abonement.status" placement="left" text="Выбрать">
+                <div class="w-52 border-2 border-slate-300 rounded-lg shadow-xl shadow-zinc-400">
+                  <p @click="selectAbonement = abonement.id" class="p-2 hover:bg-slate-200 cursor-pointer">
+                    Удалить
+                  </p>
+                  <p @click="
+                    router.push({
+                      name: 'payAbonement',
+                      params: { id: abonement.id },
+                    })
+                    " class="p-2 hover:bg-slate-200 cursor-pointer">
+                    Оплатить
+                  </p>
+                </div>
+              </fwb-dropdown>
+              <button v-else disabled
+                class="block w-full text-white bg-slate-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                Оплачен
+              </button>
             </td>
           </tr>
         </tbody>
       </table>
-      <Paginator
-        :rows="10"
-        :totalRecords="120"
-        :rowsPerPageOptions="[10, 20, 30]"
-      ></Paginator>
+      <Paginator :rows="10" :totalRecords="120" :rowsPerPageOptions="[10, 20, 30]"></Paginator>
     </div>
   </div>
+
+  <DeleteModal 
+  @closeModal="selectAbonement = null" 
+  @delete="deleteAbonement" 
+  :text="`Вы действительно хотите удалить абонемент?`" 
+  v-if="selectAbonement" />
 </template>
 <style scoped></style>
