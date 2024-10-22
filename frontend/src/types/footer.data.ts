@@ -33,7 +33,7 @@ export const footerLinks: IFooterLink[] = [
   {
     title: "GitHub",
     link: "#",
-    icon: "ffa-brands fa-github fa-xl",
+    icon: "fa-brands fa-github fa-xl",
     style: "color: white",
   },
 ];
