@@ -5,9 +5,10 @@ const router = useRouter();
 </script>
 <template>
     <div class="info text-yellow-200 px-10 py-12">
-        <h1 class="text-3xl text-center font-extrabold">Страница не найдена</h1>
+        <h1 class="text-9xl text-white text-center mb-8">404</h1>
+        <h2 class="text-3xl text-center font-extrabold">Страница не найдена</h2>
         <a @click="router.push({ name: 'home' })" class="text-white mt-10 uppercase 
-        hover:text-red-500">На
+        hover:text-yellow-200">На
             главную</a>
     </div>
 </template>

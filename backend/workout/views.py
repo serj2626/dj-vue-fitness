@@ -2,16 +2,13 @@ from drf_spectacular.utils import extend_schema
 from rest_framework.generics import (
     CreateAPIView,
     ListAPIView,
-    ListCreateAPIView,
     RetrieveAPIView,
     RetrieveUpdateDestroyAPIView,
 )
 
-from rest_framework.response import Response
-
-
 from .models import Post, Rate, RatingStar, Reviews, Subscription, Trainer
 from .serializers import (
+    CreateReviewsSerializer,
     PostListSerializer,
     PostSerializer,
     RateSerializer,
@@ -19,13 +16,14 @@ from .serializers import (
     SubscriptionSerializer,
     TrainerListSerializer,
     TrainerSerializer,
-    CreateReviewsSerializer
 )
+
 
 class CreateReviewsView(CreateAPIView):
     """
     Представление для создания отзывов
     """
+
     serializer_class = CreateReviewsSerializer
     queryset = Reviews.objects.all()
 
@@ -37,19 +35,16 @@ class CreateReviewsView(CreateAPIView):
         serializer.save(user=self.request.user, rating=rating, trainer=trainer)
         return super().perform_create(serializer)
 
-
     @extend_schema(summary="Создать отзыв")
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
-
-
-
 
 
 class ReviewsDetailView(RetrieveUpdateDestroyAPIView):
     """
     Представление для детального вывода отзывов
     """
+
     serializer_class = ReviewsSerializer
     queryset = Reviews.objects.all()
 
@@ -82,7 +77,6 @@ class ReviewsDetailView(RetrieveUpdateDestroyAPIView):
         return super().patch(request, *args, **kwargs)
 
 
-
 @extend_schema(summary="Подписка на рассылку")
 class SubscriptionView(CreateAPIView):
     """
@@ -98,6 +92,7 @@ class PostListView(ListAPIView):
     """
     Список постов
     """
+
     serializer_class = PostListSerializer
     queryset = Post.objects.all()
 
@@ -107,6 +102,7 @@ class PostDetailView(RetrieveAPIView):
     """
     Детальная информация о посте
     """
+
     serializer_class = PostSerializer
     queryset = Post.objects.all()
 
@@ -118,6 +114,7 @@ class RateListView(ListAPIView):
     """
     Список тарифов
     """
+
     serializer_class = RateSerializer
     queryset = Rate.objects.all()
 
@@ -127,6 +124,7 @@ class TrainerListView(ListAPIView):
     """
     Список тренеров на домашней странице
     """
+
     serializer_class = TrainerListSerializer
     queryset = Trainer.objects.all()
 
@@ -136,6 +134,7 @@ class TrainerDetailView(RetrieveAPIView):
     """
     Детальная информация о тренере
     """
+
     serializer_class = TrainerSerializer
 
     def get_queryset(self):
@@ -147,5 +146,6 @@ class TrainerListForPageView(ListAPIView):
     """
     Список тренеров на отдельной странице
     """
+
     serializer_class = TrainerSerializer
     queryset = Trainer.objects.all()

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const date = defineModel("date");
-import type { IAbonement } from "@/interfaces/orders";
+import type { IAbonement } from "@/types/orders";
 defineProps({
   abonement: {
     type: Object as () => IAbonement,

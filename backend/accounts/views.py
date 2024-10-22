@@ -4,18 +4,19 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.generics import CreateAPIView, GenericAPIView, ListAPIView
 from rest_framework.mixins import DestroyModelMixin, UpdateModelMixin
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 
 from orders.models import OrderAbonement, OrderTraining
 from orders.serializers import OrderAbonementListSerializer, OrderTrainingListSerializer
-from rest_framework.pagination import PageNumberPagination
+
 from .serializers import RegisterSerializer
 
 User = get_user_model()
 
 
-@extend_schema(summary="Информация о пользователе",responses={200: RegisterSerializer})
+@extend_schema(summary="Информация о пользователе", responses={200: RegisterSerializer})
 @api_view(["GET"])
 def get_my_info(request):
     return Response(
@@ -29,7 +30,7 @@ def get_my_info(request):
 
 class MyTrainingPagination(PageNumberPagination):
     page_size = 5
-    page_size_query_param = 'page_size'
+    page_size_query_param = "page_size"
     max_page_size = 100
 
 
@@ -90,6 +91,5 @@ class RegisterView(CreateAPIView):
         user = serializer.save()
         data = serializer.data
         refresh = RefreshToken.for_user(user)
-        data["token"] = {"refresh": str(
-            refresh), "access": str(refresh.access_token)}
+        data["token"] = {"refresh": str(refresh), "access": str(refresh.access_token)}
         return Response(data, status=status.HTTP_201_CREATED)

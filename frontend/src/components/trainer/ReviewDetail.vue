@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { IReview } from "@/interfaces/workout";
+import type { IReview } from "@/types/workout";
 import { FwbRating } from "flowbite-vue";
 import { useUserStore } from "@/stores/auth";
 import router from "@/router";
@@ -23,7 +23,7 @@ const store = useUserStore();
     <div class="reviews-desc__header flex justify-between items-center">
       <div class="flex gap-3">
         <h3>{{ review.user.username }}</h3>
-        <fwb-rating size="sm" :rating="review.rating" />
+        <fwb-rating  size="sm" :rating="review.rating" />
 
         <div
           v-if="store.auth.username === review.user.username"

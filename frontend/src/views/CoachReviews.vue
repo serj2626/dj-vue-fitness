@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { FwbRating } from "flowbite-vue";
-import type { ITrainer } from "@/interfaces/workout";
+import type { ITrainer } from "@/types/workout";
 import axios from "axios";
 import { ref, watchEffect } from "vue";
 import { useRoute, useRouter } from "vue-router";

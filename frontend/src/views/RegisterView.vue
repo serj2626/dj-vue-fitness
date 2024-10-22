@@ -4,7 +4,7 @@ import { RouterLink } from "vue-router";
 import { useToast } from "vue-toastification";
 import { useRouter } from "vue-router";
 import { useUserStore } from "@/stores/auth";
-import type { IUserRegister } from "@/interfaces/auth";
+import type { IUserRegister } from "@/types/auth";
 
 const store = useUserStore();
 const router = useRouter();

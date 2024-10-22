@@ -2,7 +2,7 @@
 import axios from "axios";
 import { ref, onMounted } from "vue";
 import { useToast } from "vue-toastification";
-import type {iRate} from "@/interfaces/workout";
+import type {iRate} from "@/types/workout";
 
 
 defineProps({

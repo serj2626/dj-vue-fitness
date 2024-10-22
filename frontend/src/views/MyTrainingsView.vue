@@ -5,7 +5,7 @@ import { useToast } from "vue-toastification";
 import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { FwbDropdown } from "flowbite-vue";
-import type { IMyTrainig } from "@/interfaces/orders";
+import type { IMyTrainig } from "@/types/orders";
 
 import Paginator from "primevue/paginator";
 import DeleteModal from "@/components/DeleteModal.vue";

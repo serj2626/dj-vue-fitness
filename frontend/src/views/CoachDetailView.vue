@@ -4,11 +4,16 @@ import { ref, onMounted } from "vue";
 import { useToast } from "vue-toastification";
 import { useRoute, useRouter } from "vue-router";
 
+import { useUserStore } from "@/stores/auth";
 import { FwbRating } from "flowbite-vue";
-import type { ITrainer } from "@/interfaces/workout";
+import type { ITrainer } from "@/types/workout";
 
 import CreateOrderTrain from "@/components/trainer/CreateOrderTrain.vue";
-import ReviewList from "@/components/trainer/ReviewList.vue";
+import { storeToRefs } from "pinia";
+
+
+const store = useUserStore();
+const { auth } = storeToRefs(store);
 
 const router = useRouter();
 const route = useRoute();

@@ -78,15 +78,23 @@ const router = createRouter({
       name: "notFound",
       component: () => import("../views/NotFoundView.vue"),
     },
+    {
+      path: "/other",
+      name: "other",
+      component: () => import("../views/Other.vue"),
+    },
   ],
 });
 
-// router.beforeEach((to, from, next) => {
-//   if (to.path === "/login" || to.path === "/register") {
-//     next();
-//   } else {
-//     next("/login");
-//   }
-// });
+router.beforeEach((to, from, next) => {
+  // if (to.path === "/login" || to.path === "/register") {
+  //   next();
+  // } else {
+  //   next("/login");
+  console.log("to", to);
+  console.log("from", from);
+  next();
+  // }
+});
 
 export default router;

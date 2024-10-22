@@ -3,7 +3,7 @@ import axios from "axios";
 import { ref, onMounted } from "vue";
 import { useToast } from "vue-toastification";
 import { FwbDropdown } from "flowbite-vue";
-import type { IMyAbonement } from "@/interfaces/orders";
+import type { IMyAbonement } from "@/types/orders";
 import Paginator from "primevue/paginator";
 import { useRouter } from "vue-router";
 import DeleteModal from "@/components/DeleteModal.vue";

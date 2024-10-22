@@ -9,7 +9,7 @@ import { Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import type { ITrainerList } from "@/interfaces/workout";
+import type { ITrainerList } from "@/types/workout";
 
 const router = useRouter();
 const toast = useToast();

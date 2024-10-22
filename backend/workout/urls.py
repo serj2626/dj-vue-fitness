@@ -1,6 +1,7 @@
 from django.urls import path
 
 from .views import (
+    CreateReviewsView,
     PostDetailView,
     PostListView,
     RateListView,
@@ -9,7 +10,6 @@ from .views import (
     TrainerDetailView,
     TrainerListForPageView,
     TrainerListView,
-    CreateReviewsView
 )
 
 urlpatterns = [

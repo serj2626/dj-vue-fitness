@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { computed, reactive } from "vue";
 import axios from "axios";
-import type { IAuth, ILogin, IUserRegister } from "@/interfaces/auth";
+import type { IAuth, ILogin, IUserRegister } from "@/types/auth";
 
 export const useUserStore = defineStore("user", () => {
   const user = reactive<IAuth>({
