@@ -4,6 +4,7 @@ import axios from "axios";
 import { ref, onMounted } from "vue";
 import { useToast } from "vue-toastification";
 import type { IAbonement } from "@/types/orders";
+import AbonementCard from "./AbonementCard.vue";
 
 
 const toast = useToast();
@@ -26,16 +27,11 @@ onMounted(() => getAbonements());
   </h1>
 
   <div class="flex justify-center items-center gap-10 mt-10 mb-20 text-yellow-400">
-    <div v-for="abonement in abonements" :key="abonement.id"
-      class="box flex flex-col gap-2 items-center justify-around">
-      <div class="box__title">
-        <h3 class="title text-xl uppercase font-bold">{{ abonement.title }}</h3>
-      </div>
-      <div class="box__body text-center">
-        <p class="text-white mb-4">{{ abonement.description }}</p>
-        <span class="text-gray-400">{{ abonement.price }} рублей</span>
-      </div>
-    </div>
+    <AbonementCard 
+      v-for="abonement in abonements" 
+      :key="abonement.id" 
+      :abonement="abonement" 
+    />
   </div>
 </template>
 
