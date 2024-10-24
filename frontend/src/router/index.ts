@@ -86,15 +86,15 @@ const router = createRouter({
   ],
 });
 
-router.beforeEach((to, from, next) => {
-  // if (to.path === "/login" || to.path === "/register") {
-  //   next();
-  // } else {
-  //   next("/login");
-  console.log("to", to);
-  console.log("from", from);
-  next();
-  // }
-});
+// router.beforeEach((to, from, next) => {
+//   // if (to.path === "/login" || to.path === "/register") {
+//   //   next();
+//   // } else {
+//   //   next("/login");
+//   console.log("to", to);
+//   console.log("from", from);
+//   next();
+//   // }
+// });
 
 export default router;
