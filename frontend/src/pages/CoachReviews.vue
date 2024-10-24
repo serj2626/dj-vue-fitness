@@ -6,7 +6,6 @@ import { ref, watchEffect } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useToast } from "vue-toastification";
 import ReviewDetail from "@/components/trainer/ReviewDetail.vue";
-import CreateReviewForm from "@/components/trainer/CreateReviewForm.vue";
 import DeleteModal from "@/components/DeleteModal.vue";
 
 const router = useRouter();
@@ -19,10 +18,11 @@ const selectDelReview = ref(null);
 
 const toast = useToast();
 
-interface IForm {
-  text: string;
-  rating: number;
+interface IFormReview {
+  message: string;
+  rating: number | null;
 }
+
 
 const getCoach = async () => {
   try {
@@ -36,10 +36,10 @@ const getCoach = async () => {
   }
 };
 
-const createReview = async (form: IForm) => {
+const createReview = async (form: IFormReview) => {
   try {
     await axios.post("/api/workout/reviews/create", {
-      text: form.text,
+      text: form.message,
       trainer: coach.value.id,
       rating: form.rating,
     });
@@ -96,10 +96,11 @@ watchEffect(getCoach);
         Назад
       </button>
 
-      <CreateReviewForm
+      <CreateOrderModal 
         v-if="showFormCreateReview"
-        @sendReview="createReview"
-        @closeModal="showFormCreateReview = false"
+        orderType="review" 
+        @closeModal="showFormCreateReview = false" 
+        @createReview="createReview"
       />
 
     </div>
