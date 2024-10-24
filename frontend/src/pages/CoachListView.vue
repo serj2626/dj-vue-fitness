@@ -52,7 +52,7 @@ const getCoaches = async () => {
   }
 };
 
-const totalCoaches = computed(() => {
+const totalCoaches = computed<ITrainer[]>(() => {
   if (selected.value && searchName.value) {
     return coaches.value.filter((coach) => coach.position === selected.value)
       .filter((coach) => coach.first_name.toLowerCase().includes(searchName.value.toLowerCase()) 
