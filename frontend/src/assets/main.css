@@ -196,7 +196,9 @@ svg * {
   }
 
   .grid__box {
-    @apply border-2 border-slate-50 border-opacity-20 rounded-md p-12 text-xl text-center font-bold hover:border-yellow-400 text-yellow-400 transition-all duration-300 ease-in cursor-pointer
+    @apply border-2 border-slate-50 border-opacity-20 rounded-md p-12 text-xl 
+    text-center font-bold hover:border-yellow-400 text-yellow-400 transition-all 
+    duration-300 ease-in cursor-pointer
   }
 
   .footer-link {
