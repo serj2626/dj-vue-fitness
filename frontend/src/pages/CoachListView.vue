@@ -53,9 +53,17 @@ const getCoaches = async () => {
 };
 
 const totalCoaches = computed(() => {
-  if(selected.value) {
-    return coaches.value.filter((coach) => coach.position === selected.value);
+  if (selected.value && searchName.value) {
+    return coaches.value.filter((coach) => coach.position === selected.value)
+      .filter((coach) => coach.first_name.toLowerCase().includes(searchName.value.toLowerCase()) 
+      || coach.last_name.toLowerCase().includes(searchName.value.toLowerCase()))
+  } else if (selected.value) {
+    return coaches.value.filter((coach) => coach.position === selected.value)
   } else {
+    if (searchName.value) {
+    return coaches.value.filter((coach) => coach.first_name.toLowerCase().includes(searchName.value.toLowerCase()) 
+    || coach.last_name.toLowerCase().includes(searchName.value.toLowerCase()))
+  }
     return coaches.value
   }
 });
