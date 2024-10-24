@@ -56,7 +56,7 @@ onMounted(getCoaches);
 
 <template>
   <div class="container row my-36">
-    <h1 class="text-3xl text-center text-uppercase text-yellow-300 mb-12">
+    <h1 class="text-xl sm:text-2xl md:text-3xl text-center text-uppercase text-yellow-300 mb-12">
       Тренеры
     </h1>
     <div class="flex justify-between items-center">
