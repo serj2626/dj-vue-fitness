@@ -4,7 +4,6 @@ import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { useToast } from "vue-toastification";
 import type { IAbonement } from "@/types/orders";
-import CreateOrderForm from "@/components/abonements/CreateOrderAbonement.vue";
 
 
 const router = useRouter();
@@ -15,6 +14,7 @@ const orderDate = ref('')
 const showModal = ref<boolean>(false);
 
 const selectAbonement = ref({} as IAbonement);
+
 const choiceAbonement = (abonement: IAbonement) => {
   if (selectAbonement.value.id === abonement.id) {
     selectAbonement.value = {} as IAbonement;
@@ -24,7 +24,7 @@ const choiceAbonement = (abonement: IAbonement) => {
 };
 
 
-const orderAbonement = async () => {
+const newOrderAbonement = async () => {
   showModal.value = false;
   try {
     await axios.post(`/api/orders/abonements/${selectAbonement.value.id}/order/`,
@@ -123,15 +123,15 @@ onMounted(() => getAbonements());
     </div>
   </div>
 
-  <CreateOrderForm 
-    v-model:date="orderDate"
-    :abonement="selectAbonement" 
+  <CreateOrderModal 
     v-if="showModal" 
+    :abonement="selectAbonement" 
     @closeModal="showModal = false"
-    @orderAbonement="orderAbonement"
-    />
+    orderType="abonement"
+    v-model:date="orderDate"
+    @crateOrderAbonement="newOrderAbonement"
+  />
 </template>
-
 <style scoped>
 .abonements {
   box-shadow: 0 5px 40px rgb(228, 227, 221);
