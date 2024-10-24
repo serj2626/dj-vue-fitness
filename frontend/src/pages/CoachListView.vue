@@ -40,7 +40,7 @@ const toast = useToast();
 
 const name = ref("");
 const selected = ref("");
-const countries = [
+const categories = [
   { value: "bass", name: "Инструктор бассейна" },
   { value: "gym", name: "Инструктор тренажорного зала" },
   { value: "yoga", name: "Тренер по йоге" },
@@ -68,8 +68,8 @@ onMounted(getCoaches);
     <div class="flex justify-between items-center">
       <fwb-select
         v-model="selected"
-        :options="countries"
-        label="Select a country"
+        :options="categories"
+        placeholder="Выберите категорию"
         size="sm"
       />
 
