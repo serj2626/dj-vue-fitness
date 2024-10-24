@@ -22,7 +22,7 @@ export interface IReview {
 }
 
 export interface ITrainer {
-  id: string | undefined;
+  id: string | number;
   first_name: string;
   last_name: string;
   position: string;
@@ -33,6 +33,13 @@ export interface ITrainer {
   trainer_reviews: [];
   count_reviews?: number;
   total_rating?: number;
+}
+
+export interface ITrainerInfo {
+  id: string | number;
+  firstName: string;
+  lastName: string;
+  position: string;
 }
 
 export interface ITrainerList {
