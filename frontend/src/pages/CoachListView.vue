@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import axios from "axios";
-import { ref, onMounted, reactive } from "vue";
+import { ref, onMounted, reactive, computed } from "vue";
 import { useToast } from "vue-toastification";
 import CoachCard from "@/components/trainer/CoachCard.vue";
 import { FwbInput } from "flowbite-vue";
@@ -36,9 +36,9 @@ const searchName = ref("");
 const selected = ref("");
 console.log(selected.value);
 const categories = [
-  { value: "bass", name: "Инструктор бассейна" },
-  { value: "gym", name: "Инструктор тренажорного зала" },
-  { value: "yoga", name: "Тренер по йоге" },
+  { value: "Инструктор бассейна", name: "Инструктор бассейна" },
+  { value: "Инструктор тренажерного зала", name: "Инструктор тренажорного зала" },
+  { value: "Инструктор йоги", name: "Тренер по йоге" },
 ];
 
 const coaches = ref<ITrainer[]>([]);
@@ -46,10 +46,19 @@ const getCoaches = async () => {
   try {
     const { data } = await axios.get("/api/workout/all-trainers/");
     coaches.value = data;
+    console.log(coaches.value);
   } catch (err) {
     toast.error("Произошла ошибка при получении тренеров");
   }
 };
+
+const totalCoaches = computed(() => {
+  if(selected.value) {
+    return coaches.value.filter((coach) => coach.position === selected.value);
+  } else {
+    return coaches.value
+  }
+});
 
 onMounted(getCoaches);
 </script>
@@ -93,7 +102,7 @@ onMounted(getCoaches);
 
     <div class="grid max-[450px]:grid-cols-1 grid-cols-2 md:grid-cols-3 gap-10 mt-12 px-3">
       <CoachCard 
-        v-for="coach in coaches" 
+        v-for="coach in totalCoaches" 
         :key="coach.id" 
         :coach="coach"
         :currentId="trainerInfo.id"
