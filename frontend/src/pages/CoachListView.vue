@@ -32,8 +32,9 @@ const resetDetails = () => {
 
 const toast = useToast();
 
-const name = ref("");
+const searchName = ref("");
 const selected = ref("");
+console.log(selected.value);
 const categories = [
   { value: "bass", name: "Инструктор бассейна" },
   { value: "gym", name: "Инструктор тренажорного зала" },
@@ -45,7 +46,6 @@ const getCoaches = async () => {
   try {
     const { data } = await axios.get("/api/workout/all-trainers/");
     coaches.value = data;
-    console.log(data);
   } catch (err) {
     toast.error("Произошла ошибка при получении тренеров");
   }
@@ -68,7 +68,7 @@ onMounted(getCoaches);
       />
 
       <fwb-input
-        v-model="name"
+        v-model="searchName"
         placeholder="Введите имя тренера"
       >
         <template #prefix>
@@ -91,7 +91,7 @@ onMounted(getCoaches);
       </fwb-input>
     </div>
 
-    <div class="grid grid-cols-3 gap-10 mt-12">
+    <div class="grid max-[450px]:grid-cols-1 grid-cols-2 md:grid-cols-3 gap-10 mt-12 px-3">
       <CoachCard 
         v-for="coach in coaches" 
         :key="coach.id" 
