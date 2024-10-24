@@ -28,11 +28,11 @@ const router = createRouter({
       name: "coach",
       component: () => import("../pages/CoachDetailView.vue"),
     },
-    // {
-    //   path: "/coach/:id/repages",
-    //   name: "coachRepages",
-    //   component: () => import("../pages/CoachRepages.vue"),
-    // },
+    {
+      path: "/coach/:id/reviews",
+      name: "coachReviews",
+      component: () => import("../pages/CoachReviews.vue"),
+    },
     {
       path: "/posts/:category",
       name: "post",

@@ -111,7 +111,6 @@ watchEffect(getCoach);
       <div v-for="review in coach.trainer_reviews" :key="review">
         <ReviewDetail
         :review="review"
-        @deleteReview="selectDelReview = review.id"
         />
       </div>
     </div>
