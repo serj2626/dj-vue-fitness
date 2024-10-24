@@ -34,12 +34,12 @@ const logout = () => {
     class="header bg-black bg-opacity-50 py-2 fixed z-10 top-0 w-full"
   >
     <div
-      class="header__container container h-20 flex justify-center flex-wrap items-center gap-6"
+      class="header__container container min-h-20 flex justify-center flex-wrap items-center gap-6"
     >
       <h3 class="header__logo text-yellow-300 font-bold text-lg mr-14">
         <RouterLink :to="{ name: 'home' }">DV FITNESS </RouterLink>
       </h3>
-      <div class="header__menu flex items-center gap-4">
+      <div class="header__menu flex items-center justify-center  flex-wrap gap-4">
         <HeaderLink
           v-for="(link, index) in headerLinks"
           :key="index"
