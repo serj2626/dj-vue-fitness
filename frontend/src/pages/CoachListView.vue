@@ -2,25 +2,18 @@
 import axios from "axios";
 import { ref, onMounted, reactive } from "vue";
 import { useToast } from "vue-toastification";
-import { useRouter } from "vue-router";
 import CoachCard from "@/components/trainer/CoachCard.vue";
 import { FwbInput } from "flowbite-vue";
 import { FwbSelect } from "flowbite-vue";
+import type { ITrainer, ITrainerInfo } from "@/types/workout";
 
-interface ITrainer {
-  id: number;
-  first_name: string;
-  last_name: string;
-  position: string;
-  avatar: string;
-}
-
-const trainerInfo = reactive({
-  id: 0,
+const trainerInfo = reactive<ITrainerInfo>({
+  id: "",
   firstName: "",
   lastName: "",
   position: "",
-});
+})
+
 
 const showDetails = (trainer: ITrainer) => {
   trainerInfo.id = trainer.id;
@@ -33,9 +26,10 @@ const resetDetails = () => {
   trainerInfo.firstName = "";
   trainerInfo.lastName = "";
   trainerInfo.position = "";
+  trainerInfo.id = "";
 };
 
-const router = useRouter();
+
 const toast = useToast();
 
 const name = ref("");
@@ -75,7 +69,6 @@ onMounted(getCoaches);
 
       <fwb-input
         v-model="name"
-        label="Search"
         placeholder="Введите имя тренера"
       >
         <template #prefix>
@@ -99,58 +92,14 @@ onMounted(getCoaches);
     </div>
 
     <div class="grid grid-cols-3 gap-10 mt-12">
-      <div v-for="coach in coaches" :key="coach.id">
-        <div
-          @mouseenter="showDetails(coach)"
-          @mouseleave="resetDetails"
-          @click="router.push({ name: 'coach', params: { id: coach.id } })"
-          class="card"
-        >
-          <div
-            v-if="trainerInfo.id === coach.id"
-            class="card__content font-bold"
-          >
-            <h3 class="card__title text-2xl">
-              {{ coach.first_name }} {{ coach.last_name }}
-            </h3>
-            <p class="card__text">{{ coach.position }}</p>
-          </div>
-          <img class="card__img rounded-xl" :src="coach.avatar" alt="" />
-        </div>
-      </div>
+      <CoachCard 
+        v-for="coach in coaches" 
+        :key="coach.id" 
+        :coach="coach"
+        :currentId="trainerInfo.id"
+        @showDetail = "showDetails(coach)"
+        @resetData = "resetDetails"  
+      />
     </div>
   </div>
 </template>
-<style scoped>
-.card {
-  position: relative;
-  max-height: 400px;
-  background-color: #fff;
-  border-radius: 20px;
-  box-shadow: 0 0 15px rgb(219, 217, 217);
-  cursor: pointer;
-}
-
-.card__content {
-  position: absolute;
-  z-index: 10;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  color: #fff;
-}
-
-.card__img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: all 0.5s ease-in;
-
-&:hover {
-  transform: scale(1.1);
-  filter:brightness(0.6);
-}
-}
-
-</style>
