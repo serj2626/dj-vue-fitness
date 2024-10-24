@@ -6,6 +6,7 @@ import USelect from "./USelect.vue";
 import UInput from "./UInput.vue";
 import UButton from "./UButton.vue";
 import AuthCard from "./AuthCard.vue";
+import CreateOrderModal from "./CreateOrderModal.vue";
 
 const components = [
   { name: "ArrowUpButton", component: ArrowUpButton },
@@ -15,6 +16,7 @@ const components = [
   { name: "UInput", component: UInput },
   { name: "UButton", component: UButton },
   { name: "AuthCard", component: AuthCard },
+  { name: "CreateOrderModal", component: CreateOrderModal },
 ];
 
 export default {
