@@ -3,17 +3,9 @@ import axios from "axios";
 import { ref, onMounted } from "vue";
 import { useToast } from "vue-toastification";
 import { useRoute, useRouter } from "vue-router";
-
-import { useUserStore } from "@/stores/auth";
 import { FwbRating } from "flowbite-vue";
-import type { ITrainer } from "@/types/workout";
+import type { iRate, ITrainer } from "@/types/workout";
 
-import CreateOrderTrain from "@/components/trainer/CreateOrderTrain.vue";
-import { storeToRefs } from "pinia";
-
-
-const store = useUserStore();
-const { auth } = storeToRefs(store);
 
 const router = useRouter();
 const route = useRoute();
@@ -27,7 +19,7 @@ const showModal = ref<boolean>(false);
 
 const coach = ref<ITrainer>({} as ITrainer);
 
-const orderTraining = async () => {
+const createOrderTraining = async () => {
   try {
     await axios.post("/api/orders/trainings/create/order/", {
       start: dateTrain.value,
@@ -52,7 +44,21 @@ const getCoach = async () => {
   }
 };
 
-onMounted(getCoach);
+const rates = ref<iRate[]>([]);
+
+const getRates = async () => {
+  try {
+    const res = await axios.get("/api/workout/rates/");
+    rates.value = res.data;
+  } catch {
+    toast.error("Произошла ошибка при получении данных");
+  }
+};
+
+onMounted(() => {
+  getCoach();
+  getRates();
+});
 </script>
 
 <template>
@@ -168,20 +174,17 @@ onMounted(getCoach);
     </div>
   </div>
 
-  <div v-if="showModal">
-    <CreateOrderTrain
-      v-model:date="dateTrain"
-      v-model:rate="rateTrain"
-      :lastName="coach.last_name"
-      :firstName="coach.first_name"
-      :position="coach.position"
-      :id="coach.id"
-      @closeModal="showModal = false"
-      @orderTraining="orderTraining"
-    />
-  </div>
+  <CreateOrderModal
+    v-if="showModal"
+    v-model:date="dateTrain"
+    v-model:rate="rateTrain" 
+    orderType="training"
+    @closeModal="showModal = false"
+    @createOrderTraining="createOrderTraining"
+    :coach="coach"
+    :rates="rates"
+  />
 </template>
-
 <style scoped>
 /* Show Reviews Animation */
 .fade-enter-active,
