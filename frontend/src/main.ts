@@ -3,8 +3,7 @@ import { createPinia } from "pinia";
 
 import PrimeVue from "primevue/config";
 import Aura from "@primevue/themes/aura";
-import ConfirmationService from 'primevue/confirmationservice';
-
+import ConfirmationService from "primevue/confirmationservice";
 
 import axios from "axios";
 import App from "./App.vue";
@@ -15,18 +14,19 @@ import Toast from "vue-toastification";
 import "vue-toastification/dist/index.css";
 import "./assets/main.css";
 
-
 axios.defaults.baseURL = import.meta.env.VITE_API_URL;
 
 const app = createApp(App);
 app
-  .use(ConfirmationService)
+  .use(createPinia())
+  .use(router)
   .use(PrimeVue, {
     theme: {
       preset: Aura,
     },
     ripple: true,
   })
+  .use(ConfirmationService)
   .use(globalComponents)
   .use(Toast, {
     transition: "Vue-Toastification__fade",
@@ -45,6 +45,4 @@ app
     icon: true,
     rtl: false,
   })
-  .use(createPinia())
-  .use(router)
   .mount("#app");
