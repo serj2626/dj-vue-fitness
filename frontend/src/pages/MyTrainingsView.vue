@@ -1,6 +1,14 @@
 <script setup lang="ts">
 import axios from "axios";
-
+import {
+  FwbA,
+  FwbTable,
+  FwbTableBody,
+  FwbTableCell,
+  FwbTableHead,
+  FwbTableHeadCell,
+  FwbTableRow,
+} from "flowbite-vue";
 import { useToast } from "vue-toastification";
 import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
@@ -8,7 +16,7 @@ import { FwbDropdown } from "flowbite-vue";
 import type { IMyTrainig } from "@/types/orders";
 
 import Paginator from "primevue/paginator";
-import DeleteModal from "@/components/DeleteModal.vue";
+import DeleteModal from "@/components/global/DeleteModal.vue";
 
 const router = useRouter();
 const toast = useToast();
@@ -46,6 +54,57 @@ onMounted(() => getMyTrainings());
 
 <template>
   <div class="my-36 mx-16">
+    <fwb-table class="text-center">
+      <fwb-table-head>
+        <fwb-table-head-cell>№</fwb-table-head-cell>
+        <fwb-table-head-cell>Тренер</fwb-table-head-cell>
+        <fwb-table-head-cell>Позиция</fwb-table-head-cell>
+        <fwb-table-head-cell>Начало</fwb-table-head-cell>
+        <fwb-table-head-cell>Конец</fwb-table-head-cell>
+        <fwb-table-head-cell>Тариф</fwb-table-head-cell>
+        <fwb-table-head-cell>Цена</fwb-table-head-cell>
+        <fwb-table-head-cell>Оплачен</fwb-table-head-cell>
+        <fwb-table-head-cell>Действие</fwb-table-head-cell>
+      </fwb-table-head>
+      <fwb-table-body>
+        <fwb-table-row v-for="(train, index) in trainings" :key="train.id">
+          <fwb-table-cell>{{ index + 1 }}</fwb-table-cell>
+          <fwb-table-cell
+          class="cursor-pointer hover:text-blue-700"
+            @click="
+              router.push({
+                name: 'coach',
+                params: { id: train.trainer.id },
+              })
+            "
+          >
+            {{ train.trainer.first_name }}
+            {{ train.trainer.last_name }}
+          </fwb-table-cell>
+          <fwb-table-cell>{{ train.trainer.position }}</fwb-table-cell>
+          <fwb-table-cell>{{ train.start }}</fwb-table-cell>
+          <fwb-table-cell>{{ train.end }}</fwb-table-cell>
+          <fwb-table-cell>{{ train.rate.title }}</fwb-table-cell>
+          <fwb-table-cell>{{ train.rate.price }} руб</fwb-table-cell>
+          <fwb-table-cell
+            ><i class="fa-solid fa-xmark fa-2xl" style="color: #ff0000"></i
+          ></fwb-table-cell>
+          <fwb-table-cell>
+            <fwb-dropdown text="Bottom" align-to-end>
+              <div class="w-52">
+                <p class="p-2">Dropdown content line one</p>
+                <p class="p-2">Dropdown content line two</p>
+                <p class="p-2">Dropdown content line three</p>
+                <p class="p-2">Dropdown content line four</p>
+              </div>
+            </fwb-dropdown>
+          </fwb-table-cell>
+        </fwb-table-row>
+      </fwb-table-body>
+    </fwb-table>
+  </div>
+
+  <!-- <div class="my-36 mx-16">
     <h1 class="text-3xl text-center text-uppercase text-yellow-300 py-4 mb-10">
       Мои тренировки
     </h1>
@@ -105,9 +164,12 @@ onMounted(() => getMyTrainings());
                 <div
                   class="w-52 border-2 border-slate-300 rounded-lg shadow-xl shadow-zinc-400"
                 >
-                  <p 
-                  @click="selectTrain = train.id"
-                  class="p-2 hover:bg-slate-200 cursor-pointer">Удалить</p>
+                  <p
+                    @click="selectTrain = train.id"
+                    class="p-2 hover:bg-slate-200 cursor-pointer"
+                  >
+                    Удалить
+                  </p>
                   <p
                     @click="
                       router.push({
@@ -125,20 +187,15 @@ onMounted(() => getMyTrainings());
           </tr>
         </tbody>
       </table>
-
-      <Paginator 
-      v-model="currentPage" 
-      :rows="itemsPerPage" 
-      :totalRecords="trainings.length">
-      </Paginator>
     </div>
 
     <DeleteModal
-    :text="`Вы действительно хотите удалить тренировку?`"
-    v-if="selectTrain" 
-    @closeModal="selectTrain = null" 
-    @delete="deleteAbonement" />
-  </div>
+      :text="`Вы действительно хотите удалить тренировку?`"
+      v-if="selectTrain"
+      @closeModal="selectTrain = null"
+      @delete="deleteAbonement"
+    />
+  </div> -->
 </template>
 
 <style scoped></style>
