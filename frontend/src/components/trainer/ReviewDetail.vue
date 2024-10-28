@@ -2,7 +2,7 @@
 import type { IReview } from "@/types/workout";
 import { FwbRating } from "flowbite-vue";
 import { useUserStore } from "@/stores/auth";
-import router from "@/router";
+import { ref } from "vue";
 
 defineProps({
   review: {
@@ -11,26 +11,37 @@ defineProps({
   },
 });
 
-const emit = defineEmits(["closeModal", "deleteReview"]);
+const showModal = ref(false);
 
 const store = useUserStore();
+
+const deleteReview = (id: number) => {
+  showModal.value = false;
+}
 </script>
 
 <template>
+  <DeleteModal
+    v-if="showModal"
+    view="review"
+    @closeModal="showModal = false"
+    @delete="deleteReview(review.id)"
+  />
+
   <div
     class="reviews__desc w-[85%] mx-auto flex flex-col justify-center gap-6 p-2 rounded-md my-10"
   >
     <div class="reviews-desc__header flex justify-between items-center">
       <div class="flex gap-3">
         <h3>{{ review.user.username }}</h3>
-        <fwb-rating  size="sm" :rating="review.rating" />
+        <fwb-rating size="sm" :rating="review.rating" />
 
         <div
           v-if="store.auth.username === review.user.username"
           class="flex gap-2"
         >
           <svg
-            @click="emit('deleteReview', review.id)"
+            @click="showModal = true"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -46,9 +57,6 @@ const store = useUserStore();
           </svg>
 
           <svg
-            @click="
-              router.push({ name: 'reviewUpdate', params: { id: review.id } })
-            "
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -67,7 +75,7 @@ const store = useUserStore();
 
       <span>{{ review.date_age }} назад</span>
     </div>
-    <!-- add style text-overflow -->
+
     <div class="reviews-desc__body">
       <p class="word-wrap">{{ review.text }}</p>
     </div>
@@ -78,6 +86,7 @@ const store = useUserStore();
 .word-wrap {
   word-wrap: break-word;
 }
+
 .reviews__desc {
   background-color: rgba(102, 93, 93, 0.223);
   color: white;
