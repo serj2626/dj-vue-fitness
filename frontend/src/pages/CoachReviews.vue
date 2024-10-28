@@ -6,6 +6,7 @@ import { ref, watchEffect } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useToast } from "vue-toastification";
 import ReviewDetail from "@/components/trainer/ReviewDetail.vue";
+import { validateDateReview } from "@/validators";
 
 const router = useRouter();
 const route = useRoute();
@@ -36,6 +37,7 @@ const getCoach = async () => {
 
 const createReview = async (form: IFormReview) => {
   try {
+    validateDateReview(form);
     await axios.post("/api/workout/reviews/create", {
       text: form.message,
       trainer: coach.value.id,
@@ -44,9 +46,8 @@ const createReview = async (form: IFormReview) => {
     toast.success("Отзыв успешно создан");
     showFormCreateReview.value = false;
     getCoach();
-  } catch (err) {
-    console.log(err);
-    toast.error("Произошла ошибка при создании отзыва");
+  } catch (err: any) {
+    toast.error(err.message);
   }
 };
 
