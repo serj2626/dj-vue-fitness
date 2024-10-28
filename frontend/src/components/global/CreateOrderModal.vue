@@ -21,7 +21,7 @@ const formReview = ref<IFormReview>({
   rating: null,
 })
 
-type OrderType = "training" | "abonement" | "review"
+type OrderType = "training" | "abonement" | "review" | "updateReview";
 
 interface IProps {
   abonement?: IAbonement;
@@ -93,7 +93,7 @@ const createNewReview = async () => {
       <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
         <span class="font-bold text-xl block underline">{{
           abonement?.description
-        }}</span>
+          }}</span>
         Тариф {{ abonement?.title }} вы можете забронировать на нашем сайте.
         Данный абонемент включает в себя
         {{ abonement?.number_of_months }} месяцев занятий без ограничения по
@@ -117,12 +117,12 @@ const createNewReview = async () => {
 
   <!-- Оставьте свой отзыв -->
 
-  <fwb-modal v-if="orderType === 'review'" @close="$emit('closeModal')">
+  <fwb-modal v-if="orderType === 'updateReview'" @close="$emit('closeModal')">
     <template #header>
-      <div class="flex items-center text-lg">Новый отзыв</div>
+      <div class="flex items-center text-lg">Редактировать свой отзыв</div>
     </template>
     <template #body>
-      <Rating class="mb-6"  v-model="formReview.rating" />
+      <Rating class="mb-6" v-model="formReview.rating" />
       <fwb-textarea v-model="formReview.message" :rows="4" label=" Ваш отзыв" placeholder="Напишите отзыв..." />
     </template>
     <template #footer>
@@ -136,4 +136,28 @@ const createNewReview = async () => {
       </div>
     </template>
   </fwb-modal>
+
+  <!-- Редактировать  свой отзыв -->
+
+
+  <fwb-modal v-if="orderType === 'review'" @close="$emit('closeModal')">
+    <template #header>
+      <div class="flex items-center text-lg">Новый отзыв</div>
+    </template>
+    <template #body>
+      <Rating class="mb-6" v-model="formReview.rating" />
+      <fwb-textarea v-model="formReview.message" :rows="4" label=" Ваш отзыв" placeholder="Напишите отзыв..." />
+    </template>
+    <template #footer>
+      <div class="flex justify-between">
+        <fwb-button size="lg" @click="$emit('closeModal')" color="red">
+          Отмена
+        </fwb-button>
+        <fwb-button size="lg" @click="createNewReview" color="green">
+          Отправить
+        </fwb-button>
+      </div>
+    </template>
+  </fwb-modal>
+
 </template>
