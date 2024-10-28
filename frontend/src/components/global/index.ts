@@ -6,6 +6,7 @@ import AuthCard from "./AuthCard.vue";
 import CreateOrderModal from "./CreateOrderModal.vue";
 import UModal from "./UModal.vue";
 import DeleteModal from "./DeleteModal.vue";
+import Alert from "./Alert.vue";
 
 const components = [
   { name: "ArrowUpButton", component: ArrowUpButton },
@@ -15,6 +16,7 @@ const components = [
   { name: "CreateOrderModal", component: CreateOrderModal },
   { name: "UModal", component: UModal },
   { name: "DeleteModal", component: DeleteModal },
+  { name: "Alert", component: Alert },
 ];
 
 export default {
