@@ -7,6 +7,14 @@ import { useToast } from "vue-toastification";
 import { headerLinks } from "@/types/header.data";
 import HeaderLink from "./HeaderLink.vue";
 import { ref } from "vue";
+import SplitButton from 'primevue/splitbutton';
+
+
+ const items = ([
+    { label: 'Update', icon: 'pi pi-refresh', command: () => { } },
+    { label: 'Delete', icon: 'pi pi-times', command: () => { } },
+    { label: 'React', icon: 'pi pi-heart', command: () => { } }
+]);
 
 const showProfile = ref(false);
 const closeShowProfile = () => {
@@ -51,7 +59,6 @@ const logout = () => {
           class="header__link"
           >Войти
         </RouterLink>
-
         <div
           v-if="auth.isAuthenticated"
           @click="showProfile = true"
