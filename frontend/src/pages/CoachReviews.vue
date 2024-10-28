@@ -102,7 +102,9 @@ watchEffect(getCoach);
 
     </div>
 
-    <div class="h-[800px] overflow-y-auto">
+    <div
+      v-if="coach.count_reviews"
+      class="h-[800px] overflow-y-auto">
       <h3 class="text-2xl text-center text-yellow-300 my-2">
         Отзывы ({{ coach.count_reviews }})
       </h3>
@@ -113,7 +115,13 @@ watchEffect(getCoach);
           :review="review"
           @deleteReview="deleteReview"
         />
-   
+    </div>
+
+    <div v-else class="h-[800px] flex justify-center items-center">
+      <Alert
+      view="danger"
+      message="На данный момент отзывов нет"
+      />
     </div>
   </div>
 </template>
