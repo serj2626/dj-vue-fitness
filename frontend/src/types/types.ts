@@ -10,4 +10,10 @@ interface IPost {
     category: string;
 }
 
-export type { UserType, IPost }
+interface IFormReview {
+    message: string;
+    rating: number | null;
+  }
+  
+
+export type { UserType, IPost, IFormReview };
