@@ -6,7 +6,6 @@ import { ref, watchEffect } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useToast } from "vue-toastification";
 import ReviewDetail from "@/components/trainer/ReviewDetail.vue";
-import DeleteModal from "@/components/DeleteModal.vue";
 
 const router = useRouter();
 const route = useRoute();
@@ -14,7 +13,6 @@ const route = useRoute();
 const coach = ref<ITrainer>({} as ITrainer);
 
 const showFormCreateReview = ref(false);
-const selectDelReview = ref(null);
 
 const toast = useToast();
 
@@ -52,11 +50,10 @@ const createReview = async (form: IFormReview) => {
   }
 };
 
-const deleteReview = async () => {
+const deleteReview = async (id: number) => {
   try {
-    await axios.delete(`/api/workout/reviews/${selectDelReview.value}`);
+    await axios.delete(`/api/workout/reviews/${id}`);
     toast.success("Отзыв успешно удален");
-    selectDelReview.value = null;
     getCoach();
   } catch (err) {
     console.log(err);
@@ -109,19 +106,15 @@ watchEffect(getCoach);
       <h3 class="text-2xl text-center text-yellow-300 my-2">
         Отзывы ({{ coach.count_reviews }})
       </h3>
-      <div v-for="review in coach.trainer_reviews" :key="review">
-        <ReviewDetail
-        :review="review"
-        />
-      </div>
-    </div>
 
-    <DeleteModal
-      v-if="selectDelReview"
-      :text="`Вы действительно хотите удалить отзыв?`"
-      @closeModal="selectDelReview = null"
-      @delete="deleteReview"
-    />
+        <ReviewDetail
+          v-for="review in coach.trainer_reviews" 
+          :key="review"
+          :review="review"
+          @deleteReview="deleteReview"
+        />
+   
+    </div>
   </div>
 </template>
 <style scoped>
