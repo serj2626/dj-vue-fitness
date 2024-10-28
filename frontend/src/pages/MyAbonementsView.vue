@@ -4,15 +4,22 @@ import { ref, onMounted } from "vue";
 import { useToast } from "vue-toastification";
 import { FwbDropdown } from "flowbite-vue";
 import type { IMyAbonement } from "@/types/orders";
-import Paginator from "primevue/paginator";
 import { useRouter } from "vue-router";
-import DeleteModal from "@/components/DeleteModal.vue";
+import DeleteModal from "@/components/global/DeleteModal.vue";
+import {
+  FwbTable,
+  FwbTableBody,
+  FwbTableCell,
+  FwbTableHead,
+  FwbTableHeadCell,
+  FwbTableRow,
+} from "flowbite-vue";
 
 const router = useRouter();
 const toast = useToast();
 const abonemets = ref<IMyAbonement[]>([]);
 
-const selectAbonement = ref(null);
+const selectAbonement = ref<number | null>(null);
 
 
 
@@ -44,12 +51,58 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="my-36 mx-16">
-    <h1 class="text-3xl text-center text-uppercase text-yellow-300 py-4 mb-10">
+  <div class="my-36 mx-16 text-center">
+    <h1 class="text-3xl text-uppercase text-yellow-300 py-4 mb-10">
       Мои абонементы
     </h1>
 
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+
+    <fwb-table class=" min-h-80">
+      <fwb-table-head>
+        <fwb-table-head-cell>№</fwb-table-head-cell>
+        <fwb-table-head-cell>Тариф</fwb-table-head-cell>
+        <fwb-table-head-cell>Кол-во месяцев</fwb-table-head-cell>
+        <fwb-table-head-cell>Начало</fwb-table-head-cell>
+        <fwb-table-head-cell>Конец</fwb-table-head-cell>
+        <fwb-table-head-cell>Цена</fwb-table-head-cell>
+        <fwb-table-head-cell>Оплачен</fwb-table-head-cell>
+        <fwb-table-head-cell></fwb-table-head-cell>
+      </fwb-table-head>
+      <fwb-table-body>
+        <fwb-table-row v-for="(abonement, index) in abonemets" :key="index">
+          <fwb-table-cell>{{ index + 1 }}</fwb-table-cell>
+          <fwb-table-cell  >
+          {{ abonement.abonement.title }}
+          </fwb-table-cell>
+          <fwb-table-cell>{{ abonement.abonement.number_of_months }}</fwb-table-cell>
+          <fwb-table-cell>{{ abonement.start }}</fwb-table-cell>
+          <fwb-table-cell>{{ abonement.end }}</fwb-table-cell>
+          <fwb-table-cell>{{ abonement.abonement.price }}</fwb-table-cell>
+          <fwb-table-cell
+            ><i class="fa-solid fa-xmark fa-2xl" style="color: #ff0000"></i
+          ></fwb-table-cell>
+          <fwb-table-cell>
+            <fwb-dropdown
+             class="text-center"
+              placement="left"
+              text="Действие"
+            >
+              <div
+                class="w-52 border-2 text-center border-slate-300 rounded-lg shadow-xl shadow-zinc-400"
+              >
+                <p @click="selectAbonement = abonement.id" class="p-2 hover:bg-slate-200 cursor-pointer">Удалить</p>
+                <p class="p-2 hover:bg-slate-200 cursor-pointer">Оплатить</p>
+              </div>
+            </fwb-dropdown>
+          </fwb-table-cell>
+        </fwb-table-row>
+      </fwb-table-body>
+    </fwb-table>
+
+
+
+
+    <!-- <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
       <table class="w-full text-center text-sm rtl:text-right text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
@@ -110,14 +163,13 @@ onMounted(() => {
           </tr>
         </tbody>
       </table>
-      <Paginator :rows="10" :totalRecords="120"></Paginator>
-    </div>
+    </div> -->
   </div>
 
   <DeleteModal 
   @closeModal="selectAbonement = null" 
   @delete="deleteAbonement" 
-  :text="`Вы действительно хотите удалить абонемент?`" 
+  view="abonement"
   v-if="selectAbonement" />
 </template>
-<style scoped></style>
+
