@@ -12,6 +12,7 @@ defineProps({
 });
 
 const showModal = ref(false);
+const showModalForUpdate = ref(false);
 
 const store = useUserStore();
 
@@ -31,6 +32,13 @@ const deleteReview = (id: number) => {
     @closeModal="showModal = false"
     @delete="deleteReview(review.id)"
   />
+
+
+  <CreateOrderModal 
+        v-if="showModalForUpdate"
+        orderType="updateReview" 
+        @closeModal="showModalForUpdate = false" 
+      />
 
   <div
     class="reviews__desc w-[85%] mx-auto flex flex-col justify-center gap-6 p-2 rounded-md my-10"
@@ -61,6 +69,7 @@ const deleteReview = (id: number) => {
           </svg>
 
           <svg
+            @click="showModalForUpdate = true"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
