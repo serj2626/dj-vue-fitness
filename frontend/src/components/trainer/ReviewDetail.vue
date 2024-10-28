@@ -15,8 +15,12 @@ const showModal = ref(false);
 
 const store = useUserStore();
 
+
+const emit = defineEmits(["deleteReview"]);
+
 const deleteReview = (id: number) => {
   showModal.value = false;
+  emit("deleteReview", id);
 }
 </script>
 
