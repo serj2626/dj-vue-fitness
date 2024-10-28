@@ -6,7 +6,6 @@ import Rating from "primevue/rating";
 import { ref } from "vue";
 
 
-
 const date = defineModel("date");
 const rate = defineModel("rate");
 
@@ -120,10 +119,10 @@ const createNewReview = async () => {
 
   <fwb-modal v-if="orderType === 'review'" @close="$emit('closeModal')">
     <template #header>
-      <div class="flex items-center text-lg">Оставьте свой отзыв</div>
+      <div class="flex items-center text-lg">Новый отзыв</div>
     </template>
     <template #body>
-      <Rating v-model="formReview.rating" />
+      <Rating class="mb-6"  v-model="formReview.rating" />
       <fwb-textarea v-model="formReview.message" :rows="4" label=" Ваш отзыв" placeholder="Напишите отзыв..." />
     </template>
     <template #footer>
