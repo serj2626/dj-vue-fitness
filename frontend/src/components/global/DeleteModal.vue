@@ -36,7 +36,8 @@ const emit = defineEmits(["closeModal", "delete"]);
           </h3>
         </div>
         <div
-          class="flex items-center justify-between p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600"
+          class="flex items-center gap-5 justify-end p-4 md:p-5 border-t border-gray-200 rounded-b \
+          dark:border-gray-600"
         >
           <fwb-button size="lg" @click="emit('closeModal')" color="light">
             Отмена
