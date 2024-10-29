@@ -14,7 +14,7 @@
 - Django
 - Django Rest Framework
 - CK-Editor
-- PostgreSQL
+- SQLite
 - Celery
 - Redis
 - Docker
