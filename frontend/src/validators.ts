@@ -16,14 +16,18 @@ function checkDateOrderAbonement(dateStart: string) {
   }
 }
 
-function checkDateOrderTraining(start: string, end: string) {
-  if (new Date(start) >= new Date(end)) {
-    throw new Error("Начало тренировки не может быть больше времени окончания");
+function checkDateOrderTraining(dateStart: string, rate: number) {
+  if (!dateStart) {
+    throw new Error("Выберите дату начала абонемента");
   }
-  if (new Date(start) <= new Date()) {
-    throw new Error("Начало тренировки не может быть меньше или равно текущему времени");
+  if (new Date(dateStart) <= new Date()) {
+    throw new Error("Дата бронирования не может быть меньше текущей");
+  }
+  if (!rate) {
+    throw new Error("Выберите тариф");
   }
 }
+
 
 function checkLogin(login: string) {
   if (!login) {
@@ -41,8 +45,8 @@ function checkRegistration(registration: string) {
 
 export {
   validateDateReview,
-  checkDateOrderAbonement,
   checkLogin,
   checkRegistration,
-  checkDateOrderTraining,
+  checkDateOrderAbonement,
+  checkDateOrderTraining
 };
