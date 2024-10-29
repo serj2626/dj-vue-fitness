@@ -15,6 +15,11 @@ class SubscriptionSerializer(serializers.ModelSerializer):
         model = Subscription
         fields = ("email",)
 
+    def validate_email(self, value):
+        if Subscription.objects.filter(email=value).exists():
+            raise serializers.ValidationError("Вы уже подписаны на рассылку")
+        return value
+
 
 class PostListSerializer(serializers.ModelSerializer):
     """
@@ -62,7 +67,8 @@ class ReviewsSerializer(serializers.ModelSerializer):
 
     # rating = serializers.IntegerField(min_value=1, max_value=5)
     user = UserSerializer(read_only=True)
-    created_at = serializers.DateTimeField(format="%d.%m.%Y %H:%M:%S", read_only=True)
+    created_at = serializers.DateTimeField(
+        format="%d.%m.%Y %H:%M:%S", read_only=True)
     trainer = TrainerForReviewsSerializer(read_only=True)
 
     class Meta:
