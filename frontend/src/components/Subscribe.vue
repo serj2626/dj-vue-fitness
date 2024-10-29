@@ -41,7 +41,7 @@ const sendSubscription = async () => {
 
       <form
         @submit.prevent="sendSubscription"
-        class="mx-auto mt-5 flex max-w-md gap-x-4"
+        class="mx-auto mt-5 flex justify-center max-w-md gap-x-4"
       >
         <fwb-input type="email" v-model="subscription" required placeholder="Введите почту" />
         <fwb-button size="sm" color="light">Подписаться</fwb-button>
