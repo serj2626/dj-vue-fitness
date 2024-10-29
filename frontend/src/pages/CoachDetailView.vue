@@ -1,18 +1,26 @@
 <script setup lang="ts">
 import axios from "axios";
-import { ref, onMounted } from "vue";
+import { ref, onMounted, reactive } from "vue";
 import { useToast } from "vue-toastification";
 import { useRoute, useRouter } from "vue-router";
 import { FwbRating } from "flowbite-vue";
 import { FwbBreadcrumb, FwbBreadcrumbItem } from "flowbite-vue";
 import type { iRate, ITrainer } from "@/types/workout";
+import { checkDateOrderTraining }  from "@/validators";
+
 
 const router = useRouter();
 const route = useRoute();
 const { id } = route.params;
 
-const dateTrain = ref("");
-const rateTrain = ref(null);
+
+interface ItrainingData {
+  date: string;
+  rate: number;
+}
+
+const trainingData = reactive<ItrainingData>({} as ItrainingData);
+
 const toast = useToast();
 
 const showModal = ref<boolean>(false);
@@ -21,16 +29,17 @@ const coach = ref<ITrainer>({} as ITrainer);
 
 const createOrderTraining = async () => {
   try {
+    checkDateOrderTraining(trainingData.date, trainingData.rate);
     await axios.post("/api/orders/trainings/create/order/", {
-      start: dateTrain.value,
-      rate: rateTrain.value,
+      start: trainingData.date,
+      rate: trainingData.rate,
       trainer: id,
     });
     toast.success("Вы записались на тренировку");
     showModal.value = false;
     router.push({ name: "myTrainings" });
-  } catch {
-    toast.error("Произошла ошибка при записи на тренировку");
+  } catch(err: any) {
+    toast.error(err.message);
   }
 };
 
@@ -182,8 +191,8 @@ onMounted(() => {
 
   <CreateOrderModal
     v-if="showModal"
-    v-model:date="dateTrain"
-    v-model:rate="rateTrain"
+    v-model:date="trainingData.date"
+    v-model:rate="trainingData.rate"
     orderType="training"
     @closeModal="showModal = false"
     @createOrderTraining="createOrderTraining"
