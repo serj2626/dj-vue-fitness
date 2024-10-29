@@ -7,21 +7,22 @@ function validateDateReview(formData: IFormReview) {
   return formData;
 }
 
-function checkDateOrderAbonement(date: Date) {
-  if (date <= new Date()) {
+function checkDateOrderAbonement(dateStart: string) {
+  if (!dateStart) {
+    throw new Error("Выберите дату начала абонемента");
+  }
+  if (new Date(dateStart) <= new Date()) {
     throw new Error("Дата бронирования не может быть меньше текущей");
   }
-  return date;
 }
 
-function checkDateOrderTraining(start: Date, end: Date) {
-  if (start >= end) {
+function checkDateOrderTraining(start: string, end: string) {
+  if (new Date(start) >= new Date(end)) {
     throw new Error("Начало тренировки не может быть больше времени окончания");
   }
-  if (start <= new Date()) {
-    throw new Error("Начало тренировки не может быть меньше текущего времени");
+  if (new Date(start) <= new Date()) {
+    throw new Error("Начало тренировки не может быть меньше или равно текущему времени");
   }
-  return { start, end };
 }
 
 function checkLogin(login: string) {

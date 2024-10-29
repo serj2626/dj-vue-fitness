@@ -4,12 +4,12 @@ import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { useToast } from "vue-toastification";
 import type { IAbonement } from "@/types/orders";
-import { checkDateOrder } from "@/validators";
+import { checkDateOrderAbonement } from "@/validators";
 
 const router = useRouter();
 const toast = useToast();
 const abonements = ref<IAbonement[]>([]);
-const orderDate = ref<string>();
+const orderDate = ref<string>('');
 
 const showModal = ref<boolean>(false);
 
@@ -26,7 +26,8 @@ const choiceAbonement = (abonement: IAbonement) => {
 const newOrderAbonement = async () => {
   showModal.value = false;
   try {
-    checkDateOrder(orderDate.value);
+    checkDateOrderAbonement(orderDate.value);
+    console.log(orderDate.value, typeof orderDate.value);
     await axios.post(
       `/api/orders/abonements/${selectAbonement.value.id}/order/`,
       {
@@ -38,11 +39,6 @@ const newOrderAbonement = async () => {
     router.push({ name: "myAbonements" });
   } catch (error: any) {
     toast.error(error.message);
-    // if (error.response.data.start) {
-    //   toast.error(error.response.data.start[0]);
-    // } else {
-    //   toast.error("Произошла ошибка");
-    // }
   }
 };
 
@@ -122,8 +118,14 @@ onMounted(() => getAbonements());
     </div>
   </div>
 
-  <CreateOrderModal v-if="showModal" :abonement="selectAbonement" @closeModal="showModal = false" orderType="abonement"
-    v-model:date="orderDate" @crateOrderAbonement="newOrderAbonement" />
+  <CreateOrderModal 
+      v-if="showModal" 
+      :abonement="selectAbonement" 
+      @closeModal="showModal = false" 
+      orderType="abonement"
+      v-model:date="orderDate" 
+      @crateOrderAbonement="newOrderAbonement" 
+    />
 </template>
 <style scoped>
 .abonements {
