@@ -28,7 +28,6 @@ function checkDateOrderTraining(dateStart: string, rate: number) {
   }
 }
 
-
 function checkLogin(login: string) {
   if (!login) {
     throw new Error("Заполните поле");
@@ -48,5 +47,5 @@ export {
   checkLogin,
   checkRegistration,
   checkDateOrderAbonement,
-  checkDateOrderTraining
+  checkDateOrderTraining,
 };
