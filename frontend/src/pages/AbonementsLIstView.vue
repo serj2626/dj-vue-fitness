@@ -4,12 +4,12 @@ import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { useToast } from "vue-toastification";
 import type { IAbonement } from "@/types/orders";
-
+import { checkDateOrder } from "@/validators";
 
 const router = useRouter();
 const toast = useToast();
 const abonements = ref<IAbonement[]>([]);
-const orderDate = ref('')
+const orderDate = ref<string>();
 
 const showModal = ref<boolean>(false);
 
@@ -23,24 +23,26 @@ const choiceAbonement = (abonement: IAbonement) => {
   }
 };
 
-
 const newOrderAbonement = async () => {
   showModal.value = false;
   try {
-    await axios.post(`/api/orders/abonements/${selectAbonement.value.id}/order/`,
+    checkDateOrder(orderDate.value);
+    await axios.post(
+      `/api/orders/abonements/${selectAbonement.value.id}/order/`,
       {
         abonement: selectAbonement.value.id,
         start: orderDate.value,
       }
-    )
+    );
     toast.success("Вы забронировали абонемент");
-    router.push({ name: "myAbonements" })
-  } catch(error:any) {
-    if(error.response.data.start){
-      toast.error(error.response.data.start[0])
-    }else{
-      toast.error("Произошла ошибка");
-    }
+    router.push({ name: "myAbonements" });
+  } catch (error: any) {
+    toast.error(error.message);
+    // if (error.response.data.start) {
+    //   toast.error(error.response.data.start[0]);
+    // } else {
+    //   toast.error("Произошла ошибка");
+    // }
   }
 };
 
@@ -102,19 +104,16 @@ onMounted(() => getAbonements());
             </td>
             <td class="px-6 py-4">
               <!-- Modal toggle -->
-              <button v-if="selectAbonement.id === abonement.id" @click="showModal = true"
-              title="Забронировать"
-                class="block text-white bg-transparent
-               
-                 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+              <button v-if="selectAbonement.id === abonement.id" @click="showModal = true" title="Забронировать"
+                class="block text-white bg-transparent font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                 type="button">
-                <i class="fa-solid fa-plus fa-2xl" style="color: #ff5900;"></i>
+                <i class="fa-solid fa-plus fa-2xl" style="color: #ff5900"></i>
               </button>
 
               <button v-else disabled
                 class="block text-white bg-transparent font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                 type="button">
-                <i class="fa-solid fa-minus fa-2xl" style="color: #0011ff;"></i>
+                <i class="fa-solid fa-minus fa-2xl" style="color: #0011ff"></i>
               </button>
             </td>
           </tr>
@@ -123,14 +122,8 @@ onMounted(() => getAbonements());
     </div>
   </div>
 
-  <CreateOrderModal 
-    v-if="showModal" 
-    :abonement="selectAbonement" 
-    @closeModal="showModal = false"
-    orderType="abonement"
-    v-model:date="orderDate"
-    @crateOrderAbonement="newOrderAbonement"
-  />
+  <CreateOrderModal v-if="showModal" :abonement="selectAbonement" @closeModal="showModal = false" orderType="abonement"
+    v-model:date="orderDate" @crateOrderAbonement="newOrderAbonement" />
 </template>
 <style scoped>
 .abonements {

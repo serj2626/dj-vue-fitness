@@ -10,7 +10,7 @@ const date = defineModel("date");
 const rate = defineModel("rate");
 
 
-interface IFormReview {
+export interface IFormReview {
   message: string;
   rating: number | null;
 }
@@ -36,13 +36,15 @@ defineProps<IProps>();
 const emit = defineEmits(["closeModal", "createOrderTraining", "crateOrderAbonement", "createReview"]);
 
 
+
 const createNewReview = async () => {
   emit("createReview", formReview.value);
 }
 </script>
 <template>
-  <!-- Бронирование тренировки -->
 
+
+  <!-- Бронирование тренировки -->
   <fwb-modal v-if="orderType === 'training'" @close="$emit('closeModal')">
     <template #header>
       <div class="flex items-center text-lg">Бронирование тренировки</div>
@@ -83,8 +85,8 @@ const createNewReview = async () => {
     </template>
   </fwb-modal>
 
-  <!-- Бронирование абонемента   -->
 
+  <!-- Бронирование абонемента   -->
   <fwb-modal v-if="orderType === 'abonement'" @close="$emit('closeModal')">
     <template #header>
       <div class="flex items-center text-lg">Бронирование абонемента</div>
@@ -115,8 +117,8 @@ const createNewReview = async () => {
     </template>
   </fwb-modal>
 
-  <!-- Оставьте свой отзыв -->
 
+  <!-- Оставьте свой отзыв -->
   <fwb-modal v-if="orderType === 'updateReview'" @close="$emit('closeModal')">
     <template #header>
       <div class="flex items-center text-lg">Редактировать свой отзыв</div>
@@ -137,9 +139,8 @@ const createNewReview = async () => {
     </template>
   </fwb-modal>
 
+
   <!-- Редактировать  свой отзыв -->
-
-
   <fwb-modal v-if="orderType === 'review'" @close="$emit('closeModal')">
     <template #header>
       <div class="flex items-center text-lg">Новый отзыв</div>
@@ -159,5 +160,4 @@ const createNewReview = async () => {
       </div>
     </template>
   </fwb-modal>
-
 </template>
