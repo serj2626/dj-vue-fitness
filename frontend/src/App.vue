@@ -35,5 +35,3 @@ onBeforeMount(() => {
     <RouterView />
   </main>
 </template>
-
-<style scoped></style>
