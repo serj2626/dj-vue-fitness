@@ -6,12 +6,11 @@ import Rating from "primevue/rating";
 import { ref } from "vue";
 
 
-
 const date = defineModel("date");
 const rate = defineModel("rate");
 
 
-interface IFormReview {
+export interface IFormReview {
   message: string;
   rating: number | null;
 }
@@ -22,7 +21,7 @@ const formReview = ref<IFormReview>({
   rating: null,
 })
 
-type OrderType = "training" | "abonement" | "review"
+type OrderType = "training" | "abonement" | "review" | "updateReview";
 
 interface IProps {
   abonement?: IAbonement;
@@ -37,13 +36,15 @@ defineProps<IProps>();
 const emit = defineEmits(["closeModal", "createOrderTraining", "crateOrderAbonement", "createReview"]);
 
 
+
 const createNewReview = async () => {
   emit("createReview", formReview.value);
 }
 </script>
 <template>
-  <!-- Бронирование тренировки -->
 
+
+  <!-- Бронирование тренировки -->
   <fwb-modal v-if="orderType === 'training'" @close="$emit('closeModal')">
     <template #header>
       <div class="flex items-center text-lg">Бронирование тренировки</div>
@@ -84,8 +85,8 @@ const createNewReview = async () => {
     </template>
   </fwb-modal>
 
-  <!-- Бронирование абонемента   -->
 
+  <!-- Бронирование абонемента   -->
   <fwb-modal v-if="orderType === 'abonement'" @close="$emit('closeModal')">
     <template #header>
       <div class="flex items-center text-lg">Бронирование абонемента</div>
@@ -94,7 +95,7 @@ const createNewReview = async () => {
       <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
         <span class="font-bold text-xl block underline">{{
           abonement?.description
-        }}</span>
+          }}</span>
         Тариф {{ abonement?.title }} вы можете забронировать на нашем сайте.
         Данный абонемент включает в себя
         {{ abonement?.number_of_months }} месяцев занятий без ограничения по
@@ -116,14 +117,36 @@ const createNewReview = async () => {
     </template>
   </fwb-modal>
 
-  <!-- Оставьте свой отзыв -->
 
-  <fwb-modal v-if="orderType === 'review'" @close="$emit('closeModal')">
+  <!-- Оставьте свой отзыв -->
+  <fwb-modal v-if="orderType === 'updateReview'" @close="$emit('closeModal')">
     <template #header>
-      <div class="flex items-center text-lg">Оставьте свой отзыв</div>
+      <div class="flex items-center text-lg">Редактировать свой отзыв</div>
     </template>
     <template #body>
-      <Rating v-model="formReview.rating" />
+      <Rating class="mb-6" v-model="formReview.rating" />
+      <fwb-textarea v-model="formReview.message" :rows="4" label=" Ваш отзыв" placeholder="Напишите отзыв..." />
+    </template>
+    <template #footer>
+      <div class="flex justify-between">
+        <fwb-button size="lg" @click="$emit('closeModal')" color="red">
+          Отмена
+        </fwb-button>
+        <fwb-button size="lg" @click="createNewReview" color="green">
+          Отправить
+        </fwb-button>
+      </div>
+    </template>
+  </fwb-modal>
+
+
+  <!-- Редактировать  свой отзыв -->
+  <fwb-modal v-if="orderType === 'review'" @close="$emit('closeModal')">
+    <template #header>
+      <div class="flex items-center text-lg">Новый отзыв</div>
+    </template>
+    <template #body>
+      <Rating class="mb-6" v-model="formReview.rating" />
       <fwb-textarea v-model="formReview.message" :rows="4" label=" Ваш отзыв" placeholder="Напишите отзыв..." />
     </template>
     <template #footer>
