@@ -111,5 +111,3 @@ onMounted(() => getMyTrainings());
     />
   </div>
 </template>
-
-<style scoped></style>
