@@ -46,7 +46,7 @@ onMounted(() => getMyTrainings());
 </script>
 
 <template>
-  <div class="my-36 mx-16">
+  <div v-if="trainings.length" class="my-36 mx-16">
     <h1 class="text-3xl text-center text-uppercase text-yellow-300 py-4 mb-10">
       Мои тренировки
     </h1>
@@ -87,14 +87,16 @@ onMounted(() => getMyTrainings());
             ><i class="fa-solid fa-xmark fa-2xl" style="color: #ff0000"></i
           ></fwb-table-cell>
           <fwb-table-cell>
-            <fwb-dropdown
-              placement="left"
-              text="Действие"
-            >
+            <fwb-dropdown placement="left" text="Действие">
               <div
                 class="w-52 border-2 text-center border-slate-300 rounded-lg shadow-xl shadow-zinc-400"
               >
-                <p @click="selectTrain = train.id" class="p-2 hover:bg-slate-200 cursor-pointer">Удалить</p>
+                <p
+                  @click="selectTrain = train.id"
+                  class="p-2 hover:bg-slate-200 cursor-pointer"
+                >
+                  Удалить
+                </p>
                 <p class="p-2 hover:bg-slate-200 cursor-pointer">Оплатить</p>
               </div>
             </fwb-dropdown>
@@ -109,5 +111,9 @@ onMounted(() => getMyTrainings());
       @closeModal="selectTrain = ''"
       @delete="deleteAbonement"
     />
+  </div>
+
+  <div v-else class="h-[800px] flex justify-center items-center">
+    <Alert view="danger" message="На данный момент у вас нет тренировок" />
   </div>
 </template>

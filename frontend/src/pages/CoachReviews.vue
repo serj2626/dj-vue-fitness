@@ -22,7 +22,6 @@ interface IFormReview {
   rating: number | null;
 }
 
-
 const getCoach = async () => {
   try {
     const { data } = await axios.get(
@@ -62,7 +61,6 @@ const deleteReview = async (id: number) => {
   }
 };
 
-
 watchEffect(getCoach);
 </script>
 <template>
@@ -88,41 +86,35 @@ watchEffect(getCoach);
       </button>
 
       <button
-        @click="router.push({name: 'coach', params: {id: coach.id}})"
+        @click="router.push({ name: 'coach', params: { id: coach.id } })"
         class="block w-3/4 bg-red-700 mx-auto border-2 border-white border-opacity-30 rounded-md py-3 text-white hover:bg-red-800 active:scale-95 transition-all duration-300 ease-in"
       >
         Назад
       </button>
 
-      <CreateOrderModal 
+      <CreateOrderModal
         v-if="showFormCreateReview"
-        orderType="review" 
-        @closeModal="showFormCreateReview = false" 
+        orderType="review"
+        @closeModal="showFormCreateReview = false"
         @createReview="createReview"
       />
-
     </div>
 
-    <div
-      v-if="coach.count_reviews"
-      class="h-[800px] overflow-y-auto">
+    <div v-if="coach.count_reviews" class="h-[800px] overflow-y-auto">
       <h3 class="text-2xl text-center text-yellow-300 my-2">
         Отзывы ({{ coach.count_reviews }})
       </h3>
 
-        <ReviewDetail
-          v-for="review in coach.trainer_reviews" 
-          :key="review"
-          :review="review"
-          @deleteReview="deleteReview"
-        />
+      <ReviewDetail
+        v-for="review in coach.trainer_reviews"
+        :key="review"
+        :review="review"
+        @deleteReview="deleteReview"
+      />
     </div>
 
     <div v-else class="h-[800px] flex justify-center items-center">
-      <Alert
-      view="danger"
-      message="На данный момент отзывов нет"
-      />
+      <Alert view="danger" message="На данный момент отзывов нет" />
     </div>
   </div>
 </template>
