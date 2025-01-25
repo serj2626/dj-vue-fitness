@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "reset";
+
+// GLOBAL
+
+body {
+  @apply bg-gray-950;
+}
+
+// HEADER
+
+.header__link {
+  @apply text-white font-bold transition-colors duration-300 ease-in hover:text-yellow-300;
+}
+
+.header__link-buy {
+  @apply py-3 px-5 rounded-md border-2 border-yellow-300 ms-6 transition-colors duration-300 ease-in;
+}
+
+.container {
+  @apply max-w-7xl mx-auto pl-2 pr-2;
+}
+
+.container-xl {
+  @apply max-w-[90%] mx-auto;
+}
+
+.container-md {
+    @apply max-w-[80%] mx-auto;
+  }
+
+// HeaderSection
+
+// AboutSection
+
+
+// FOOTER
+
+.footer__social-link{
+  @apply transition-all duration-300 ease-in;
+}
+.footer__social-link:hover{
+  @apply scale-125;
+}

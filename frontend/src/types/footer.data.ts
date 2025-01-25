@@ -1,3 +1,5 @@
+import { Icons } from "./icons";
+
 interface IFooterLink {
   title: string;
   link: string;
@@ -9,31 +11,31 @@ export const footerLinks: IFooterLink[] = [
   {
     title: "Telegram",
     link: "#",
-    icon: "fa-brands fa-telegram fa-xl",
+    icon: Icons.TG,
     style: "color: #74c0fc",
   },
   {
     title: "Instagram",
     link: "#",
-    icon: "fa-brands fa-instagram fa-xl",
+    icon: Icons.Insta,
     style: "color: #ffd43b",
   },
   {
     title: "Linkedin",
     link: "#",
-    icon: "fa-brands fa-linkedin fa-xl",
+    icon: Icons.Linkedin,
     style: "color: #74c0fc",
   },
   {
     title: "VK",
     link: "#",
-    icon: "fa-brands fa-vk fa-xl",
+    icon: Icons.VK,
     style: "color: #74c0fc",
   },
   {
     title: "GitHub",
     link: "#",
-    icon: "fa-brands fa-github fa-xl",
+    icon: Icons.Github,
     style: "color: white",
   },
 ];

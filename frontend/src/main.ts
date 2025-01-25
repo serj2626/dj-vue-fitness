@@ -12,7 +12,7 @@ import globalComponents from "./components/global";
 import Toast from "vue-toastification";
 // import '../node_modules/flowbite-vue/dist/index.css'
 import "vue-toastification/dist/index.css";
-import "./assets/main.css";
+import "./assets/style/main.scss";
 
 axios.defaults.baseURL = import.meta.env.VITE_API_URL;
 

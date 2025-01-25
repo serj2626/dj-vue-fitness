@@ -7,14 +7,6 @@ import { useToast } from "vue-toastification";
 import { headerLinks } from "@/types/header.data";
 import HeaderLink from "./HeaderLink.vue";
 import { ref } from "vue";
-import SplitButton from 'primevue/splitbutton';
-
-
- const items = ([
-    { label: 'Update', icon: 'pi pi-refresh', command: () => { } },
-    { label: 'Delete', icon: 'pi pi-times', command: () => { } },
-    { label: 'React', icon: 'pi pi-heart', command: () => { } }
-]);
 
 const showProfile = ref(false);
 const closeShowProfile = () => {
@@ -47,7 +39,9 @@ const logout = () => {
       <h3 class="header__logo text-yellow-300 font-bold text-lg mr-14">
         <RouterLink :to="{ name: 'home' }">DV FITNESS </RouterLink>
       </h3>
-      <div class="header__menu flex items-center justify-center  flex-wrap gap-4">
+      <div
+        class="header__menu flex items-center justify-between flex-wrap gap-4"
+      >
         <HeaderLink
           v-for="(link, index) in headerLinks"
           :key="index"
@@ -86,7 +80,7 @@ const logout = () => {
         >
         <RouterLink
           :to="{ name: 'abonements' }"
-          class="header__link header__link__buy"
+          class="header__link header__link-buy"
           >Купить абонемент</RouterLink
         >
       </div>
