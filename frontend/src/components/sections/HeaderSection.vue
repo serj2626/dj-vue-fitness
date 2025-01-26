@@ -1,4 +1,6 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import Posts from "@/components/Posts.vue";
+</script>
 
 <template>
   <section id="header" class="header-section">
@@ -8,7 +10,7 @@
       >
         Начни сейчас <br />и никогда не останавливайся.
       </h3>
-      <!-- <Posts /> -->
+      <Posts />
     </div>
   </section>
 </template>
@@ -27,7 +29,6 @@
   width: 100%;
   min-height: 120vh;
 }
-
 
 .header-section__body {
   position: absolute;
