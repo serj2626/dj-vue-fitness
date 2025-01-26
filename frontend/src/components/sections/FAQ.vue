@@ -8,7 +8,7 @@ import {
 } from "flowbite-vue";
 </script>
 <template>
-  <div class="faq py-6 mb-3">
+  <section id="faq" class="faq py-6 mb-3">
     <div class="container faq__container">
       <h3 class="faq__title text-3xl text-center text-yellow-300 mb-16">Ответы на часто задаваемые вопросы</h3>
       <fwb-accordion :open-first-item="false">
@@ -24,5 +24,5 @@ import {
         </fwb-accordion-panel>
       </fwb-accordion>
     </div>
-  </div>
+  </section>
 </template>
