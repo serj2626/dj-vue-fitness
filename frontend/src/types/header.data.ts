@@ -17,7 +17,7 @@ export const headerLinks: IHeaderLink[] = [
   },
   {
     title: "Тренеры",
-    link: "#coach",
+    link: "#coaches",
     class: "header__link",
   },
   {
