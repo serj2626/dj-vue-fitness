@@ -4,6 +4,7 @@ import { RouterLink } from "vue-router";
 import { useToast } from "vue-toastification";
 import { useRouter } from "vue-router";
 import { useUserStore } from "@/stores/auth";
+import { FwbButton } from "flowbite-vue";
 
 const store = useUserStore();
 const router = useRouter();
@@ -48,7 +49,7 @@ const login = async () => {
       id="loginID"
       class="w-6/12 mx-auto mt-[180px] bg-transparent dark:bg-gray-900 rounded-2xl"
     >
-      <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+      <div class="p-10">
         <h1
           id="login-title"
           class="text-xl font-bold leading-tight tracking-tight text-yellow-500 text-center md:text-2xl dark:text-white"
@@ -63,7 +64,7 @@ const login = async () => {
           alt="Fitness"
         />
         <form @submit.prevent="login" class="space-y-4 md:space-y-6">
-          <div id="login-text" class="w-3/4 mx-auto">
+          <div id="login-text" class="">
             <label
               for="username"
               class="block text-sm font-medium text-gray-900 dark:text-white"
@@ -79,7 +80,7 @@ const login = async () => {
               required
             />
           </div>
-          <div id="login-password" class="w-3/4 mx-auto">
+          <div id="login-password" class="">
             <label
               for="password"
               class="block text-sm font-medium text-gray-900 dark:text-white"
@@ -95,14 +96,13 @@ const login = async () => {
               required
             />
           </div>
-
-          <button
+          <fwb-button
             type="submit"
-            id="login-button"
-            class="form-btn w-3/4 mx-auto"
+            size="lg"
+            class="block w-full"
+            color="yellow"
+            >Войти</fwb-button
           >
-            Войти
-          </button>
           <p
             id="login-help"
             class="text-sm font-bold text-yellow-500 dark:text-gray-400"
