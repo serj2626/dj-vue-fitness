@@ -1,4 +1,4 @@
-export const enum Messages {
+export const enum MESSAGES {
   ABONEMENT_CREATED = "Вы забронировали абонемент",
   ABONEMENT_DELETED = "Абонемент удален",
   AUTH_ERROR = "Вы не авторизовались",
@@ -7,6 +7,7 @@ export const enum Messages {
   LOGOUT_SUCCESS = "Вы вышли из аккаунта",
   NO_ABONEMENTS = "На данный момент у вас нет абонементов",
   NO_REVIEWS = "Комментариев нет",
+  NO_COACHES = "Тренеры не найдены",
   NO_TRAININGS = "На данный момент у вас нет тренировок",
   REGISTER_SUCCESS = "Вы успешно зарегистрировались",
   REVIEW_CREATED = "Отзыв успешно создан",
