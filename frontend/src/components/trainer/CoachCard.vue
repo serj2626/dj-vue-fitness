@@ -72,7 +72,7 @@ const resetDataCoach = (): void => {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: all 0.5s ease-in;
+    transition: all 0.3s ease-in;
 
     &:hover {
         transform: scale(1.1);
