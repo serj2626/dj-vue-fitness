@@ -19,7 +19,7 @@ onMounted(getCoaches);
 <template>
   <div class="container mt-[100px] pt-12 pb-32">
     <div>
-      <div class="flex justify-between items-center mb-10">
+      <div class="flex justify-between items-center mb-12">
         <fwb-select
           v-model="selected"
           :options="categories"
@@ -27,7 +27,7 @@ onMounted(getCoaches);
           size="sm"
         />
         <h1
-          class="text-xl sm:text-2xl md:text-3xl text-center text-uppercase text-yellow-300 mb-12"
+          class="text-xl sm:text-2xl md:text-3xl text-center text-uppercase text-yellow-300 "
         >
           Тренеры
         </h1>

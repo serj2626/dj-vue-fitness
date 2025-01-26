@@ -1,23 +1,15 @@
 <script setup lang="ts">
-import axios from "axios";
-import { ref, onMounted } from "vue";
+import { onMounted } from "vue";
 import { useToast } from "vue-toastification";
-import type { IPost } from "@/types/types";
 import { gsap } from "gsap";
 import PostCard from "./PostCard.vue";
-
-
+import { usePostsStore } from "@/stores/posts";
+import { storeToRefs } from "pinia";
 const toast = useToast();
-const posts = ref<IPost[]>([]);
 
-const getPosts = async () => {
-  try {
-    const { data } = await axios.get("/api/workout/posts/");
-    posts.value = data;
-  } catch {
-    toast.error("Произошла ошибка при получении постов");
-  }
-};
+const store = usePostsStore();
+const { posts } = storeToRefs(store);
+const { getPosts } = store;
 
 onMounted(getPosts);
 
@@ -44,20 +36,20 @@ const afterEnter = (el: any) => {
 </script>
 <template>
   <div class="contact">
-    <transition-group 
-      @before-enter="beforeEnter" 
-      @enter="enter" 
-      @after-enter="afterEnter" 
+    <transition-group
+      @before-enter="beforeEnter"
+      @enter="enter"
+      @after-enter="afterEnter"
       appear
-      class="grid grid-cols-5 gap-5  mt-5" 
-      name="list" 
+      class="grid grid-cols-5 gap-5 mt-5"
+      name="list"
       tag="ul"
-      >
-      <PostCard 
-        v-for="(post, index) in posts" 
-        :key="index" 
+    >
+      <PostCard
+        v-for="(post, index) in posts"
+        :key="index"
         :post="post"
-        :data-index="index" 
+        :data-index="index"
       />
     </transition-group>
   </div>

@@ -1,6 +1,8 @@
+import { computed, ref } from "vue";
+
+import { MESSAGES } from "@/types/messages";
 import axios from "axios";
 import { defineStore } from "pinia";
-import { computed, ref } from "vue";
 
 export interface ITrainer {
   id: string | number;
@@ -27,7 +29,7 @@ export const useCoachesStore = defineStore("coaches", () => {
       trainers.value = data;
     } catch (err) {
       console.log("err", err);
-      throw new Error("Произошла ошибка при получении тренеров");
+      throw new Error(MESSAGES.COACHES_ERROR);
     }
   };
 
@@ -73,5 +75,5 @@ export const useCoachesStore = defineStore("coaches", () => {
     }
   });
 
-  return { trainers, searchName, selected, categories,allCoaches, getCoaches };
+  return { trainers, searchName, selected, categories, allCoaches, getCoaches };
 });

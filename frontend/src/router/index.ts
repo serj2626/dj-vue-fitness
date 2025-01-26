@@ -6,27 +6,27 @@ const router = createRouter({
     {
       path: "/",
       name: "home",
-      component: () => import("../pages/HomeView.vue"),
+      component: () => import("../pages/Home.vue"),
     },
     {
       path: "/login",
       name: "login",
-      component: () => import("../pages/LoginView.vue"),
+      component: () => import("../pages/Login.vue"),
     },
     {
       path: "/register",
       name: "register",
-      component: () => import("../pages/RegisterView.vue"),
+      component: () => import("../pages/Register.vue"),
     },
     {
       path: "/coach-list",
       name: "coachList",
-      component: () => import("../pages/CoachListView.vue"),
+      component: () => import("../pages/CoachList.vue"),
     },
     {
       path: "/coach/:id",
       name: "coach",
-      component: () => import("../pages/CoachDetailView.vue"),
+      component: () => import("../pages/CoachDetail.vue"),
     },
     {
       path: "/coach/:id/reviews",
@@ -36,47 +36,47 @@ const router = createRouter({
     {
       path: "/posts/:category",
       name: "post",
-      component: () => import("../pages/PostView.vue"),
+      component: () => import("../pages/Post.vue"),
     },
     {
       path: "/abonements/",
       name: "abonements",
-      component: () => import("../pages/AbonementsLIstView.vue"),
+      component: () => import("../pages/AbonementsLIst.vue"),
     },
     {
       path: "/my-abonements/:id/pay",
       name: "payAbonement",
-      component: () => import("../pages/AbonementPaymentView.vue"),
+      component: () => import("../pages/AbonementPayment.vue"),
     },
     {
       path: "/my-abonements/",
       name: "myAbonements",
-      component: () => import("../pages/MyAbonementsView.vue"),
+      component: () => import("../pages/MyAbonements.vue"),
     },
     {
       path: "/my-trainings/",
       name: "myTrainings",
-      component: () => import("../pages/MyTrainingsView.vue"),
+      component: () => import("../pages/MyTrainings.vue"),
     },
     {
       path: "/my-trainings/:id/pay",
       name: "payTraining",
-      component: () => import("../pages/TrainingPaymentView.vue"),
+      component: () => import("../pages/TrainingPayment.vue"),
     },
     {
       path: "/my-settings/",
       name: "mySettings",
-      component: () => import("../pages/MySettingsView.vue"),
+      component: () => import("../pages/MySettings.vue"),
     },
     {
       path: "/repages/:id/update",
       name: "reviewUpdate",
-      component: () => import("../pages/ReviewUpdateView.vue"),
+      component: () => import("../pages/ReviewUpdate.vue"),
     },
     {
       path: "/:pathMatch(.*)*",
       name: "notFound",
-      component: () => import("../pages/NotFoundView.vue"),
+      component: () => import("../pages/NotFound.vue"),
     },
   ],
 });

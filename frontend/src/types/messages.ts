@@ -14,4 +14,6 @@ export const enum MESSAGES {
   REVIEW_DELETED = "Отзыв успешно удален",
   TRAINING_CREATED = "Вы записались на тренировку",
   TRAINING_DELETED = "Тренировка удалена",
+  POSTS_ERROR = "Произошла ошибка при получении постов",
+  COACHES_ERROR = "Произошла ошибка при получении тренеров",
 }

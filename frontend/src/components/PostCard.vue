@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { IPost } from "@/types/types";
+import type { IPost } from "@/stores/posts";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
