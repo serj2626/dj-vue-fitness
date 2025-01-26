@@ -69,7 +69,7 @@ watchEffect(getCoach);
     <div
       class="reviews__container container-md p-2 rounded-xl shadow-2xl shadow-white"
     >
-      <div class="reviews__coach px-8 py-2 mx-auto flex flex-col items-center">
+      <div class="reviews__coach px-8 py-5 mx-auto flex flex-col items-center">
         <img
           class="reviews__coach-img rounded-xl h-auto mb-10"
           :src="coach.avatar"
@@ -78,8 +78,8 @@ watchEffect(getCoach);
         <div
           class="reviews__coach-body w-full grow flex flex-col justify-between"
         >
-          <div class="reviews__coach-top text-center text-white">
-            <fwb-rating :rating="coach.total_rating" class="" />
+          <div class="reviews__coach-top flex flex-col items-center text-white">
+            <fwb-rating :rating="coach.total_rating" class="mb-5" />
             <h1 class="text-xl text-center text-white my-2">
               {{ coach.first_name }} {{ coach.last_name }}
             </h1>
