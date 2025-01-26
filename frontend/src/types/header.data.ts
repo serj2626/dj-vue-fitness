@@ -21,6 +21,11 @@ export const headerLinks: IHeaderLink[] = [
     class: "header__link",
   },
   {
+    title: "FAQ",
+    link: "#faq",
+    class: "header__link",
+  },
+  {
     title: "Контакты",
     link: "#contacts",
     class: "header__link",
