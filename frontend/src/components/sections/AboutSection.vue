@@ -42,7 +42,7 @@
   </section>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 #about {
   padding-block: 50px;
   color: #fff;
@@ -86,5 +86,4 @@ ul {
     margin-bottom: 10px;
   }
 }
-
 </style>

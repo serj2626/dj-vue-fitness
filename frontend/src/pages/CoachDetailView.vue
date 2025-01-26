@@ -4,15 +4,14 @@ import { ref, onMounted, reactive } from "vue";
 import { useToast } from "vue-toastification";
 import { useRoute, useRouter } from "vue-router";
 import { FwbRating } from "flowbite-vue";
-import { FwbBreadcrumb, FwbBreadcrumbItem } from "flowbite-vue";
+import { FwbBreadcrumb, FwbBreadcrumbItem, FwbButton } from "flowbite-vue";
 import type { iRate, ITrainer } from "@/types/workout";
-import { checkDateOrderTraining }  from "@/validators";
-
+import { checkDateOrderTraining } from "@/validators";
+import { Messages } from "@/types/messages";
 
 const router = useRouter();
 const route = useRoute();
 const { id } = route.params;
-
 
 interface ItrainingData {
   date: string;
@@ -35,10 +34,11 @@ const createOrderTraining = async () => {
       rate: trainingData.rate,
       trainer: id,
     });
-    toast.success("Вы записались на тренировку");
+    toast.success(Messages.TRAINING_CREATED);
     showModal.value = false;
     router.push({ name: "myTrainings" });
-  } catch(err: any) {
+  } catch (err: any) {
+    console.log(err);
     toast.error(err.message);
   }
 };
@@ -73,7 +73,7 @@ onMounted(() => {
 <template>
   <div class="container mt-[160px] rounded-xl shadow-2xl shadow-white">
     <fwb-breadcrumb class="bg-black border-0 text-white text-3xl" solid>
-      <fwb-breadcrumb-item  home href="/"> Главная </fwb-breadcrumb-item>
+      <fwb-breadcrumb-item home href="/"> Главная </fwb-breadcrumb-item>
       <fwb-breadcrumb-item href="/coach-list"> Тренеры </fwb-breadcrumb-item>
       <fwb-breadcrumb-item>Тренер </fwb-breadcrumb-item>
     </fwb-breadcrumb>
@@ -98,7 +98,12 @@ onMounted(() => {
             >
           </a>
         </div>
-        <button @click="showModal = true" class="form-btn">Записаться</button>
+        <fwb-button
+          @click="showModal = true"
+          color="yellow"
+          class="block w-full text-lg p-3"
+          >Записаться
+        </fwb-button>
       </div>
 
       <div class="w-2/3 text-white">
@@ -181,7 +186,7 @@ onMounted(() => {
           </li>
           <li>
             <div class="">
-              {{ coach.bio }}
+              {{ coach.bio ? coach.bio : "Нет описания" }}
             </div>
           </li>
         </ul>

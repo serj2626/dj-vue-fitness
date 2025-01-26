@@ -1,4 +1,3 @@
-<!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
 import axios from "axios";
 import { ref, onMounted } from "vue";
@@ -9,11 +8,15 @@ import { Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import type { ITrainerList } from "@/types/workout";
 
 const router = useRouter();
 const toast = useToast();
 const modules = [Pagination, Navigation];
+
+export interface ITrainerList {
+  id: number | string;
+  avatar: string;
+}
 
 const trainers = ref<ITrainerList[]>([]);
 const getCoaches = async () => {
@@ -29,89 +32,89 @@ onMounted(getCoaches);
 </script>
 
 <template>
-  <h1
-    @click="router.push({ name: 'coachList' })"
-    class="text-3xl text-center text-uppercase text-yellow-300 my-16 hover:text-yellow-400 cursor-pointer"
-  >
-    Наши тренеры
-  </h1>
-
-  <swiper
-    :loop="true"
-    :loopFillGroupWithBlank="true"
-    :slidesPerView="1"
-    :spaceBetween="5"
-    :pagination="{
-      clickable: true,
-    }"
-
-    :breakpoints="{
-      '640': {
-        slidesPerView: 2,
-        spaceBetween: 20,
-      },
-      '768': {
-        slidesPerView: 3,
-        spaceBetween: 40,
-      },
-      '1024': {
-        slidesPerView: 3,
-        spaceBetween: 50,
-      },
-    }"
-    :modules="modules"
-    class="mySwiper"
-  >
-    <swiper-slide
-      @click="router.push({ name: 'coach', params: { id: trainer.id } })"
-      v-for="trainer in trainers"
-      :key="trainer.id"
+  <section id="coach" class="coach container-xl text-orange-300 mb-40">
+    <h1
+      @click="router.push({ name: 'coachList' })"
+      class="text-3xl text-center text-uppercase text-yellow-300 my-16 hover:text-yellow-400 cursor-pointer"
     >
-      <img :src="trainer.avatar" alt="" />
-    </swiper-slide>
-  </swiper>
+      Наши тренеры
+    </h1>
+
+    <swiper
+      :loop="true"
+      :loopFillGroupWithBlank="true"
+      :slidesPerView="1"
+      :spaceBetween="5"
+      :speed="1000"
+      :autoplay="{
+        delay: 1000,
+      }"
+      :pagination="{
+        clickable: true,
+        type: 'bullets',
+      }"
+      :navigation="{
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      }"
+      :breakpoints="{
+        '640': {
+          slidesPerView: 2,
+          spaceBetween: 20,
+        },
+        '768': {
+          slidesPerView: 3,
+          spaceBetween: 20,
+        },
+        '1024': {
+          slidesPerView: 4,
+          spaceBetween: 20,
+        },
+      }"
+      :modules="modules"
+      class="mySwiper coach__list relative p-40"
+    >
+      <swiper-slide
+        @click="router.push({ name: 'coach', params: { id: trainer.id } })"
+        v-for="trainer in trainers"
+        :key="trainer.id"
+      >
+        <img :src="trainer.avatar" alt="" />
+      </swiper-slide>
+      <div class="swiper-btns">
+        <button class="swiper-button-prev text-3xl"></button>
+        <button class="swiper-button-next"></button>
+      </div>
+    </swiper>
+  </section>
 </template>
 
-<style scoped>
-.swiper {
-  --swiper-pagination-color: #fcc707;
-  --swiper-pagination-bullet-size: 18px;
-  --swiper-pagination-bullet-width: 18px;
-  --swiper-pagination-bullet-height: 18px;
-  --swiper-pagination-bullet-inactive-color: #3322c9;
-  --swiper-pagination-bullet-inactive-opacity: 0.7;
-  --swiper-pagination-bullet-opacity: 1;
-  --swiper-pagination-bullet-horizontal-gap: 9px;
-  --swiper-pagination-bullet-vertical-gap: 6px;
-
-  --swiper-navigation-color: orange;
-  --swiper-navigation-size: 100px;
-
-  --swiper-navigation-offset-horizontal: 0;
-  --swiper-navigation-offset-vertical: 0;
-
-  width: 100%;
-  height: 100%;
-}
-
+<style scoped lang="scss">
 .swiper-slide {
-  margin: 0 50px;
-  text-align: center;
-  font-size: 18px;
-  background: #fff;
   width: auto;
   cursor: pointer;
-
-  /* Center slide text vertically */
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  border-radius: 20px;
+  overflow: hidden;
 }
 
 .swiper-slide img {
   display: block;
   width: 100%;
-  height: 400px;
+  height: 450px;
   object-fit: cover;
+}
+.swiper-button-prev {
+  color: yellow;
+}
+.swiper-button-next {
+  color: yellow;
+}
+
+.swiper-pagination-bullet {
+}
+.swiper-pagination-bullet {
+  background-color: red;
+  width: 40px;
+  height: 40px;
 }
 </style>

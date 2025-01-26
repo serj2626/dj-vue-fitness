@@ -1,11 +1,16 @@
-<!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
 import axios from "axios";
 import { ref, onMounted } from "vue";
 import { useToast } from "vue-toastification";
-import type { IAbonement } from "@/types/orders";
 import AbonementCard from "./AbonementCard.vue";
 
+export interface IAbonement {
+  id: number;
+  title: string;
+  description: string;
+  price: number;
+  number_of_months: number;
+}
 
 const toast = useToast();
 const abonements = ref<IAbonement[]>([]);
@@ -18,24 +23,32 @@ const getAbonements = async (): Promise<void> => {
     toast.error("Произошла ошибка");
   }
 };
-onMounted(() => getAbonements());
+onMounted(getAbonements);
 </script>
 
 <template>
-  <h1 class="text-3xl text-center text-uppercase text-yellow-300">
-    Абонементы
-  </h1>
+  <section id="abonements" class="abonements my-16">
+    <div class="container-md abonements__container">
+      <h1
+        class="abonements__title text-3xl text-center text-uppercase text-yellow-300"
+      >
+        Абонементы
+      </h1>
 
-  <div class="flex justify-center items-center gap-10 mt-10 mb-20 text-yellow-400">
-    <AbonementCard 
-      v-for="abonement in abonements" 
-      :key="abonement.id" 
-      :abonement="abonement" 
-    />
-  </div>
+      <div
+        class="abonements__list flex justify-center items-center gap-10 my-20 text-yellow-400"
+      >
+        <AbonementCard
+          v-for="abonement in abonements"
+          :key="abonement.id"
+          :abonement="abonement"
+        />
+      </div>
+    </div>
+  </section>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .box {
   width: 300px;
   height: 300px;
@@ -52,38 +65,45 @@ onMounted(() => getAbonements());
 }
 
 .box:nth-child(1) {
-  background: linear-gradient(45deg,
-      rgb(0, 0, 0) 0%,
-      rgba(188, 11, 94, 0.917) 50%);
+  background: linear-gradient(
+    45deg,
+    rgb(0, 0, 0) 0%,
+    rgba(188, 11, 94, 0.917) 50%
+  );
   animation: show-one linear both;
   animation-timeline: view();
 }
 
 .box:nth-child(2) {
-  background: linear-gradient(45deg,
-      rgb(4, 4, 4) 5%,
-      rgba(255, 177, 31, 0.917) 100%);
+  background: linear-gradient(
+    45deg,
+    rgb(4, 4, 4) 5%,
+    rgba(255, 177, 31, 0.917) 100%
+  );
   animation: show-two linear both;
   animation-timeline: view();
 }
 
 .box:nth-child(3) {
-  background: linear-gradient(45deg,
-      rgb(32, 41, 49) 0%,
-      rgba(251, 39, 255, 0.917) 100%);
+  background: linear-gradient(
+    45deg,
+    rgb(32, 41, 49) 0%,
+    rgba(251, 39, 255, 0.917) 100%
+  );
   animation: show-three linear both;
   animation-timeline: view();
 }
 
 .box:nth-child(4) {
-  background: linear-gradient(45deg,
-      rgb(0, 0, 0) 0%,
-      rgba(26, 224, 197, 0.917) 100%);
+  background: linear-gradient(
+    45deg,
+    rgb(0, 0, 0) 0%,
+    rgba(26, 224, 197, 0.917) 100%
+  );
 
   animation: show-four linear both;
   animation-timeline: view();
 }
-
 
 @keyframes show-four {
   0% {

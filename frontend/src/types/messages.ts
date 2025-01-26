@@ -1,0 +1,16 @@
+export const enum Messages {
+  ABONEMENT_CREATED = "Вы забронировали абонемент",
+  ABONEMENT_DELETED = "Абонемент удален",
+  AUTH_ERROR = "Вы не авторизовались",
+  FILL_ALL_FIELDS = "Заполните все поля",
+  LOGIN_SUCCESS = "Вы успешно вошли в аккаунт",
+  LOGOUT_SUCCESS = "Вы вышли из аккаунта",
+  NO_ABONEMENTS = "На данный момент у вас нет абонементов",
+  NO_REVIEWS = "Комментариев нет",
+  NO_TRAININGS = "На данный момент у вас нет тренировок",
+  REGISTER_SUCCESS = "Вы успешно зарегистрировались",
+  REVIEW_CREATED = "Отзыв успешно создан",
+  REVIEW_DELETED = "Отзыв успешно удален",
+  TRAINING_CREATED = "Вы записались на тренировку",
+  TRAINING_DELETED = "Тренировка удалена",
+}

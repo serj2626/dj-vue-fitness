@@ -61,7 +61,7 @@ class TrainerAdmin(admin.ModelAdmin):
     """Admin View for Trainer"""
 
     list_display = (
-        "id",
+     
         "position",
         "first_name",
         "last_name",
