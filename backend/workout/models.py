@@ -11,6 +11,41 @@ from .service import get_path_for_avatar_for_trainer
 User = get_user_model()
 
 
+# class FitnessClub(models.Model):
+#     """
+#     Фитнес клуб
+#     """
+
+#     title = models.CharField("Название клуба", max_length=100, unique=True)
+#     city = models.CharField("Город", max_length=100)
+#     address = models.CharField("Адрес", max_length=100, unique=True)
+#     phone = models.CharField("Телефон", max_length=11, unique=True)
+#     mail = models.EmailField("Почта", unique=True)
+#     site = models.URLField("Сайт", unique=True)
+
+#     class Meta:
+#         verbose_name = "Фитнес клуб"
+#         verbose_name_plural = "Фитнес клубы"
+
+#     def __str__(self):
+#         return self.title
+
+
+# # create class by all images for fitness club
+
+
+# class FitnessClubImage(models.Model):
+#     image = models.ImageField(upload_to=get_path_for_avatar_for_trainer)
+#     fitness_club = models.ForeignKey(FitnessClub, on_delete=models.CASCADE)
+
+#     def __str__(self):
+#         return f"Изображение {self.fitness_club}"
+
+#     class Meta:
+#         verbose_name = "Изображение"
+#         verbose_name_plural = "Изображения"
+
+
 class Rate(models.Model):
     """
     Цены индивидульных тренировок
