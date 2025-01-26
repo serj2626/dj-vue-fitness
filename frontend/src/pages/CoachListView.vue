@@ -1,92 +1,24 @@
 <script setup lang="ts">
-import axios from "axios";
-import { ref, onMounted, reactive, computed } from "vue";
-import { useToast } from "vue-toastification";
+import { onMounted } from "vue";
+
 import CoachCard from "@/components/trainer/CoachCard.vue";
-import { FwbInput } from "flowbite-vue";
-import { FwbSelect } from "flowbite-vue";
-import type { ITrainer, ITrainerInfo } from "@/types/workout";
+import { FwbInput, FwbSelect } from "flowbite-vue";
+
 import Icon from "@/components/Icon.vue";
+import { useCoachesStore } from "@/stores/coaches";
+import { storeToRefs } from "pinia";
+import { MESSAGES } from "@/types/messages";
 
-const trainerInfo = reactive<ITrainerInfo>({
-  id: "",
-  firstName: "",
-  lastName: "",
-  position: "",
-});
-
-const showDetails = (trainer: ITrainer) => {
-  trainerInfo.id = trainer.id;
-  trainerInfo.firstName = trainer.first_name;
-  trainerInfo.lastName = trainer.last_name;
-  trainerInfo.position = trainer.position;
-};
-
-const resetDetails = () => {
-  trainerInfo.firstName = "";
-  trainerInfo.lastName = "";
-  trainerInfo.position = "";
-  trainerInfo.id = "";
-};
-
-const toast = useToast();
-
-const searchName = ref("");
-const selected = ref("");
-console.log(selected.value);
-const categories = [
-  { value: "Инструктор бассейна", name: "Инструктор бассейна" },
-  {
-    value: "Инструктор тренажерного зала",
-    name: "Инструктор тренажорного зала",
-  },
-  { value: "Инструктор йоги", name: "Тренер по йоге" },
-];
-
-const coaches = ref<ITrainer[]>([]);
-const getCoaches = async () => {
-  try {
-    const { data } = await axios.get("/api/workout/all-trainers/");
-    coaches.value = data;
-    console.log(coaches.value);
-  } catch (err) {
-    toast.error("Произошла ошибка при получении тренеров");
-  }
-};
-
-const totalCoaches = computed<ITrainer[]>(() => {
-  if (selected.value && searchName.value) {
-    return coaches.value
-      .filter((coach) => coach.position === selected.value)
-      .filter(
-        (coach) =>
-          coach.first_name
-            .toLowerCase()
-            .includes(searchName.value.toLowerCase()) ||
-          coach.last_name.toLowerCase().includes(searchName.value.toLowerCase())
-      );
-  } else if (selected.value) {
-    return coaches.value.filter((coach) => coach.position === selected.value);
-  } else {
-    if (searchName.value) {
-      return coaches.value.filter(
-        (coach) =>
-          coach.first_name
-            .toLowerCase()
-            .includes(searchName.value.toLowerCase()) ||
-          coach.last_name.toLowerCase().includes(searchName.value.toLowerCase())
-      );
-    }
-    return coaches.value;
-  }
-});
+const store = useCoachesStore();
+const { searchName, selected, categories, allCoaches } = storeToRefs(store);
+const { getCoaches } = store;
 
 onMounted(getCoaches);
 </script>
 
 <template>
   <div class="container mt-[100px] pt-12 pb-32">
-    <div v-if="coaches.length">
+    <div>
       <div class="flex justify-between items-center mb-10">
         <fwb-select
           v-model="selected"
@@ -105,23 +37,20 @@ onMounted(getCoaches);
           </template>
         </fwb-input>
       </div>
-
-      <div
-        class="grid max-[450px]:grid-cols-1 grid-cols-2 md:grid-cols-3 gap-10"
-      >
-        <CoachCard
-          v-for="coach in totalCoaches"
-          :key="coach.id"
-          :coach="coach"
-          :currentId="trainerInfo.id"
-          @showDetail="showDetails(coach)"
-          @resetData="resetDetails"
-        />
-      </div>
     </div>
-
+    <div
+      v-if="allCoaches.length"
+      class="grid max-[450px]:grid-cols-1 grid-cols-2 md:grid-cols-3 gap-10"
+    >
+      <CoachCard
+        v-for="coach in allCoaches"
+        :key="coach.id"
+        :coach="coach"
+        :currentId="coach.id"
+      />
+    </div>
     <div v-else class="h-[800px] flex justify-center items-center">
-      <Alert view="danger" message="На данный момент тренеров нет" />
+      <Alert view="danger" :message="MESSAGES.NO_COACHES" />
     </div>
   </div>
 </template>
