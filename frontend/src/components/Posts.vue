@@ -41,7 +41,7 @@ const afterEnter = (el: any) => {
       @enter="enter"
       @after-enter="afterEnter"
       appear
-      class="grid grid-cols-5 gap-5 mt-5"
+      class="grid grid-cols-5 gap-5 mt-32"
       name="list"
       tag="ul"
     >
