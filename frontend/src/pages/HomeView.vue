@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import AboutSection from "@/components/sections/AboutSection.vue";
-import CoachList from "../components/sections/CoachList.vue";
+import CoachList from "../components/sections/CoachListSection.vue";
 import AbonementsList from "@/components/sections/AbonementsList.vue";
 import HeaderSection from "@/components/sections/HeaderSection.vue";
 import SubscribeSection from "@/components/sections/SubscribeSection.vue";
