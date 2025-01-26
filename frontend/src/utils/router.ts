@@ -1,0 +1,17 @@
+export const enum AppRoutes {
+  abonements = "abonements",
+  coach = "coach",
+  coachList = "coachList",
+  coachReviews = "coachReviews",
+  home = "home",
+  login = "login",
+  myAbonements = "myAbonements",
+  mySettings = "mySettings",
+  myTrainings = "myTrainings",
+  notFound = "notFound",
+  payAbonement = "payAbonement",
+  payTraining = "payTraining",
+  post = "post",
+  register = "register",
+  reviewUpdate = "reviewUpdate",
+}
