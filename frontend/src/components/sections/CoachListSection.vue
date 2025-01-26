@@ -1,13 +1,19 @@
 <script setup lang="ts">
-import axios from "axios";
-import { ref, onMounted } from "vue";
+import { onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { useToast } from "vue-toastification";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Pagination, Navigation } from "swiper/modules";
+import { useCoachesStore } from "@/stores/coaches";
+import { storeToRefs } from "pinia";
+
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+
+const store = useCoachesStore();
+const { trainers } = storeToRefs(store);
+const { getCoaches } = store;
 
 const router = useRouter();
 const toast = useToast();
@@ -17,16 +23,6 @@ export interface ITrainerList {
   id: number | string;
   avatar: string;
 }
-
-const trainers = ref<ITrainerList[]>([]);
-const getCoaches = async () => {
-  try {
-    const { data } = await axios.get("/api/workout/trainers/");
-    trainers.value = data;
-  } catch {
-    toast.error("Произошла ошибка");
-  }
-};
 
 onMounted(getCoaches);
 </script>
