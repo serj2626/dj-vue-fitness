@@ -46,7 +46,6 @@ onMounted(getCoaches);
         v-for="coach in allCoaches"
         :key="coach.id"
         :coach="coach"
-        :currentId="coach.id"
       />
     </div>
     <div v-else class="h-[800px] flex justify-center items-center">
