@@ -4,7 +4,7 @@ import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { useToast } from "vue-toastification";
 import type { IAbonement } from "@/types/orders";
-import { checkDateOrderAbonement } from "@/validators";
+import { checkDateOrderAbonement } from "@/utils/validators";
 
 const router = useRouter();
 const toast = useToast();
