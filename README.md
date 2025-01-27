@@ -1,5 +1,9 @@
 # Сайт "Фитнес-клуба" на Django и Vue.js
 
+:warning: Проект в разработке 
+:warning: Адаптивная верстка не реализована
+:warning: Система оплаты не реализована
+
 ![Django](./frontend/src/assets/screen/screen.png)
 
 ![Django](./frontend/src/assets/screen/screen-order.png)
