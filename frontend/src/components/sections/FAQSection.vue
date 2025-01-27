@@ -11,7 +11,7 @@ import AccordionContent from "primevue/accordioncontent";
       Ответы на часто задаваемые вопросы
     </h3>
     <Accordion multiple class="w-3/4 mx-auto">
-      <AccordionPanel v-for="(faq, index) in faqs" :key="faq.id" :value="index">
+      <AccordionPanel v-for="(faq, index) in faqs" :key="faq.id" :value="`${index}`">
         <AccordionHeader
           ><span class="bg-yellow-300 rounded-full py-2 px-4">{{ faq.id }}</span>
           {{ faq.question }}</AccordionHeader
