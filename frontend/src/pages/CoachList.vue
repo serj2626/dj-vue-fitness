@@ -27,7 +27,7 @@ onMounted(getCoaches);
           size="sm"
         />
         <h1
-          class="text-xl sm:text-2xl md:text-3xl text-center text-uppercase text-yellow-300 "
+          class="text-xl sm:text-2xl md:text-3xl text-center text-uppercase text-yellow-300"
         >
           Тренеры
         </h1>
