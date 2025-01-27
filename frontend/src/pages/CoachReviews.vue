@@ -65,27 +65,27 @@ const deleteReview = async (id: number) => {
 watchEffect(getCoach);
 </script>
 <template>
-  <div class="reviews mt-[100px]">
+  <div class="mt-[100px]">
     <div
-      class="reviews__container container-md p-2 rounded-xl shadow-2xl shadow-white"
+      class="grid grid-cols-[1fr_2fr] container-md p-2 rounded-xl shadow-2xl shadow-white"
     >
-      <div class="reviews__coach px-8 py-5 mx-auto flex flex-col items-center">
+      <div class="px-8 py-5 mx-auto flex flex-col items-center">
         <img
           class="reviews__coach-img rounded-xl h-auto mb-10"
           :src="coach.avatar"
           :alt="coach.first_name"
         />
         <div
-          class="reviews__coach-body w-full grow flex flex-col justify-between"
+          class="flex flex-col justify-between w-full"
         >
-          <div class="reviews__coach-top flex flex-col items-center text-white">
+          <div class="flex flex-col items-center text-white">
             <fwb-rating :rating="coach.total_rating" class="mb-5" />
-            <h1 class="text-xl text-center text-white my-2">
+            <h1 class="text-xl text-center text-white mb-2">
               {{ coach.first_name }} {{ coach.last_name }}
             </h1>
             <p class="reviews__coach-position">{{ coach.position }}</p>
           </div>
-          <div class="reviews__coach-bottom flex flex-col gap-3">
+          <div class="flex flex-col gap-3 mt-10">
             <fwb-button
               gradient="cyan"
               @click="showFormCreateReview = true"
@@ -111,7 +111,7 @@ watchEffect(getCoach);
 
       <div
         v-if="coach.count_reviews"
-        class="reviews__body h-[800px] overflow-y-auto"
+        class="reviews__body h-[800px] px-5 overflow-y-auto"
       >
         <h3 class="text-2xl text-center text-yellow-300 my-2">
           Отзывы ({{ coach.count_reviews }})
@@ -132,8 +132,5 @@ watchEffect(getCoach);
   </div>
 </template>
 <style scoped lang="scss">
-.reviews__container {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-}
+
 </style>
