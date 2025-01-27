@@ -18,7 +18,7 @@ export const footerLinks: IFooterLink[] = [
     title: "Instagram",
     link: "#",
     icon: Icons.Insta,
-    style: "color: #ffd43b",
+    style: "color: #cc5a29",
   },
   {
     title: "Linkedin",
