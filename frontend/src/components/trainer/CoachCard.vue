@@ -11,7 +11,7 @@ defineProps({
     },
     currentId: {
         type: [Number, String],
-        required: true,
+        required: false,
     }
 });
 
