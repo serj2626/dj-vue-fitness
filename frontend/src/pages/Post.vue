@@ -34,7 +34,7 @@ onMounted(getPost);
 
 <template>
   <ArrowUpButton />
-  <div class="container rounded-xl bg-white p-5 mb-24 mt-[100px]">
+  <div class="container-md rounded-xl bg-white p-12 mt-[100px]">
     <h1 class="text-center mt-5 mb-20 uppercase font-bold">{{ post.title }}</h1>
     <p v-html="post.content"></p>
   </div>
