@@ -39,7 +39,7 @@ export interface ITrainer {
   trainer_reviews: [];
   count_reviews?: number;
   total_rating?: number;
-  images: ITrainerImage[];
+  images?: ITrainerImage[];
 }
 
 export interface ITrainerInfo {
