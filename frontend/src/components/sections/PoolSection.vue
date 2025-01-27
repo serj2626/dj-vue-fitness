@@ -3,6 +3,11 @@
 </script>
 
 <template>
+   <div>
+      <h3 class="text-3xl text-center text-yellow-300 my-12">
+         Бассейн для здоровья и отдыха
+      </h3>
+   </div>
    <section id="pool" class="pool"></section>
 </template>
 
