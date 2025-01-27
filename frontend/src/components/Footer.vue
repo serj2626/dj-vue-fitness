@@ -7,7 +7,7 @@ import { footerLinks } from "@/types/footer.data";
     bottom-0 left-[50%] translate-x-[-50%]"
   >
     <div class="text-white">
-      <a class="text-yellow-500" href="https://github.com/serj2626"
+      <a class="text-yellow-300" href="https://github.com/serj2626"
         >Бойцов Сергей</a
       >
       <p>© 2024 Санкт-Петербург</p>
