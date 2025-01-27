@@ -16,13 +16,12 @@ const showModalForUpdate = ref(false);
 
 const store = useUserStore();
 
-
 const emit = defineEmits(["deleteReview"]);
 
 const deleteReview = (id: number) => {
   showModal.value = false;
   emit("deleteReview", id);
-}
+};
 </script>
 
 <template>
@@ -33,24 +32,23 @@ const deleteReview = (id: number) => {
     @delete="deleteReview(review.id)"
   />
 
-
-  <CreateOrderModal 
-        v-if="showModalForUpdate"
-        orderType="updateReview" 
-        @closeModal="showModalForUpdate = false" 
-      />
+  <CreateOrderModal
+    v-if="showModalForUpdate"
+    orderType="updateReview"
+    @closeModal="showModalForUpdate = false"
+  />
 
   <div
-    class="reviews__desc w-[85%] mx-auto flex flex-col justify-center gap-6 p-2 rounded-md my-10"
+    class="reviews__desc flex flex-col justify-center gap-6 py-2 px-4 rounded-md my-10"
   >
     <div class="reviews-desc__header flex justify-between items-center">
-      <div class="flex gap-3">
+      <div class="flex items-center gap-3">
         <h3>{{ review.user.username }}</h3>
         <fwb-rating size="sm" :rating="review.rating" />
 
         <div
           v-if="store.auth.username === review.user.username"
-          class="flex gap-2"
+          class="flex items-center gap-2"
         >
           <svg
             @click="showModal = true"
