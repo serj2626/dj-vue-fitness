@@ -1,12 +1,14 @@
 <script setup lang="ts">
-import type { IAbonement } from "./AbonementsList.vue";
+import type { IAbonement } from "@/stores/abonements";
 
 defineProps<{
   abonement: IAbonement;
 }>();
 </script>
 <template>
-  <div class="abonement abonements__item box flex flex-col gap-2 items-center justify-around">
+  <div
+    class="abonement abonements__item box cursor-pointer flex flex-col gap-2 items-center justify-around"
+  >
     <div class="box__title">
       <h3 class="title text-xl uppercase font-bold">{{ abonement.title }}</h3>
     </div>
