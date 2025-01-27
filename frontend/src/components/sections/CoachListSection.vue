@@ -1,9 +1,9 @@
 <script setup lang="ts">
+import { AppRoutes } from "@/utils/router";
 import { onMounted } from "vue";
 import { useRouter } from "vue-router";
-import { useToast } from "vue-toastification";
 import { Swiper, SwiperSlide } from "swiper/vue";
-import { Pagination, Navigation } from "swiper/modules";
+import { Pagination, Navigation, Autoplay } from "swiper/modules";
 import { useCoachesStore } from "@/stores/coaches";
 import { storeToRefs } from "pinia";
 
@@ -16,8 +16,7 @@ const { trainers } = storeToRefs(store);
 const { getCoaches } = store;
 
 const router = useRouter();
-const toast = useToast();
-const modules = [Pagination, Navigation];
+const modules = [Pagination, Navigation, Autoplay];
 
 export interface ITrainerList {
   id: number | string;
@@ -30,7 +29,7 @@ onMounted(getCoaches);
 <template>
   <section id="coaches" class="coach container-xl text-orange-300 mb-20">
     <h1
-      @click="router.push({ name: 'coachList' })"
+      @click="router.push({ name: AppRoutes.coachList })"
       class="text-3xl text-center text-uppercase text-yellow-300 my-16 hover:text-yellow-400 cursor-pointer"
     >
       Наши тренеры
@@ -42,8 +41,11 @@ onMounted(getCoaches);
       :slidesPerView="1"
       :spaceBetween="5"
       :speed="1000"
+      :clickable="true"
+      :centeredSlides="true"
       :autoplay="{
         delay: 1000,
+        disableOnInteraction: false,
       }"
       :pagination="{
         clickable: true,
@@ -71,14 +73,16 @@ onMounted(getCoaches);
       class="mySwiper coach__list relative p-40"
     >
       <swiper-slide
-        @click="router.push({ name: 'coach', params: { id: trainer.id } })"
         v-for="trainer in trainers"
         :key="trainer.id"
+        @click="
+          router.push({ name: AppRoutes.coach, params: { id: trainer.id } })
+        "
       >
-        <img :src="trainer.avatar" alt="" />
+        <img :src="trainer.avatar" :alt="trainer.first_name" />
       </swiper-slide>
       <div class="swiper-btns">
-        <button class="swiper-button-prev text-3xl"></button>
+        <button class="swiper-button-prev"></button>
         <button class="swiper-button-next"></button>
       </div>
     </swiper>
