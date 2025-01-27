@@ -31,7 +31,7 @@ onBeforeMount(() => {
     <Header />
   </header>
 
-  <main class="main">
+  <main>
     <RouterView />
   </main>
 </template>
