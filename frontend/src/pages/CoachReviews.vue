@@ -6,8 +6,8 @@ import { ref, watchEffect } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useToast } from "vue-toastification";
 import ReviewDetail from "@/components/trainer/ReviewDetail.vue";
-import { validateDateReview } from "@/validators";
-import { Messages } from "@/types/messages";
+import { validateDateReview } from "@/utils/validators";
+import { MESSAGES } from "@/types/messages";
 
 const route = useRoute();
 const router = useRouter();
@@ -126,7 +126,7 @@ watchEffect(getCoach);
       </div>
 
       <div v-else class="h-[800px] flex justify-center items-center">
-        <Alert view="danger" :message="Messages.NO_REVIEWS" />
+        <Alert view="danger" :message="MESSAGES.NO_REVIEWS" />
       </div>
     </div>
   </div>
