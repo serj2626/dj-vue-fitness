@@ -7,8 +7,8 @@
       <h3 class="about__title text-3xl text-center text-yellow-300 mb-16">
         О клубе
       </h3>
-      <div class="about__body flex justify-between">
-        <div class="about__desc">
+      <div class="about__body grid grid-cols-[3fr_2fr]">
+        <div class="about__desc p-3">
           <h3 class="about__desc-title uppercase mb-4">
             Добро пожаловать в DV FITNESS.
           </h3>
