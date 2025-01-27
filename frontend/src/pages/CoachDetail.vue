@@ -4,11 +4,12 @@ import { ref, onMounted, reactive } from "vue";
 import { useToast } from "vue-toastification";
 import { useRoute, useRouter } from "vue-router";
 import { FwbRating } from "flowbite-vue";
-import { FwbBreadcrumb, FwbBreadcrumbItem, FwbButton } from "flowbite-vue";
+import { FwbButton } from "flowbite-vue";
 import type { iRate, ITrainer } from "@/types/workout";
-import { checkDateOrderTraining } from "@/validators";
-import { Messages } from "@/types/messages";
+import { checkDateOrderTraining } from "@/utils/validators";
+import { MESSAGES } from "@/types/messages";
 import Icon from "@/components/Icon.vue";
+import TrainerImages from "@/components/trainer/TrainerImages.vue";
 
 const router = useRouter();
 const route = useRoute();
@@ -35,7 +36,7 @@ const createOrderTraining = async () => {
       rate: trainingData.rate,
       trainer: id,
     });
-    toast.success(Messages.TRAINING_CREATED);
+    toast.success(MESSAGES.TRAINING_CREATED);
     showModal.value = false;
     router.push({ name: "myTrainings" });
   } catch (err: any) {
@@ -72,16 +73,13 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="container mt-[160px] rounded-xl shadow-2xl shadow-white">
-    <fwb-breadcrumb class="bg-black border-0 text-white text-3xl" solid>
-      <fwb-breadcrumb-item home href="/"> Главная </fwb-breadcrumb-item>
-      <fwb-breadcrumb-item href="/coach-list"> Тренеры </fwb-breadcrumb-item>
-      <fwb-breadcrumb-item>Тренер </fwb-breadcrumb-item>
-    </fwb-breadcrumb>
 
-    <div class="flex gap-4 p-9">
+
+
+  <div class="container my-[160px] rounded-xl shadow-2xl shadow-white">
+    <div class="flex max-[767px]:flex-col gap-4 p-9">
       <div
-        class="w-1/3 mx-auto rounded-2xl flex flex-col items-center justify-center gap-8"
+        class="min-[767px]:w-1/3 mx-auto rounded-2xl flex flex-col items-center justify-center gap-8"
       >
         <img class="rounded-xl" :src="coach.avatar" alt="" />
         <fwb-rating :rating="coach.total_rating" />
@@ -107,7 +105,7 @@ onMounted(() => {
         </fwb-button>
       </div>
 
-      <div class="w-2/3 text-white">
+      <div class="min-[767px]:w-2/3 text-white">
         <ul class="coach-info">
           <li>
             <div class="flex gap-5">
@@ -141,6 +139,19 @@ onMounted(() => {
         </ul>
       </div>
     </div>
+    <div class="grid grid-cols-3 gap-3 max-[500px]:grid-cols-1 max-[767px]:grid-cols-2">
+      <img
+        v-for="img in coach.images"
+        :key="img.id"
+        class="block h-[300px] w-full object-cover"
+        :src="img.image"
+        alt="photo"
+        loading="lazy"
+      />
+    </div>
+    <!-- <div>
+      <TrainerImages :images="coach.images" />
+    </div> -->
   </div>
 
   <CreateOrderModal
@@ -154,7 +165,7 @@ onMounted(() => {
     :rates="rates"
   />
 </template>
-<style scoped>
+<style scoped lang="scss">
 /* Show Reviews Animation */
 .fade-enter-active,
 .fade-leave-active {
@@ -188,4 +199,5 @@ ul {
   margin: 0;
   padding: 0;
 }
+
 </style>
