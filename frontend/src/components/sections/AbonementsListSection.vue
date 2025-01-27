@@ -1,28 +1,16 @@
 <script setup lang="ts">
-import axios from "axios";
-import { ref, onMounted } from "vue";
-import { useToast } from "vue-toastification";
+import { onMounted } from "vue";
 import AbonementCard from "../abonements/AbonementCard.vue";
+import { useAbonementsStore } from "@/stores/abonements";
+import { storeToRefs } from "pinia";
+import { AppRoutes } from "@/utils/router";
+import { useRouter } from "vue-router";
 
-export interface IAbonement {
-  id: number;
-  title: string;
-  description: string;
-  price: number;
-  number_of_months: number;
-}
 
-const toast = useToast();
-const abonements = ref<IAbonement[]>([]);
-
-const getAbonements = async (): Promise<void> => {
-  try {
-    const { data } = await axios.get("/api/orders/abonements/");
-    abonements.value = data;
-  } catch (err) {
-    toast.error("Произошла ошибка");
-  }
-};
+const router = useRouter();
+const store = useAbonementsStore();
+const { abonements } = storeToRefs(store);
+const { getAbonements } = store;
 onMounted(getAbonements);
 </script>
 
@@ -42,6 +30,7 @@ onMounted(getAbonements);
           v-for="abonement in abonements"
           :key="abonement.id"
           :abonement="abonement"
+          @click="router.push(AppRoutes.abonements)"
         />
       </div>
     </div>
@@ -53,15 +42,10 @@ onMounted(getAbonements);
   width: 300px;
   height: 300px;
 
-  /* transition: all 0.3s ease-in; */
   border-radius: 10px;
   font-size: 18px;
   box-shadow: 0 0 15px rgba(255, 255, 255, 0.918);
   padding: 15px;
-
-  /* &:hover {
-    transform: scale(1.1);
-  } */
 }
 
 .box:nth-child(1) {
