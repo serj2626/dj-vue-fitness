@@ -41,7 +41,7 @@ const afterEnter = (el: any) => {
       @enter="enter"
       @after-enter="afterEnter"
       appear
-      class="grid grid-cols-5 gap-5 mt-32"
+      class="grid grid-cols-5 gap-10 mt-32"
       name="list"
       tag="ul"
     >
@@ -49,7 +49,7 @@ const afterEnter = (el: any) => {
         v-for="(post, index) in posts"
         :key="index"
         :post="post"
-        :data-index="index"
+        :data-index="index *2"
       />
     </transition-group>
   </div>
