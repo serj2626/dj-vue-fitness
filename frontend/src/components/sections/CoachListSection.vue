@@ -44,7 +44,7 @@ onMounted(getCoaches);
       :clickable="true"
       :centeredSlides="true"
       :autoplay="{
-        delay: 1000,
+        delay: 500,
         disableOnInteraction: false,
       }"
       :pagination="{
