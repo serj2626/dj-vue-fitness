@@ -21,6 +21,12 @@ export interface IReview {
   date_age?: string;
 }
 
+export interface ITrainerImage {
+  id: number;
+  image: string;
+  trainer?: string;
+}
+
 export interface ITrainer {
   id: string | number;
   first_name: string;
@@ -33,6 +39,7 @@ export interface ITrainer {
   trainer_reviews: [];
   count_reviews?: number;
   total_rating?: number;
+  images: ITrainerImage[];
 }
 
 export interface ITrainerInfo {
