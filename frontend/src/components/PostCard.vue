@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { IPost } from "@/stores/posts";
+import { AppRoutes } from "@/utils/router";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
@@ -9,7 +10,9 @@ defineProps<{
 </script>
 <template>
   <li
-    @click="router.push({ name: 'post', params: { category: post.category } })"
+    @click="
+      router.push({ name: AppRoutes.post, params: { category: post.category } })
+    "
     class="post text-yellow-300"
   >
     {{ post.category }}
