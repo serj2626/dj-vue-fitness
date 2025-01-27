@@ -3,7 +3,7 @@ from rest_framework import serializers
 
 from accounts.serializers import UserSerializer
 
-from .models import Post, Rate, Reviews, Subscription, Trainer
+from .models import Post, Rate, Reviews, Subscription, Trainer, TrainerImage
 
 
 class SubscriptionSerializer(serializers.ModelSerializer):
@@ -67,8 +67,7 @@ class ReviewsSerializer(serializers.ModelSerializer):
 
     # rating = serializers.IntegerField(min_value=1, max_value=5)
     user = UserSerializer(read_only=True)
-    created_at = serializers.DateTimeField(
-        format="%d.%m.%Y %H:%M:%S", read_only=True)
+    created_at = serializers.DateTimeField(format="%d.%m.%Y %H:%M:%S", read_only=True)
     trainer = TrainerForReviewsSerializer(read_only=True)
 
     class Meta:
@@ -104,6 +103,12 @@ class TrainerListSerializer(serializers.ModelSerializer):
         fields = ("id", "avatar")
 
 
+class TrainerImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TrainerImage
+        fields = "__all__"
+
+
 class TrainerSerializer(serializers.ModelSerializer):
     """
     Детальная информация о тренере
@@ -113,15 +118,27 @@ class TrainerSerializer(serializers.ModelSerializer):
     position = serializers.CharField(source="get_position_display")
     count_reviews = serializers.SerializerMethodField()
     total_rating = serializers.SerializerMethodField()
+    images = TrainerImageSerializer(many=True, read_only=True)
 
     class Meta:
         model = Trainer
-        fields = "__all__"
+        fields = (
+            "id",
+            "avatar",
+            "first_name",
+            "last_name",
+            "position",
+            "email",
+            "phone",
+            "trainer_reviews",
+            "count_reviews",
+            "total_rating",
+            "images",
+        )
 
     def get_count_reviews(self, obj):
         return obj.trainer_reviews.count()
 
     def get_total_rating(self, obj):
         total_sum = obj.trainer_reviews.aggregate(Sum("rating"))["rating__sum"]
-        print(type(total_sum))
         return total_sum / obj.trainer_reviews.count() if total_sum else 0

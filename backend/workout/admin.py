@@ -1,7 +1,29 @@
 from django.contrib import admin
 from django.utils.html import mark_safe
 
-from .models import Post, Rate, RatingStar, Reviews, Subscription, Trainer
+from .models import Post, Rate, RatingStar, Reviews, Subscription, Trainer, TrainerImage
+
+
+@admin.register(TrainerImage)
+class TrainerImageAdmin(admin.ModelAdmin):
+    """Admin View for TrainerImage"""
+
+    list_display = (
+        "get_full_name",
+        "get_image",
+    )
+
+
+    def get_full_name(self, obj):
+        return f"{obj.trainer.first_name} {obj.trainer.last_name}"
+
+    def get_image(self, obj):
+        return mark_safe(
+            f'<img src={obj.image.url} style="border-radius: 50%;" " width="50" height="50"'
+        )
+
+    get_full_name.short_description = "Имя тренера"
+    get_image.short_description = "Фото"
 
 
 @admin.register(Post)
@@ -61,7 +83,6 @@ class TrainerAdmin(admin.ModelAdmin):
     """Admin View for Trainer"""
 
     list_display = (
-     
         "position",
         "first_name",
         "last_name",
