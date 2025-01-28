@@ -65,9 +65,9 @@ const deleteReview = async (id: number) => {
 watchEffect(getCoach);
 </script>
 <template>
-  <div class="mt-[100px]">
+  <div class="mt-[100px] container-md max-[700px]:container-xl">
     <div
-      class="grid grid-cols-[1fr_2fr] container-md p-2 rounded-xl shadow-2xl shadow-white"
+      class="grid grid-cols-[1fr_2fr] max-[720px]:grid-cols-1 p-2 rounded-xl shadow-2xl shadow-white"
     >
       <div class="px-8 py-5 mx-auto flex flex-col items-center">
         <img
@@ -75,9 +75,7 @@ watchEffect(getCoach);
           :src="coach.avatar"
           :alt="coach.first_name"
         />
-        <div
-          class="flex flex-col justify-between w-full"
-        >
+        <div class="flex flex-col justify-between w-full">
           <div class="flex flex-col items-center text-white">
             <fwb-rating :rating="coach.total_rating" class="mb-5" />
             <h1 class="text-xl text-center text-white mb-2">
@@ -100,7 +98,7 @@ watchEffect(getCoach);
               >Назад
             </fwb-button>
           </div>
-          <CreateOrderModal
+          <UModal
             v-if="showFormCreateReview"
             orderType="review"
             @closeModal="showFormCreateReview = false"
@@ -131,6 +129,4 @@ watchEffect(getCoach);
     </div>
   </div>
 </template>
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>
