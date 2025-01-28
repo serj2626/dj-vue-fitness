@@ -22,7 +22,6 @@ export const useCoachesStore = defineStore("coaches", () => {
   const trainers = ref<ITrainer[]>([]);
   const searchName = ref("");
   const selected = ref("");
-  const coach = ref<ITrainer>({} as ITrainer);
 
   const getCoaches = async () => {
     try {
@@ -31,15 +30,6 @@ export const useCoachesStore = defineStore("coaches", () => {
     } catch (err) {
       console.log("err", err);
       throw new Error(MESSAGES.COACHES_ERROR);
-    }
-  };
-
-  const getCoach = async (id: number) => {
-    try {
-      const { data } = await axios.get(`/api/workout/trainers/${id}`);
-      coach.value = data;
-    } catch {
-      throw new Error(MESSAGES.COACH_ERROR);
     }
   };
 
@@ -52,24 +42,6 @@ export const useCoachesStore = defineStore("coaches", () => {
     { value: "Инструктор йоги", name: "Тренер по йоге" },
   ]);
 
-  const responsiveOptions = ref([
-    {
-      breakpoint: "1500px",
-      numVisible: 5,
-    },
-    {
-      breakpoint: "1024px",
-      numVisible: 3,
-    },
-    {
-      breakpoint: "768px",
-      numVisible: 2,
-    },
-    {
-      breakpoint: "560px",
-      numVisible: 1,
-    },
-  ]);
 
   const allCoaches = computed<ITrainer[]>(() => {
     if (selected.value && searchName.value) {
@@ -110,8 +82,6 @@ export const useCoachesStore = defineStore("coaches", () => {
     selected,
     categories,
     allCoaches,
-    responsiveOptions,
     getCoaches,
-    getCoach
   };
 });
