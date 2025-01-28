@@ -1,16 +1,17 @@
 <script setup lang="ts"></script>
 
 <template>
-<a href="#"><i class="fa-solid fa-arrow-up fa-beat fa-2xl" style="color: #FFD43B;"></i>
-</a>
+  <a href="#"
+    ><i class="fa-solid fa-arrow-up fa-beat fa-2xl" style="color: #ffd43b"></i>
+  </a>
 </template>
 
-<style scoped>
-i{
-    cursor: pointer;
-    position: fixed;
-    bottom: 50px;
-    right: 50px;
-    color: #FFD43B;
+<style scoped lang="scss">
+i {
+  cursor: pointer;
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+  color: #ffd43b;
 }
 </style>
