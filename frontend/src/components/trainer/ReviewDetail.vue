@@ -4,12 +4,9 @@ import { FwbRating } from "flowbite-vue";
 import { useUserStore } from "@/stores/auth";
 import { ref } from "vue";
 
-defineProps({
-  review: {
-    type: Object as () => IReview,
-    required: true,
-  },
-});
+defineProps<{
+  review: IReview;
+}>();
 
 const showModal = ref(false);
 const showModalForUpdate = ref(false);
@@ -25,16 +22,17 @@ const deleteReview = (id: number) => {
 </script>
 
 <template>
-  <DeleteModal
+  <Confirm
     v-if="showModal"
     view="review"
     @closeModal="showModal = false"
     @delete="deleteReview(review.id)"
   />
 
-  <CreateOrderModal
+  <UModal
     v-if="showModalForUpdate"
     orderType="updateReview"
+    :text="review.text"
     @closeModal="showModalForUpdate = false"
   />
 
@@ -93,7 +91,7 @@ const deleteReview = (id: number) => {
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .word-wrap {
   word-wrap: break-word;
 }
@@ -105,6 +103,7 @@ const deleteReview = (id: number) => {
 }
 
 svg {
+  cursor: pointer;
   transition: all 0.3s ease-in;
 }
 
