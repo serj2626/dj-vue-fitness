@@ -1,4 +1,3 @@
-<!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
 import { FwbAlert } from 'flowbite-vue'
 type AlertType = "success" | "danger" | "warning" | "info"
@@ -10,6 +9,6 @@ defineProps<{
 </script>
 <template>
     <fwb-alert icon :type="view">
-        {{ message }}
+        {{ message.toUpperCase() }}
     </fwb-alert>
 </template>
