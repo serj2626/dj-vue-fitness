@@ -9,4 +9,4 @@ const props = defineProps({
 <template>
     <fwb-spinner />
 </template>
-<style scoped></style>
+<style scoped lang="scss"></style>
