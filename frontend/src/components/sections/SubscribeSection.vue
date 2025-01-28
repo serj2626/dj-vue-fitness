@@ -25,11 +25,11 @@ const sendSubscription = async () => {
 <template>
   <section id="contacts" class="subscribe px-6 pb-3">
     <div class="relative overflow-hidden px-6 py-24">
-      <h2
-        class="mx-auto max-w-2xl text-center text-3xl font-bold text-yellow-300 sm:text-4xl"
+      <h5
+        class="mx-auto max-w-2xl text-center text-xl  text-yellow-300 sm:text-4xl"
       >
         Будьте в курсе событий
-      </h2>
+      </h5>
 
       <p
         class="mx-auto mt-2 max-w-xl text-center text-lg leading-8 text-gray-300"
