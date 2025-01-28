@@ -4,17 +4,16 @@ import { ref, onMounted, reactive } from "vue";
 import { useToast } from "vue-toastification";
 import { useRoute, useRouter } from "vue-router";
 import { FwbRating, FwbButton } from "flowbite-vue";
-import type { iRate, ITrainer } from "@/types/workout";
 import { checkDateOrderTraining } from "@/utils/validators";
 import { MESSAGES } from "@/types/messages";
-import Icon from "@/components/Icon.vue";
 import { AppRoutes } from "@/utils/router";
 import Galleria from "primevue/galleria";
-import { useCoachesStore } from "@/stores/coaches";
+import { useCoachStore } from "@/stores/coach";
 import { storeToRefs } from "pinia";
 
-const store = useCoachesStore();
-const { responsiveOptions } = storeToRefs(store);
+const storeCoach = useCoachStore();
+const { coach, rates } = storeToRefs(storeCoach);
+const { getCoach, getRates, responsiveOptions } = storeCoach;
 
 const router = useRouter();
 const route = useRoute();
@@ -30,8 +29,6 @@ const trainingData = reactive<ItrainingData>({} as ItrainingData);
 const toast = useToast();
 
 const showModal = ref<boolean>(false);
-
-const coach = ref<ITrainer>({} as ITrainer);
 
 const createOrderTraining = async () => {
   try {
@@ -50,82 +47,84 @@ const createOrderTraining = async () => {
   }
 };
 
-const getCoach = async () => {
-  try {
-    const { data } = await axios.get(`/api/workout/trainers/${id}`);
-    coach.value = data;
-    console.log(data);
-  } catch {
-    toast.error("Произошла ошибка при получении тренера");
-  }
-};
-
-const rates = ref<iRate[]>([]);
-
-const getRates = async () => {
-  try {
-    const res = await axios.get("/api/workout/rates/");
-    rates.value = res.data;
-  } catch {
-    toast.error("Произошла ошибка при получении данных");
-  }
-};
-
 const displayBasic = ref(false);
 
 onMounted(() => {
-  getCoach();
+  getCoach(String(id));
   getRates();
 });
 </script>
 
 <template>
-  <!-- asdasdas -->
   <div class="container mt-[100px] rounded-xl shadow-2xl shadow-white">
-    <div class="grid grid-cols-2 max-[640px]:grid-cols-1  gap-4 p-5">
+    <div class="grid grid-cols-2 max-[640px]:grid-cols-1 gap-4 p-5">
       <div
         class="rounded-2xl py-5 px-12 flex flex-col items-center justify-center"
       >
         <img class="rounded-xl" :src="coach.avatar" alt="" />
         <div class="flex flex-col items-center my-10">
           <fwb-rating :rating="coach.total_rating" />
-
           <div>
-            <a class="text-white cursor-pointer mt-3">
-              Отзывы
-              <span
-                @click="
-                  router.push({
-                    name: AppRoutes.coachReviews,
-                    params: { id: coach.id },
-                  })
-                "
-                class="text-yellow-300 hover:underline"
-              >
-                ( {{ coach.count_reviews }} )</span
-              >
-            </a>
+            <div class="flex my-5 gap-5 justify-center items-center">
+              <div class="flex items-center gap-2 text-white">
+                <svg
+                  @click="
+                    router.push({
+                      name: AppRoutes.coachReviews,
+                      params: { id: coach.id },
+                    })
+                  "
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="size-6 cursor-pointer"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z"
+                  />
+                </svg>
+                <sub class="text-2xl text-yellow-300">{{
+                  coach.count_reviews
+                }}</sub>
+              </div>
+              <div class="flex items-center gap-2 text-white">
+                <svg
+                  @click="displayBasic = true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="size-6 cursor-pointer"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
+                  />
+                </svg>
+                <sub class="text-2xl text-yellow-300">{{
+                  coach.images?.length
+                }}</sub>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="flex flex-col gap-3 w-full">
-          <fwb-button
-            @click="showModal = true"
-            color="yellow"
-            class="block w-full text-lg p-3"
-            >Записаться
-          </fwb-button>
-          <fwb-button
-            v-if="coach?.images?.length"
-            @click="displayBasic = true"
-            color="purple"
-            class="block w-full text-lg p-3"
-            >Фотографии
-          </fwb-button>
-        </div>
+
+        <fwb-button
+          @click="showModal = true"
+          color="yellow"
+          class="block w-full text-lg p-3"
+          >Записаться
+        </fwb-button>
       </div>
 
       <div class="text-white py-5 px-12">
-        <ul class="coach-info ">
+        <ul class="coach-info">
           <li>
             <div class="flex items-center gap-5">
               <Icon type="user" />
