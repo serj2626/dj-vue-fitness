@@ -6,6 +6,7 @@ import { useToast } from "vue-toastification";
 import { headerLinks } from "@/types/header.data";
 import HeaderLink from "./HeaderLink.vue";
 import { ref } from "vue";
+import { AppRoutes } from "@/utils/router";
 
 const showProfile = ref(false);
 const closeShowProfile = () => {
@@ -22,7 +23,7 @@ const { auth } = storeToRefs(store);
 
 const logout = () => {
   store.removeToken();
-  router.push({ name: "home" });
+  router.push({ name: AppRoutes.login });
   toast.success("Вы вышли из аккаунта");
 };
 </script>
@@ -36,7 +37,7 @@ const logout = () => {
       class="header__container container-md min-h-20 flex justify-center flex-wrap items-center gap-6"
     >
       <h3 class="header__logo text-yellow-300 font-bold text-lg mr-14">
-        <RouterLink :to="{ name: 'home' }">DV FITNESS </RouterLink>
+        <RouterLink :to="{ name: AppRoutes.home }">DV FITNESS </RouterLink>
       </h3>
       <div
         class="header__menu flex items-center justify-between flex-wrap gap-4"
@@ -48,7 +49,7 @@ const logout = () => {
         />
         <RouterLink
           v-if="!auth.isAuthenticated"
-          :to="{ name: 'login' }"
+          :to="{ name: AppRoutes.login }"
           class="header__link"
           >Войти
         </RouterLink>
@@ -63,13 +64,13 @@ const logout = () => {
             :class="showProfile ? 'showDropdownMenu' : 'hidden'"
             class="text-white"
           >
-            <RouterLink :to="{ name: 'myAbonements' }">
+            <RouterLink :to="{ name: AppRoutes.myAbonements }">
               <li>Абонементы</li>
             </RouterLink>
             <RouterLink :to="{ name: 'mySettings' }">
               <li>Настройки</li>
             </RouterLink>
-            <RouterLink :to="{ name: 'myTrainings' }">
+            <RouterLink :to="{ name: AppRoutes.myTrainings }">
               <li>Тренировки</li>
             </RouterLink>
           </ul>
@@ -78,7 +79,7 @@ const logout = () => {
           >Выйти</a
         >
         <RouterLink
-          :to="{ name: 'abonements' }"
+          :to="{ name: AppRoutes.abonements }"
           class="header__link header__link-buy"
           >Купить абонемент</RouterLink
         >
