@@ -4,7 +4,7 @@ import { onMounted } from "vue";
 import CoachCard from "@/components/trainer/CoachCard.vue";
 import { FwbInput, FwbSelect } from "flowbite-vue";
 
-import Icon from "@/components/Icon.vue";
+import Icon from "@/components/global/Icon.vue";
 import { useCoachesStore } from "@/stores/coaches";
 import { storeToRefs } from "pinia";
 import { MESSAGES } from "@/types/messages";
