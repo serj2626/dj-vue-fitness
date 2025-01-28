@@ -4,7 +4,7 @@ import { ref, onMounted } from "vue";
 import { useToast } from "vue-toastification";
 import { FwbDropdown } from "flowbite-vue";
 import type { IMyAbonement } from "@/types/orders";
-import DeleteModal from "@/components/global/DeleteModal.vue";
+import DeleteModal from "@/components/global/Confirm.vue";
 import {
   FwbTable,
   FwbTableBody,
