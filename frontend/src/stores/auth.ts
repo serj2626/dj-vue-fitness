@@ -1,7 +1,8 @@
-import { defineStore } from "pinia";
-import { computed, reactive } from "vue";
-import axios from "axios";
 import type { IAuth, ILogin, IUserRegister } from "@/types/auth";
+import { computed, reactive } from "vue";
+
+import axios from "axios";
+import { defineStore } from "pinia";
 
 export const useUserStore = defineStore("user", () => {
   const user = reactive<IAuth>({
@@ -33,7 +34,7 @@ export const useUserStore = defineStore("user", () => {
   };
 
   const auth = computed(() => {
-    return user
+    return user;
   });
 
   const register = async (userData: IUserRegister) => {
@@ -56,18 +57,17 @@ export const useUserStore = defineStore("user", () => {
     }
   };
 
-
   const setUserInfo = async () => {
     try {
       const { data } = await axios.get("/api/auth/me/");
       console.log(data);
-        user.id = data.id;
-        user.username = data.username;
-        user.email = data.email;
-        user.isAuthenticated = true;
-        localStorage.setItem("fitness.id", data.id);
-        localStorage.setItem("fitness.username", data.username);
-        localStorage.setItem("fitness.email", data.email);
+      user.id = data.id;
+      user.username = data.username;
+      user.email = data.email;
+      user.isAuthenticated = true;
+      localStorage.setItem("fitness.id", data.id);
+      localStorage.setItem("fitness.username", data.username);
+      localStorage.setItem("fitness.email", data.email);
     } catch (error) {
       console.log(error);
       console.log("Произошла ошибка при получении информации о пользователе");
@@ -84,7 +84,7 @@ export const useUserStore = defineStore("user", () => {
       user.refresh = data.refresh;
       localStorage.setItem("fitness.access", data.access);
       localStorage.setItem("fitness.refresh", data.refresh);
-      
+
       axios.defaults.headers.common["Authorization"] = "Bearer " + user.access;
       await setUserInfo();
     } catch (error) {
@@ -132,7 +132,6 @@ export const useUserStore = defineStore("user", () => {
       removeToken();
     }
   };
-
 
   return {
     user,
