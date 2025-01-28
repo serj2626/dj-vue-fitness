@@ -10,4 +10,4 @@ const { size, color } = defineProps<IPropsButton>();
         <slot></slot>
     </fwb-button>
 </template>
-<style scoped></style>
+<style scoped lang="scss"></style>
