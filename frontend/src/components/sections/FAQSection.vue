@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { faqs } from "@/types/faq";
 import Accordion from "primevue/accordion";
 import AccordionPanel from "primevue/accordionpanel";
