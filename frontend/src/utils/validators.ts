@@ -1,43 +1,44 @@
 import type { IFormReview } from "@/types/types";
+import { MESSAGES } from "@/types/messages";
 
 function validateDateReview(formData: IFormReview) {
   if (!formData.message || !formData.rating) {
-    throw new Error("Заполните все поля");
+    throw new Error(MESSAGES.FILL_ALL_FIELDS);
   }
   return formData;
 }
 
 function checkDateOrderAbonement(dateStart: string) {
   if (!dateStart) {
-    throw new Error("Выберите дату начала абонемента");
+    throw new Error(MESSAGES.DATE_START_SELECT);
   }
   if (new Date(dateStart) <= new Date()) {
-    throw new Error("Дата бронирования не может быть меньше текущей");
+    throw new Error(MESSAGES.DATE_ERROR);
   }
 }
 
 function checkDateOrderTraining(dateStart: string, rate: number) {
   if (!dateStart) {
-    throw new Error("Выберите дату начала абонемента");
+    throw new Error(MESSAGES.DATE_START_SELECT);
   }
   if (new Date(dateStart) <= new Date()) {
-    throw new Error("Дата бронирования не может быть меньше текущей");
+    throw new Error(MESSAGES.DATE_ERROR);
   }
   if (!rate) {
-    throw new Error("Выберите тариф");
+    throw new Error(MESSAGES.RATE_SELECT);
   }
 }
 
 function checkLogin(login: string) {
   if (!login) {
-    throw new Error("Заполните поле");
+    throw new Error(MESSAGES.FILL_FIELD);
   }
   return login;
 }
 
 function checkRegistration(registration: string) {
   if (!registration) {
-    throw new Error("Заполните поле");
+    throw new Error(MESSAGES.FILL_FIELD);
   }
   return registration;
 }
