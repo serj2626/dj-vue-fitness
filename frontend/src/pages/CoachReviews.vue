@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import { FwbRating, FwbButton } from "flowbite-vue";
 import type { ITrainer } from "@/types/workout";
-import axios from "axios";
 import { ref, watchEffect } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useToast } from "vue-toastification";
 import ReviewDetail from "@/components/trainer/ReviewDetail.vue";
 import { validateDateReview } from "@/utils/validators";
 import { MESSAGES } from "@/types/messages";
+import { $DelReview, $CreateReview } from "@/features/review";
+import { $GetCoach } from "@/features/coach";
 
 const route = useRoute();
 const router = useRouter();
@@ -25,24 +26,18 @@ interface IFormReview {
 
 const getCoach = async () => {
   try {
-    const { data } = await axios.get(
-      `/api/workout/trainers/${route.params.id}`
-    );
+    const data = await $GetCoach(route.params.id as string & { __uuid: true });
     coach.value = data;
   } catch {
-    toast.error("Произошла ошибка при получении тренера");
+    toast.error(MESSAGES.COACH_ERROR);
   }
 };
 
 const createReview = async (form: IFormReview) => {
   try {
     validateDateReview(form);
-    await axios.post("/api/workout/reviews/create", {
-      text: form.message,
-      trainer: coach.value.id,
-      rating: form.rating,
-    });
-    toast.success("Отзыв успешно создан");
+    await $CreateReview(form, coach.value.id as string & { __uuid: true });
+    toast.success(MESSAGES.REVIEW_CREATED);
     showFormCreateReview.value = false;
     getCoach();
   } catch (err: any) {
@@ -53,12 +48,12 @@ const createReview = async (form: IFormReview) => {
 
 const deleteReview = async (id: number) => {
   try {
-    await axios.delete(`/api/workout/reviews/${id}`);
-    toast.success("Отзыв успешно удален");
+    await $DelReview(id);
+    toast.success(MESSAGES.REVIEW_DELETED);
     getCoach();
   } catch (err) {
     console.log(err);
-    toast.error("Произошла ошибка при удалении отзыва");
+    toast.error(MESSAGES.REVIEW_DELETED_ERROR);
   }
 };
 
