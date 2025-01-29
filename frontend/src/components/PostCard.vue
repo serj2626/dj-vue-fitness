@@ -29,7 +29,7 @@ defineProps<{
   outline: 1px solid;
   box-shadow: 0 0 10px #00000038;
   text-transform: uppercase;
-  box-shadow: 0 0 15px 10px rgba(255, 255, 1, 0.617);
+  box-shadow: 0 0 15px 10px rgba(255, 255, 1, 0.286);
   transition: all 0.3s ease-in;
 
   &:hover {
