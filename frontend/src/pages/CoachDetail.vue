@@ -40,7 +40,7 @@ const createOrderTraining = async () => {
     });
     toast.success(MESSAGES.TRAINING_CREATED);
     showModal.value = false;
-    router.push({ name: "myTrainings" });
+    router.push({ name: AppRoutes.myTrainings });
   } catch (err: any) {
     console.log(err);
     toast.error(err.message);
@@ -169,34 +169,32 @@ onMounted(() => {
         loading="lazy"
       />
     </div> -->
-
-    <Galleria
-      v-model:visible="displayBasic"
-      :value="coach.images"
-      :responsiveOptions="responsiveOptions"
-      :numVisible="9"
-      containerStyle="max-width: 50%; w-full"
-      :circular="true"
-      :fullScreen="true"
-      :showItemNavigators="true"
-    >
-      <template #item="slotProps">
-        <img
-          :src="slotProps.item.image"
-          :alt="slotProps.item.alt"
-          style="width: 100%; height: 70vh; display: block"
-        />
-      </template>
-      <template #thumbnail="slotProps">
-        <img
-          :src="slotProps.item.image"
-          :alt="slotProps.item.alt"
-          style="display: block; height: 200px; width: 100%"
-        />
-      </template>
-    </Galleria>
   </div>
-
+  <Galleria
+    v-model:visible="displayBasic"
+    :value="coach.images"
+    :responsiveOptions="responsiveOptions"
+    :numVisible="8"
+    containerStyle="width: 50%; w-full"
+    :circular="true"
+    :fullScreen="true"
+    :showItemNavigators="true"
+  >
+    <template #item="slotProps">
+      <img
+        :src="slotProps.item.image"
+        :alt="slotProps.item.alt"
+        style="width: 100%; height: 500px; display: block"
+      />
+    </template>
+    <template #thumbnail="slotProps">
+      <img
+        :src="slotProps.item.image"
+        :alt="slotProps.item.alt"
+        style="display: block; height: 60px; width: 100%"
+      />
+    </template>
+  </Galleria>
   <UModal
     v-if="showModal"
     v-model:date="trainingData.date"
@@ -241,5 +239,17 @@ onMounted(() => {
 ul {
   margin: 0;
   padding: 0;
+}
+
+.p-galleria-mask {
+    position: fixed;
+    background-color: red !important;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 </style>
