@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import axios from "axios";
 import { ref, onMounted } from "vue";
 import { useToast } from "vue-toastification";
 import { FwbDropdown } from "flowbite-vue";
 import type { IMyAbonement } from "@/types/orders";
+import { MESSAGES } from "@/types/messages";
 import DeleteModal from "@/components/global/Confirm.vue";
 import {
   FwbTable,
@@ -13,6 +13,7 @@ import {
   FwbTableHeadCell,
   FwbTableRow,
 } from "flowbite-vue";
+import { $DelAbonement, $GetMyAbonementsList } from "@/features/order";
 
 const toast = useToast();
 const abonemets = ref<IMyAbonement[]>([]);
@@ -21,24 +22,21 @@ const selectAbonement = ref<number | null>(null);
 
 const getMyAbonements = async () => {
   try {
-    const { data } = await axios.get("/api/auth/my-abonements/");
+    const data = await $GetMyAbonementsList();
     abonemets.value = data;
-    console.log(abonemets.value);
-  } catch (e) {
-    toast.error("Произошла ошибка при получении данных");
+  } catch {
+    toast.error(MESSAGES.DATA_ERROR);
   }
 };
 
-const deleteAbonement = async (id: number) => {
+const deleteAbonement = async () => {
   try {
-    await axios.delete(
-      `/api/auth/my-abonements/${selectAbonement.value}/delete`
-    );
-    toast.success("Абонемент удален");
+    await $DelAbonement(String(selectAbonement.value));
+    toast.success(MESSAGES.ABONEMENT_DELETED);
     selectAbonement.value = null;
     getMyAbonements();
-  } catch (e) {
-    toast.error("Произошла ошибка при удалении абонемента");
+  } catch {
+    toast.error(MESSAGES.ABONEMENT_DELETED_ERROR);
   }
 };
 
@@ -107,6 +105,6 @@ onMounted(() => {
   />
 
   <div v-else class="h-[800px] flex justify-center items-center">
-    <Alert view="danger" message="На данный момент у вас нет абонементов" />
+    <Alert view="danger" :message="MESSAGES.NO_ABONEMENTS" />
   </div>
 </template>
