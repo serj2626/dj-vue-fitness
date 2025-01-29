@@ -92,6 +92,13 @@ class CreateReviewsSerializer(serializers.ModelSerializer):
         model = Reviews
         fields = ("rating", "text", "trainer")
 
+    def validate(self, data):
+        if not self.context["request"].user.is_authenticated:
+            raise serializers.ValidationError(
+                "Оставлять отзыв могут только авторизованные пользователи"
+            )
+        return data
+
 
 class TrainerListSerializer(serializers.ModelSerializer):
     """
