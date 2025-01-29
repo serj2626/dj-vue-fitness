@@ -41,7 +41,6 @@ const createReview = async (form: IFormReview) => {
     showFormCreateReview.value = false;
     getCoach();
   } catch (err: any) {
-    console.log(err);
     toast.error(err.message);
   }
 };
