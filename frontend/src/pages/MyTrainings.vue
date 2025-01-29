@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import axios from "axios";
 import {
   FwbTable,
   FwbTableBody,
@@ -13,6 +12,8 @@ import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { FwbDropdown } from "flowbite-vue";
 import type { IMyTrainig } from "@/types/orders";
+import { $DelTraining, $GetMyTrainingsList } from "@/features/order";
+import { MESSAGES } from "@/types/messages";
 
 const router = useRouter();
 const toast = useToast();
@@ -23,22 +24,21 @@ const selectTrain = ref<number | string | undefined>("");
 
 const getMyTrainings = async () => {
   try {
-    const { data } = await axios.get("/api/auth/my-trainings/");
+    const data = await $GetMyTrainingsList();
     trainings.value = data.results;
-    console.log(trainings.value);
   } catch {
-    toast.error("Произошла ошибка при получении тренировок");
+    toast.error(MESSAGES.DATA_ERROR);
   }
 };
 
-const deleteAbonement = async () => {
+const deleteTraining = async () => {
   try {
-    await axios.delete(`/api/auth/my-trainings/${selectTrain.value}/delete`);
-    toast.success("Тренировка удалена");
+    await $DelTraining(String(selectTrain.value));
+    toast.success(MESSAGES.TRAINING_DELETED);
     selectTrain.value = "";
     getMyTrainings();
-  } catch (e) {
-    toast.error("Произошла ошибка при удалении тренировки");
+  } catch {
+    toast.error(MESSAGES.TRAINING_DELETED_ERROR);
   }
 };
 
@@ -105,15 +105,15 @@ onMounted(() => getMyTrainings());
       </fwb-table-body>
     </fwb-table>
 
-    <DeleteModal
+    <Confirm
       v-if="selectTrain"
       view="training"
       @closeModal="selectTrain = ''"
-      @delete="deleteAbonement"
+      @delete="deleteTraining"
     />
   </div>
 
   <div v-else class="h-[800px] flex justify-center items-center">
-    <Alert view="danger" message="На данный момент у вас нет тренировок" />
+    <Alert view="danger" :message="MESSAGES.NO_TRAININGS" />
   </div>
 </template>
